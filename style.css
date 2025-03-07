@@ -1,0 +1,242 @@
+/*INNEHÅLLSFÖRTECKNING:
+1. Css-reset
+2. Header
+3. Text
+4. Bilder
+5. Main
+6. Footer
+7. Media queries
+*/
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*RESET ENDS HERE*/
+
+body {
+  font-family: monospace;
+  font-size: 2rem;
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+#ui {
+  width: 100%;
+  height: 100%;
+}
+
+#textbox {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 2vh;
+  min-height: 10vh;
+  background-color: white;
+  border-radius: 3px;
+  outline: solid;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  word-spacing: 0.2rem;
+  filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+}
+
+.ui-text {
+  margin: 0;
+  user-select: none;
+}
+
+.ui-close-btn {
+  font-family: monospace;
+  border-style: none;
+  border-radius: 3px;
+  padding: 1rem;
+  font-size: inherit;
+}
+
+.btn-container {
+  align-self: flex-end;
+  margin-top: 1rem;
+}
+
+.note {
+  position: absolute;
+  left: 5%;
+  top: 1vh;
+  display: flex;
+  flex-direction: column;
+  color: rgb(238, 238, 238);
+  user-select: none;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  background-color: blue;
+}
+
+.puzzleImage {
+  width: 100%;
+  height: auto;
+  background-color: blueviolet;
+  cursor: move;
+}
+
+#board {
+  width: 1000px;
+  height: 700px;
+  background-color: blue;
+  border: 10px solid violet;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#board img {
+  width: 248px;
+  height: 231px;
+  border: 1px solid violet;
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" src="style.css" />
+    <title>Vite App</title>
+    <style>
+
+body {
+  font-family: monospace;
+  font-size: 2rem;
+  overflow: hidden;
+  background-color: #202121;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+#ui {
+  width: 100%;
+  height: 100%;
+}
+
+.textboxCommon {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 4vh;
+  max-width: 70%;
+  min-height: 10vh;
+  background-color: white;
+  border-radius: 3px;
+  outline: solid;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  word-spacing: 0.2rem;
+  filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+}
+
+#first-textbox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  background-color: white;
+  border: 4px solid black;
+  border-radius: 5px;
+  padding: 2rem;
+  margin: auto;
+}
+
+#chiffer-textbox {
+  row-gap: 5%;
+}
+
+.inner-textbox {
+  display: flex;
+  column-gap: 10%;
+  align-items: center;
+  width: 100%;
+}
+
+.ui-text {
+  margin: 0;
+  user-select: none;
+}
+
+.uiCommonBtn {
+  font-family: monospace;
+  border-style: none;
+  border-radius: 3px;
+  padding: 1rem;
+  font-size: inherit;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0%;}
+  to {opacity: 100%;}
+}
+.ui-start-btn {
+  width: 30%;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  filter: drop-shadow(0 0 0.25rem rgba(51, 51, 51, 0.527));
+}
+
+.ui-choice-btn {
+  background-image: linear-gradient(white, #e6e6e6);
+  filter: drop-shadow(0 0 0.25rem rgb(151, 151, 151));
+}
+.ui-choice-btn:hover {
+  background-image: linear-gradient(#e6e6e6, #c9c9c9);
+}
+
+.ui-check-btn {
+  background-image: linear-gradient(rgb(198, 241, 169), #a6ee62);
+  filter: drop-shadow(0 0 0.25rem rgb(151, 151, 151));
+  border-radius: 7px;
+  font-size: 1.6rem;
+}
+
+.ui-check-btn:hover {
+  background-image: linear-gradient(rgb(176, 229, 140), #76ad42);
+}
+
+.ui-back-btn {
+  padding: 3% 7% 3% 7%;
+}
+
+#btn-container {
+  align-items: center;
+  align-self: flex-end;
+  margin-top: 1rem;
+}
+
+#back-btn-container {
+  width: 30%;
+}
+
+#note {
+  position: absolute;
+  left: 5%;
+  top: 1vh;
+  display: flex;
+  flex-direction: column;
+  color: rgb(238, 238, 238);
+}
+
+
+.input-container {
+  display: flex;
+  align-items: center;
+  column-gap: 10%;
+}
+
+.ahritextbox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  width: 30px;
+  height: 50px;
+  border: 1px solid rgb(29, 29, 29);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#submit-btn-container {
+  align-items: center;
+}
+
+#puzzleHeader {
+  width: 100%;
+  text-align: center;
+}
+
+
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import kaboom from 'kaboom'
+      kaboom()
+    </script>
+    <div id="app">
+      <div id="ui">
+        <div id="first-textbox-container" style="display: none">
+          <div id="first-textbox">
+            <div>
+            <p id="first-dialogue" class="ui-text"></p>
+            </div>
+            <div id="first-btn-container" style="display: none">
+              <button id="start" class="uiCommonBtn ui-start-btn">Start</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="textbox-container" style="display: none">
+        <div id="textbox" class="textboxCommon">
+          <p id="dialogue" class="ui-text"></p>
+          <div id="btn-container">
+            <button id="close" class="uiCommonBtn ui-close-btn">Close</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="ahri-textbox-container" style="display: none">
+        <div id="ahri-textbox" class="textboxCommon ahritextbox">
+          <p id="ahri-dialogue" class="ui-text" style="align-self: flex-start;"></p>
+          <div id="choice-input-container" style="margin: 2% 0% 0% 0%;">
+            <button id="pokemonGo" class="uiCommonBtn ui-choice-btn">Pokemon Go</button>
+            <button id="wobble" class="uiCommonBtn ui-choice-btn">Wobble skål</button>
+            <button id="swimming" class="uiCommonBtn ui-choice-btn">Bada</button>
+          </div>
+          <div id="ahri-btn-container" style="align-self: flex-end;">
+            <button id="ahri-close" class="uiCommonBtn ui-close-btn">Close</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div id="chiffer-container" style="display: none">
+        <div id="chiffer-textbox" class="textboxCommon">
+          <div class="inner-textbox">
+            <h5>Key phrase:</h5>
+          <div class="input-container">
+          <input type="text" maxlength="1" id="input-1" class="input" required placeholder="A"/>
+          <input type="text" maxlength="1" id="input-2" class="input" required placeholder="B"/>
+          <input type="text" maxlength="1" id="input-3" class="input" required placeholder="C"/>
+          <input type="text" maxlength="1" id="input-4" class="input" required placeholder="D"/>
+          </div>
+          <div id="submit-btn-container">
+            <button id="check-key" class="uiCommonBtn ui-check-btn">Check key</button>
+          </div>
+          </div>
+          <p id="chiffer-dialogue" class="ui-text" style="margin-top: 1%;"></p>
+          <div id="btn-container">
+            <button id="close-chiffer" class="uiCommonBtn ui-close-btn">Close</button>
+          </div>
+        </div>
+      </div>
+      <div id="puzzleContainer" style="display: none; min-height: 100vh;">
+
+        <div id="boardContainer" style="display: flex; flex-grow: 3; justify-content: flex-end;">
+          <div id="board"></div>
+        </div>
+        <!-- <div id="submit-btn-container">
+          <button id="shuffleBtn" class="ui-btn">Shuffle</button>
+        </div> -->
+
+        <div id="back-btn-container">
+          <button id="backBtn" class="uiCommonBtn ui-back-btn">Back</button>
+        </div>
+      </div>
+      <canvas id="game"></canvas>
+    </div>
+    <script type="module" src="main.js"></script>
+    <!-- <script type="module" src="src/scenes/puzzle.js"></script> -->
+  </body>
+</html>
