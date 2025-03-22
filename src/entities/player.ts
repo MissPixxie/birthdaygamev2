@@ -10,6 +10,7 @@ export default function createPlayer(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.body(),
 		kaBoom.pos(pos),
 		kaBoom.anchor("center"),
+		kaBoom.health(8),
 		{
 			speed: 70,
 			direction: "down",

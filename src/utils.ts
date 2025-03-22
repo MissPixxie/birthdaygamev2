@@ -13,15 +13,10 @@ export function keysPressed(kaBoom: Kaboom, keys: Key[]) {
 	return false;
 }
 
-export function colorizeBackground(
-	kaBoom: Kaboom,
-	r: number,
-	g: number,
-	b: number
-) {
+export function colorizeBackground(kaBoom: Kaboom, hexColorCode: string) {
 	kaBoom.add([
 		kaBoom.rect(kaBoom.width(), kaBoom.height()),
-		kaBoom.color(r, g, b),
+		kaBoom.color(kaBoom.Color.fromHex(hexColorCode)),
 		kaBoom.fixed(),
 	]);
 }

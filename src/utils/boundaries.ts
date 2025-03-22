@@ -1,6 +1,6 @@
 import { GameObj, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
-import { Layers } from "../scenes/apartmentScnene";
+import { Layers } from "./types";
 
 export function generateColliders(
 	kaBoom: Kaboom,
@@ -21,7 +21,7 @@ export function generateColliders(
 export function drawBoundaries(
 	kaBoom: Kaboom,
 	map: GameObj,
-	layers: Layers[number]
+	layers: Layers[number] | Layers[any]
 ) {
 	for (const boundary of layers.objects ?? []) {
 		map.add(

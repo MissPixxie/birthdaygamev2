@@ -2,7 +2,8 @@ import { colorizeBackground } from "../utils.ts";
 import { Kaboom } from "../kaboomCtx.ts";
 
 export default function firstScene(kaBoom: Kaboom) {
-	colorizeBackground(kaBoom, 76, 170, 255);
+	colorizeBackground(kaBoom, "#a2aed5");
+	//		colorizeBackground(kaBoom, 76, 170, 255);
 
 	const greetingContainer = document.getElementById(
 		"first-textbox-container"
@@ -47,13 +48,13 @@ export default function firstScene(kaBoom: Kaboom) {
 	function startGame() {
 		greetingContainer.style.display = "none";
 		kaBoom.go("apartmentScene");
-		kaBoom.loadSound("soundtrack", "../8-bit-dream-land-142093.mp3");
-		kaBoom.play("soundtrack", {
-			volume: 0.2,
-			loop: true,
-		});
+		// kaBoom.loadSound("soundtrack", "../8-bit-dream-land-142093.mp3");
+		// kaBoom.play("soundtrack", {
+		// 	volume: 0.2,
+		// 	loop: true,
+		// });
 
-		kaBoom.volume(0.5);
+		// kaBoom.volume(0.5);
 	}
 
 	startBtn.addEventListener("click", startGame);

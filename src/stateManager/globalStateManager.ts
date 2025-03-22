@@ -1,26 +1,35 @@
+import { GameState } from "../utils/types";
+
 export default function globalStateManager() {
 	let instance: ReturnType<typeof createInstance> | null = null;
 
+	const gameState: GameState = {
+		freezePlayer: false,
+		previousScene: "null",
+		currentScene: "null",
+		hp: 5,
+	};
+
 	function createInstance() {
-		let freezePlayer = false;
-		let previousScene = "null";
-		let currentScene = "null";
+		// let freezePlayer = false;
+		// let previousScene = "null";
+		// let currentScene = "null";
 		return {
 			setFreezePlayer(value: boolean) {
-				freezePlayer = value;
+				gameState.freezePlayer = value;
 			},
-			getFreezePlayer: () => freezePlayer,
+			getFreezePlayer: () => gameState.freezePlayer,
 			setPreviousScene(sceneName: string) {
-				previousScene = sceneName;
+				gameState.previousScene = sceneName;
 			},
 			getPreviousScene: () => {
-				return previousScene;
+				return gameState.previousScene;
 			},
 			setCurrentScene(sceneName: string) {
-				currentScene = sceneName;
+				gameState.currentScene = sceneName;
 			},
 			getCurrentScene: () => {
-				return currentScene;
+				return gameState.currentScene;
 			},
 		};
 	}

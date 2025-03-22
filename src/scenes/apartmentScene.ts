@@ -15,14 +15,7 @@ import {
 import { colorizeBackground } from "../utils.ts";
 import { gameState } from "../stateManager/stateManager.js";
 import { Kaboom } from "../kaboomCtx.ts";
-import { GameObj } from "kaboom";
-
-export type Entities = {
-	player: GameObj | null;
-	ahri: GameObj | null;
-	ekko: GameObj | null;
-	balloon: GameObj | null;
-};
+import { Entities, GameState, MapData } from "../utils/types.ts";
 
 const entities: Entities = {
 	player: null,
@@ -31,26 +24,24 @@ const entities: Entities = {
 	balloon: null,
 };
 
-const mapData = (await import("../../public/map2.json")).default;
-
-export type Layers = (typeof mapData)["layers"];
-
-export default async function apartmentScene(kaBoom: Kaboom) {
+export default function apartmentScene(
+	kaBoom: Kaboom,
+	apartmentMapData: MapData,
+	previousSceneData: GameState
+) {
 	const previousScene = gameState.getPreviousScene();
 	gameState.setCurrentScene("apartmentScene");
 	const currentScene = gameState.getCurrentScene();
 
-	colorizeBackground(kaBoom, 76, 170, 255);
-
-	kaBoom.loadSprite("map", "../map2.png");
+	colorizeBackground(kaBoom, "#a2aed5");
 
 	const map = kaBoom.add([
-		kaBoom.sprite("map"),
+		kaBoom.sprite("apartmentMap"),
 		kaBoom.pos(0),
 		kaBoom.scale(scaleFactor),
 	]);
 
-	const layers = mapData.layers;
+	const layers = apartmentMapData.layers;
 
 	// BOUNDARIES //
 	for (const layer of layers) {
@@ -61,8 +52,8 @@ export default async function apartmentScene(kaBoom: Kaboom) {
 		if (layer.name === "spawnpoint") {
 			for (const entity of layer.objects!) {
 				if (
-					entity.name === "playerPuzzle" &&
-					previousScene === "puzzleScene"
+					entity.name === "playerHallway" &&
+					previousScene === "hallwayScene"
 				) {
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
@@ -71,7 +62,7 @@ export default async function apartmentScene(kaBoom: Kaboom) {
 				}
 				if (
 					entity.name === "player" &&
-					previousScene !== "puzzleScene"
+					previousScene !== "hallwayScene"
 				) {
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
@@ -99,9 +90,13 @@ export default async function apartmentScene(kaBoom: Kaboom) {
 			}
 		}
 	}
+
+	// Scale camera
 	kaBoom.camScale(kaBoom.vec2(1.5));
 	if (entities.player !== null) {
+		// get player position and update camera pos
 		kaBoom.camPos(entities.player.worldPos());
+		// callback to update camera pos when player moves
 		kaBoom.onUpdate(async () => {
 			if (entities.player !== null) {
 				if (entities.player.pos.dist(kaBoom.camPos())) {
@@ -156,10 +151,11 @@ export default async function apartmentScene(kaBoom: Kaboom) {
 			});
 		});
 
-		entities.player.onCollide("puzzle", () => {
-			if (currentScene === "puzzleScene") return;
+		entities.player.onCollide("hallway", () => {
+			gameState.setFreezePlayer(true);
+			if (currentScene === "hallwayScene") return;
 			else {
-				kaBoom.go("puzzleScene");
+				kaBoom.go("hallwayScene");
 			}
 		});
 	}
