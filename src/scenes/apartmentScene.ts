@@ -16,6 +16,7 @@ import { colorizeBackground } from "../utils.ts";
 import { gameState } from "../stateManager/stateManager.js";
 import { Kaboom } from "../kaboomCtx.ts";
 import { Entities, GameState, MapData } from "../utils/types.ts";
+import { state } from "../stateManager/globalStateManager.ts";
 
 const entities: Entities = {
 	player: null,
@@ -29,9 +30,8 @@ export default function apartmentScene(
 	apartmentMapData: MapData,
 	previousSceneData: GameState
 ) {
-	const previousScene = gameState.getPreviousScene();
-	gameState.setCurrentScene("apartmentScene");
-	const currentScene = gameState.getCurrentScene();
+	state.changeScene("apartmentScene");
+	console.log(state.current());
 
 	colorizeBackground(kaBoom, "#a2aed5");
 
@@ -42,7 +42,7 @@ export default function apartmentScene(
 	]);
 
 	const layers = apartmentMapData.layers;
-
+	//const player = map.add(makePlayer(kaBoom));
 	// BOUNDARIES //
 	for (const layer of layers) {
 		if (layer.name === "boundaries") {
@@ -53,8 +53,11 @@ export default function apartmentScene(
 			for (const entity of layer.objects!) {
 				if (
 					entity.name === "playerHallway" &&
-					previousScene === "hallwayScene"
+					state.current().previousScene === "hallwayScene"
 				) {
+					console.log(entity);
+					//player.pos(entity.x, entity.y);
+
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
@@ -62,8 +65,9 @@ export default function apartmentScene(
 				}
 				if (
 					entity.name === "player" &&
-					previousScene !== "hallwayScene"
+					state.current().previousScene !== "hallwayScene"
 				) {
+					//const player = map.add(makePlayer(kaBoom));
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
@@ -153,9 +157,9 @@ export default function apartmentScene(
 
 		entities.player.onCollide("hallway", () => {
 			gameState.setFreezePlayer(true);
-			if (currentScene === "hallwayScene") return;
+			if (state.current().currentScene === "hallwayScene") return;
 			else {
-				kaBoom.go("hallwayScene");
+				kaBoom.go("hallwayScene", previousSceneData);
 			}
 		});
 	}

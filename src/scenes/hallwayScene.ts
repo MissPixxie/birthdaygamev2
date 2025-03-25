@@ -1,9 +1,9 @@
 import { scaleFactor } from "../constants";
 import createPlayer, { setPlayerMovement } from "../entities/player";
 import { drawBoundaries } from "../utils/boundaries";
-import { gameState } from "../stateManager/stateManager";
 import { Kaboom } from "../kaboomCtx";
 import { Entities, GameState, MapData } from "../utils/types";
+import { state } from "../stateManager/globalStateManager";
 
 const entities: Entities = {
 	player: null,
@@ -17,9 +17,8 @@ export default async function hallwayScene(
 	hallwayMapData: MapData,
 	previousSceneData: GameState
 ) {
-	const previousScene = gameState.getPreviousScene();
-	gameState.setCurrentScene("hallwayScene");
-	const currentScene = gameState.getCurrentScene();
+	state.changeScene("hallwayScene");
+	console.log(state.current());
 
 	const map = kaBoom.add([
 		kaBoom.sprite("hallwayMap"),
@@ -33,28 +32,40 @@ export default async function hallwayScene(
 	for (const layer of layers) {
 		if (layer.name === "boundaries") {
 			drawBoundaries(kaBoom, map, layer);
-			break;
+			continue;
 		}
 		if (layer.name === "spawnpoint") {
 			for (const entity of layer.objects!) {
-				// 		if (
-				// 			entity.name === "playerHallway" &&
-				// 			previousScene === "apartmentScene"
-				// 		) {
-				entities.player = map.add(
-					createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
-				);
-				// 			continue;
-				// 		}
-				// 		if (
-				// 			entity.name === "player" &&
-				// 			previousScene !== "puzzleScene"
-				// 		) {
-				// 			entities.player = map.add(
-				// 				createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
-				// 			);
-				// 			continue;
-				// 		}
+				if (
+					entity.name === "playerHallway" &&
+					state.current().previousScene === "apartmentScene"
+				) {
+					// const player = map.add(
+					// 	makePlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					// );
+					entities.player = map.add(
+						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					break;
+				}
+				if (
+					entity.name === "playerStreet" &&
+					state.current().previousScene === "streetScene"
+				) {
+					entities.player = map.add(
+						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					break;
+				}
+				if (
+					entity.name === "playerBasement" &&
+					state.current().previousScene === "basementScene"
+				) {
+					entities.player = map.add(
+						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					break;
+				}
 			}
 		}
 	}
@@ -77,12 +88,12 @@ export default async function hallwayScene(
 			}
 		});
 
-		// 	entities.player.onCollide("apartment", () => {
-		// 		if (currentScene === "apartmentScene") return;
-		// 		else {
-		// 			kaBoom.go("apartmentScene");
-		// 		}
-		// 	});
+		entities.player.onCollide("apartment", () => {
+			if (state.current().currentScene === "apartmentScene") return;
+			else {
+				kaBoom.go("apartmentScene");
+			}
+		});
 	}
 	setPlayerMovement(kaBoom, entities.player!);
 }

@@ -183,7 +183,7 @@ body {
 
 .ui-text {
   margin: 0;
-  user-select: none;
+  /* user-select: none; */
 }
 
 .ui-close-btn {
@@ -206,7 +206,7 @@ body {
   display: flex;
   flex-direction: column;
   color: rgb(238, 238, 238);
-  user-select: none;
+  /* user-select: none; */
 }
 
 #container {

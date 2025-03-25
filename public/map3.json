@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"map3.json"
-        }
-    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -233,6 +225,30 @@
                  "width":0,
                  "x":200,
                  "y":218.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"playerBasement",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":174,
+                 "y":129.333333333333
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"playerStreet",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":313,
+                 "y":216
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -241,7 +257,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":19,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

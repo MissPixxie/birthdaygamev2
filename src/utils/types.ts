@@ -4,7 +4,8 @@ export type GameState = {
 	freezePlayer: boolean;
 	previousScene: string;
 	currentScene: string;
-	hp: number;
+	playerHp: number;
+	playerIsInFightMode: boolean;
 };
 
 export type Entities = {

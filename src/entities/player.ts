@@ -1,7 +1,26 @@
 import { GameObj, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
-import { gameState } from "../stateManager/stateManager";
 import { playAnimIfNotPlaying, keysPressed } from "../utils.ts";
+import { state } from "../stateManager/globalStateManager.ts";
+
+// export function makePlayer(kaBoom: Kaboom, pos: Vec2) {
+// 	const player = kaBoom.make([
+// 		kaBoom.body(),
+// 		kaBoom.pos(pos),
+// 		kaBoom.sprite("spritesheet", { anim: "idle-down" }),
+// 		kaBoom.area({ shape: new kaBoom.Rect(kaBoom.vec2(3, 4), 1, 12) }),
+// 		kaBoom.anchor("center"),
+// 		kaBoom.opacity(),
+// 		kaBoom.health(state.current().playerHp),
+// 		{
+// 			speed: 70,
+// 			direction: "down",
+// 			isInDialogue: false,
+// 			isAttacking: false,
+// 		},
+// 		"player",
+// 	]);
+// }
 
 export default function createPlayer(kaBoom: Kaboom, pos: Vec2) {
 	return [
@@ -22,7 +41,7 @@ export default function createPlayer(kaBoom: Kaboom, pos: Vec2) {
 
 export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 	kaBoom.onKeyDown((key) => {
-		if (gameState.getFreezePlayer()) return;
+		if (state.current().freezePlayer) return;
 		if (["left"].includes(key) && !keysPressed(kaBoom, ["up", "down"])) {
 			player.flipX = true;
 			playAnimIfNotPlaying(player, "walk-side");

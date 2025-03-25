@@ -1,5 +1,30 @@
 import { GameState } from "../utils/types";
 
+function initStateManager() {
+	const gameState: GameState = {
+		freezePlayer: false,
+		previousScene: "null",
+		currentScene: "null",
+		playerHp: 5,
+		playerIsInFightMode: false,
+	};
+
+	return {
+		current() {
+			return { ...gameState };
+		},
+		set<T extends keyof GameState>(property: T, value: GameState[T]) {
+			gameState[property] = value;
+		},
+		changeScene(newScene: string) {
+			gameState.previousScene = gameState.currentScene;
+			gameState.currentScene = newScene;
+		},
+	};
+}
+
+export const state = initStateManager();
+
 export default function globalStateManager() {
 	let instance: ReturnType<typeof createInstance> | null = null;
 
@@ -7,7 +32,8 @@ export default function globalStateManager() {
 		freezePlayer: false,
 		previousScene: "null",
 		currentScene: "null",
-		hp: 5,
+		playerHp: 5,
+		playerIsInFightMode: false,
 	};
 
 	function createInstance() {
