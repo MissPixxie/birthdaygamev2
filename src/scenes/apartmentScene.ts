@@ -15,15 +15,15 @@ import {
 import { colorizeBackground } from "../utils.ts";
 import { gameState } from "../stateManager/stateManager.js";
 import { Kaboom } from "../kaboomCtx.ts";
-import { Entities, GameState, MapData } from "../utils/types.ts";
+import { Entities, GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 
-const entities: Entities = {
-	player: null,
-	ahri: null,
-	ekko: null,
-	balloon: null,
-};
+// const entities: Entities = {
+// 	player: null,
+// 	ahri: null,
+// 	ekko: null,
+// 	balloon: null,
+// };
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -31,7 +31,7 @@ export default function apartmentScene(
 	previousSceneData: GameState
 ) {
 	state.changeScene("apartmentScene");
-	console.log(state.current());
+	//console.log(state.current());
 
 	colorizeBackground(kaBoom, "#a2aed5");
 
@@ -55,9 +55,6 @@ export default function apartmentScene(
 					entity.name === "playerHallway" &&
 					state.current().previousScene === "hallwayScene"
 				) {
-					console.log(entity);
-					//player.pos(entity.x, entity.y);
-
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
@@ -156,13 +153,13 @@ export default function apartmentScene(
 		});
 
 		entities.player.onCollide("hallway", () => {
-			gameState.setFreezePlayer(true);
 			if (state.current().currentScene === "hallwayScene") return;
 			else {
 				kaBoom.go("hallwayScene", previousSceneData);
 			}
 		});
 	}
+	console.log(entities.player);
 	setPlayerMovement(kaBoom, entities.player!);
 
 	// setCamScale(kaBoom);

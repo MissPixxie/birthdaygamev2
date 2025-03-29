@@ -13,6 +13,7 @@ export type Entities = {
 	ahri: GameObj | null;
 	ekko: GameObj | null;
 	balloon: GameObj | null;
+	ghost: GameObj | null;
 };
 
 export const entities: Entities = {
@@ -20,11 +21,12 @@ export const entities: Entities = {
 	ahri: null,
 	ekko: null,
 	balloon: null,
+	ghost: null,
 };
 
 export type MapData = {
 	compressionlevel: number;
-	editorsettings: { export: { format: string; target: string } };
+	editorsettings?: { export: { format: string; target: string } };
 	height: number;
 	infinite: boolean;
 	layers: (
