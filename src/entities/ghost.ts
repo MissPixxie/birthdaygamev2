@@ -1,4 +1,4 @@
-import { Vec2 } from "kaboom";
+import { GameObj, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
 
 export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
@@ -12,9 +12,13 @@ export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 		{
 			direction: "right",
 			speed: 20,
-			floatOffset: 0,
+			range: 100,
 		},
 		kaBoom.health(10),
 		"ghost",
 	];
+}
+
+export function setBehavior(kaBoom: Kaboom, ghost: GameObj) {
+	ghost.onStateEnter();
 }

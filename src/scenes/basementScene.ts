@@ -99,6 +99,14 @@ export default function basementScene(
 				kaBoom.go("hallwayScene", previousSceneData);
 			}
 		});
+		entities.player.onCollide("ghost", () => {
+			if (entities.player) {
+				entities.player.hurt(1);
+				console.log(entities.player.playerHp);
+				destroy(entities.player);
+				kaBoom.go("hallwayScene", previousSceneData);
+			}
+		});
 	}
 
 	setPlayerMovement(kaBoom, entities.player!);
