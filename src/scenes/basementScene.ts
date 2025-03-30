@@ -50,13 +50,23 @@ export default function basementScene(
 		}
 	}
 
-	kaBoom.onUpdate(() => {
+	kaBoom.onUpdate(async () => {
 		if (entities.ghost) {
-			entities.ghost.move(entities.ghost.speed, 0);
-
-			entities.ghost.floatOffset += dt() * 3;
-			entities.ghost.pos.y =
-				100 + Math.sin(entities.ghost.floatOffset) * 10;
+			if (entities.ghost.pos.x >= 700) {
+				entities.ghost.flipX = true;
+				await entities.ghost.move(-entities.ghost.speed, 0);
+				entities.ghost.direction = "left";
+			} else if (entities.ghost.pos.x <= 324) {
+				entities.ghost.flipX = false;
+				await entities.ghost.move(entities.ghost.speed, 0);
+				entities.ghost.direction = "right";
+			} else {
+				if (entities.ghost.direction === "left") {
+					await entities.ghost.move(-entities.ghost.speed, 0);
+				} else {
+					await entities.ghost.move(entities.ghost.speed, 0);
+				}
+			}
 		}
 	});
 
@@ -90,6 +100,6 @@ export default function basementScene(
 			}
 		});
 	}
-	console.log(entities.player);
+
 	setPlayerMovement(kaBoom, entities.player!);
 }

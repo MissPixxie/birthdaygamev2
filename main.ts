@@ -22,6 +22,7 @@ kaBoom.scene("basementScene", (previousSceneData) => {
 });
 
 loadSprites().then(() => {
+	console.log(kaBoom.Asset);
 	kaBoom.go("apartmentScene");
 });
 // const scenes = {

@@ -159,7 +159,6 @@ export default function apartmentScene(
 			}
 		});
 	}
-	console.log(entities.player);
 	setPlayerMovement(kaBoom, entities.player!);
 
 	// setCamScale(kaBoom);

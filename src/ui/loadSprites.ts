@@ -25,13 +25,11 @@ export async function loadSprites() {
 		},
 	});
 
-	kaBoom.loadSprite("ghost", "../ghost.png", {
-		// sliceX: 2,
-		// sliceY: 2,
-		// anims: {
-		// 	idle: { from: 0, to: 1, loop: true, speed: 0.7 },
-		// 	awake: { from: 2, to: 3, loop: true, speed: 1 },
-		// },
+	kaBoom.loadSprite("ghost", "../ghostMove2.png", {
+		sliceX: 3,
+		anims: {
+			move: { from: 0, to: 2, loop: true, speed: 2, pingpong: true },
+		},
 	});
 
 	kaBoom.loadSprite("apartmentMap", "../map2.png");
