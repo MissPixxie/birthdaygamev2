@@ -5,8 +5,7 @@ import { Kaboom } from "../kaboomCtx";
 import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { gameState } from "../stateManager/stateManager";
-import createGhost, { ghostMovement } from "../entities/ghost";
-import { GameObj } from "kaboom";
+import createGhost, { setGhostMovement } from "../entities/ghost";
 
 export default function basementScene(
 	kaBoom: Kaboom,
@@ -172,5 +171,5 @@ export default function basementScene(
 	}
 
 	setPlayerMovement(kaBoom, entities.player!);
-	ghostMovement(kaBoom, entities.ghost!);
+	setGhostMovement(kaBoom, entities.ghost!);
 }

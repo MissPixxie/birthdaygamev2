@@ -17,6 +17,8 @@ export function makePlayer(kaBoom: Kaboom, pos: Vec2) {
 			direction: "down",
 			isInDialogue: false,
 			isAttacking: false,
+			hasWeapon: false,
+			hosClue: false,
 		},
 		"player",
 	]);

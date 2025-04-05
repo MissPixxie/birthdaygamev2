@@ -1,22 +1,5 @@
-import {
-	Comp,
-	GameObj,
-	KaboomCtx,
-	PosComp,
-	ScaleComp,
-	SpriteComp,
-	SpriteCompOpt,
-	StateComp,
-	Vec2,
-} from "kaboom";
+import { GameObj, KaboomCtx, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
-
-interface customComp {
-	direction: string;
-	speed: number;
-	pursuitSpeed: number;
-	range: number;
-}
 
 export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 	return [
@@ -38,7 +21,6 @@ export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 			"retreat",
 		]),
 		{
-			direction: "right",
 			speed: 20,
 			pursuitSpeed: 50,
 			range: 100,
@@ -48,11 +30,11 @@ export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 	];
 }
 
-export function ghostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
+export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	const player = kaBoom.get("player", { recursive: true })[0];
 
 	ghost.onStateEnter("patrol-left", async () => {
-		await kaBoom.wait(3);
+		await kaBoom.wait(7);
 		if (ghost.state === "patrol-left") ghost.enterState("patrol-right");
 	});
 	ghost.onStateUpdate("patrol-left", () => {
@@ -61,7 +43,6 @@ export function ghostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 			ghost.enterState("alert");
 			return;
 		}
-
 		ghost.flipX = true;
 		ghost.move(-ghost.speed, 0);
 	});
@@ -75,12 +56,11 @@ export function ghostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 			ghost.enterState("alert");
 			return;
 		}
-
 		ghost.flipX = false;
 		ghost.move(ghost.speed, 0);
 	});
 	ghost.onStateEnter("alert", async () => {
-		await kaBoom.wait(1);
+		await kaBoom.wait(0.1);
 		if (ghost.pos.dist(player.pos) < ghost.range) {
 			ghost.enterState("attack");
 			return;

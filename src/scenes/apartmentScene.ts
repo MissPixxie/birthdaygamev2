@@ -15,7 +15,7 @@ import {
 import { colorizeBackground } from "../utils.ts";
 import { gameState } from "../stateManager/stateManager.js";
 import { Kaboom } from "../kaboomCtx.ts";
-import { Entities, GameState, MapData, entities } from "../utils/types.ts";
+import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 
 // const entities: Entities = {
@@ -76,18 +76,6 @@ export default function apartmentScene(
 					);
 					continue;
 				}
-				if (entity.name === "ekko") {
-					entities.ekko = map.add(
-						createEkko(kaBoom, kaBoom.vec2(entity.x, entity.y))
-					);
-					continue;
-				}
-				if (entity.name === "ahri") {
-					entities.ahri = map.add(
-						createAhri(kaBoom, kaBoom.vec2(entity.x, entity.y))
-					);
-					continue;
-				}
 			}
 		}
 	}
@@ -128,8 +116,8 @@ export default function apartmentScene(
 			}
 		});
 
-		entities.player.onCollide("ekko", () => {
-			displayDialogue(dialogueData["ekko"], () => {
+		entities.player.onCollide("livingRoom", () => {
+			displayDialogue(dialogueData["livingRoom"], () => {
 				gameState.setFreezePlayer(false);
 			});
 		});
