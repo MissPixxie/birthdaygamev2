@@ -2,10 +2,11 @@ import { scaleFactor } from "../constants";
 import createPlayer, { setPlayerMovement } from "../entities/player";
 import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
-import { Entities, GameState, MapData, entities } from "../utils/types";
+import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { gameState } from "../stateManager/stateManager";
-import createGhost from "../entities/ghost";
+import createGhost, { ghostMovement } from "../entities/ghost";
+import { GameObj } from "kaboom";
 
 export default function basementScene(
 	kaBoom: Kaboom,
@@ -50,26 +51,6 @@ export default function basementScene(
 		}
 	}
 
-	kaBoom.onUpdate(async () => {
-		if (entities.ghost) {
-			if (entities.ghost.pos.x >= 700) {
-				entities.ghost.flipX = true;
-				await entities.ghost.move(-entities.ghost.speed, 0);
-				entities.ghost.direction = "left";
-			} else if (entities.ghost.pos.x <= 324) {
-				entities.ghost.flipX = false;
-				await entities.ghost.move(entities.ghost.speed, 0);
-				entities.ghost.direction = "right";
-			} else {
-				if (entities.ghost.direction === "left") {
-					await entities.ghost.move(-entities.ghost.speed, 0);
-				} else {
-					await entities.ghost.move(entities.ghost.speed, 0);
-				}
-			}
-		}
-	});
-
 	// Scale camera
 	kaBoom.camScale(kaBoom.vec2(1.5));
 	if (entities.player !== null) {
@@ -92,6 +73,7 @@ export default function basementScene(
 			}
 		});
 
+		//// COLLIDERS ////
 		entities.player.onCollide("hallway", () => {
 			gameState.setFreezePlayer(true);
 			if (state.current().currentScene === "hallwayScene") return;
@@ -99,15 +81,96 @@ export default function basementScene(
 				kaBoom.go("hallwayScene", previousSceneData);
 			}
 		});
-		entities.player.onCollide("ghost", () => {
-			if (entities.player) {
-				entities.player.hurt(1);
-				console.log(entities.player.playerHp);
-				destroy(entities.player);
-				kaBoom.go("hallwayScene", previousSceneData);
-			}
+
+		kaBoom.onCollide("player", "ghost", () => {
+			//checkHealth();
+			//if (entities.player && entities.ghost)
+			//	handleBounceAnim(entities.player, entities.ghost);
 		});
+
+		// entities.player.onCollide("ghost", async () => {
+		// 	if (!entities.player) {
+		// 		return;
+		// 	}
+		// 	checkHealth();
+		// 	if (entities.ghost)
+		// 		handleBounceAnim(entities.player, entities.ghost);
+		// });
+
+		// 	function handleBounceAnim(player: GameObj, enemy: GameObj) {
+		// 		if (!player || !enemy) return;
+
+		// 		const horizontalDiff = player.pos.x - enemy.pos.x;
+		// 		const verticalDiff = player.pos.y - enemy.pos.y;
+
+		// 		let targetPos = null;
+
+		// 		if (Math.abs(horizontalDiff) > Math.abs(verticalDiff)) {
+		// 			const direction = horizontalDiff > 0 ? 1 : -1;
+		// 			targetPos = vec2(player.pos.x + 30 * direction, player.pos.y);
+		// 		} else {
+		// 			const verticalDirection = verticalDiff > 0 ? -1 : 1;
+		// 			targetPos = vec2(
+		// 				player.pos.x,
+		// 				player.pos.y + 30 * verticalDirection
+		// 			);
+		// 		}
+		// 		if (targetPos && entities.player) {
+		// 			handleOpacityChange(entities.player);
+		// 			tween(
+		// 				entities.player.pos,
+		// 				targetPos,
+		// 				0.5,
+		// 				(newPos) => {
+		// 					if (entities.player) entities.player.pos = newPos;
+		// 				},
+		// 				easings.easeInOutBounce
+		// 			);
+		// 		}
+		// 	}
+
+		// 	async function handleOpacityChange(player: GameObj) {
+		// 		await tween(
+		// 			player.opacity,
+		// 			0,
+		// 			1,
+		// 			(val) => {
+		// 				player.opacity = val;
+		// 			},
+		// 			easings.linear
+		// 		);
+		// 		tween(
+		// 			player.opacity,
+		// 			1,
+		// 			0,
+		// 			(val) => {
+		// 				player.opacity = val;
+		// 			},
+		// 			easings.linear
+		// 		);
+		// 		// wait(0.1, () => {
+		// 		// 	if (entities.player) entities.player.opacity = 1;
+		// 		// });
+		// 	}
+
+		// 	function checkHealth() {
+		// 		console.log(state.current().playerHp);
+		// 		if (state.current().playerHp === 0) {
+		// 			if (entities.player) destroy(entities.player);
+		// 			state.set("playerHp", 5);
+		// 			kaBoom.go("hallwayScene", previousSceneData);
+		// 		} else {
+		// 			let newHp = state.current().playerHp - 1;
+		// 			if (newHp < 0) {
+		// 				newHp = 0;
+		// 			}
+		// 			state.set("playerHp", newHp);
+		// 			console.log(state.current().playerHp);
+		// 			return;
+		// 		}
+		// 	}
 	}
 
 	setPlayerMovement(kaBoom, entities.player!);
+	ghostMovement(kaBoom, entities.ghost!);
 }
