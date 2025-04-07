@@ -5,7 +5,7 @@ import createEkko from "../entities/ekko.js";
 import createBalloon from "../entities/balloon.js";
 import { setPlayerMovement } from "../entities/player.ts";
 import { dialogueData } from "../utils/dialogueData.ts";
-import { drawBoundaries } from "../utils/boundaries.ts";
+import { drawBoundaries, removeCollider } from "../utils/boundaries.ts";
 import {
 	displayAhriDialogue,
 	displayChifferDialogue,
@@ -17,6 +17,7 @@ import { gameState } from "../stateManager/stateManager.js";
 import { Kaboom } from "../kaboomCtx.ts";
 import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
+import { GameObj } from "kaboom";
 
 // const entities: Entities = {
 // 	player: null,
@@ -76,6 +77,21 @@ export default function apartmentScene(
 					);
 					continue;
 				}
+				// if (entity.name === "livingRoom") {
+				// 	entities.livingRoom = map.add([
+				// 		kaBoom.area({
+				// 			shape: new kaBoom.Rect(
+				// 				kaBoom.vec2(0),
+				// 				entity.x,
+				// 				entity.y
+				// 			),
+				// 		}),
+				// 		kaBoom.pos(entity.x, entity.y),
+				// 		kaBoom.body({ isStatic: true }),
+				// 		"livingRoom",
+				// 	]);
+				// 	continue;
+				// }
 			}
 		}
 	}
@@ -109,34 +125,40 @@ export default function apartmentScene(
 					entities.ahri.status = "awake";
 				}
 				displayAhriDialogue(dialogueData["ahri"], () => {
-					gameState.setFreezePlayer(false);
+					state.set("freezePlayer", false);
 					entities.ahri!.play("idle");
 					entities.ahri!.status = "idle";
 				});
 			}
 		});
 
-		entities.player.onCollide("livingRoom", () => {
-			displayDialogue(dialogueData["livingRoom"], () => {
-				gameState.setFreezePlayer(false);
+		entities.player.onCollide("livingRoom", async (livingRoom: GameObj) => {
+			if (state.current().hasEnteredLivingRoom) {
+				return;
+			}
+			await displayDialogue(dialogueData["livingRoom"], () => {
+				state.set("freezePlayer", false);
 			});
+			destroy(livingRoom);
+			//if (entities.livingRoom) removeCollider(entities.livingRoom);
+			state.set("hasEnteredLivingRoom", true);
 		});
 
 		entities.player.onCollide("chiffer", () => {
 			displayChifferDialogue(dialogueData["chiffer"], () => {
-				gameState.setFreezePlayer(false);
+				state.set("freezePlayer", false);
 			});
 		});
 
 		entities.player.onCollide("computer", () => {
 			displayDialogue(dialogueData["computer"], () => {
-				gameState.setFreezePlayer(false);
+				state.set("freezePlayer", false);
 			});
 		});
 
 		entities.player.onCollide("tv", () => {
 			displayDialogue(dialogueData["tv"], () => {
-				gameState.setFreezePlayer(false);
+				state.set("freezePlayer", false);
 			});
 		});
 

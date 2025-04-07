@@ -15,6 +15,7 @@ export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.offscreen({ distance: 400 }),
 		kaBoom.state("patrol-left", [
 			"alert",
+			"chase",
 			"patrol-left",
 			"patrol-right",
 			"attack",
@@ -40,6 +41,7 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	ghost.onStateUpdate("patrol-left", () => {
 		console.log(ghost.state);
 		if (ghost.pos.dist(player.pos) < ghost.range) {
+			ghost.play("alert");
 			ghost.enterState("alert");
 			return;
 		}
@@ -53,6 +55,7 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	ghost.onStateUpdate("patrol-right", () => {
 		console.log(ghost.state);
 		if (ghost.pos.dist(player.pos) < ghost.range) {
+			ghost.play("alert");
 			ghost.enterState("alert");
 			return;
 		}
@@ -63,12 +66,12 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 		await kaBoom.wait(0.1);
 		if (ghost.pos.dist(player.pos) < ghost.range) {
 			ghost.enterState("attack");
+			ghost.play("attack");
 			return;
 		}
 		ghost.enterState("patrol-left");
 	});
 	ghost.onStateUpdate("attack", () => {
-		console.log(ghost.state);
 		if (ghost.pos.dist(player.pos) > ghost.range) {
 			ghost.enterState("alert");
 			return;
@@ -78,5 +81,9 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 			kaBoom.vec2(player.pos.x, player.pos.y + 12),
 			ghost.pursuitSpeed
 		);
+	});
+
+	ghost.onCollide("player", () => {
+		ghost.hurt(1);
 	});
 }

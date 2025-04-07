@@ -1,11 +1,11 @@
-import { gameState } from "../stateManager/stateManager";
+import { state } from "../stateManager/globalStateManager";
 
 // DIALOGUE //
 export async function displayDialogue(
 	text: string,
 	onDisplayEnd: CallableFunction
 ) {
-	gameState.setFreezePlayer(true);
+	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"textbox-container"
 	) as HTMLElement;
@@ -41,14 +41,13 @@ export function displayChifferDialogue(
 	text: string,
 	onDisplayEnd: CallableFunction
 ) {
-	gameState.setFreezePlayer(true);
+	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"chiffer-container"
 	) as HTMLElement;
 	const dialogue = document.getElementById("chiffer-dialogue") as HTMLElement;
 
 	dialogueUI.style.display = "block";
-	console.log(text);
 
 	let index = 0;
 	let currentText = "";
@@ -89,7 +88,7 @@ export function displayAhriDialogue(
 	text: string,
 	onDisplayEnd: CallableFunction
 ) {
-	gameState.setFreezePlayer(true);
+	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"ahri-textbox-container"
 	) as HTMLElement;

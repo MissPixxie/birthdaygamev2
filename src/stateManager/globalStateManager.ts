@@ -7,6 +7,7 @@ function initStateManager() {
 		currentScene: "null",
 		playerHp: 5,
 		playerIsInFightMode: false,
+		hasEnteredLivingRoom: false,
 	};
 
 	return {
@@ -34,6 +35,7 @@ export default function globalStateManager() {
 		currentScene: "null",
 		playerHp: 5,
 		playerIsInFightMode: false,
+		hasEnteredLivingRoom: false,
 	};
 
 	function createInstance() {

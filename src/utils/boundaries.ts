@@ -1,4 +1,4 @@
-import { GameObj, Vec2 } from "kaboom";
+import { GameObj, Tag, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
 import { Layers } from "./types";
 
@@ -34,4 +34,8 @@ export function drawBoundaries(
 			)
 		);
 	}
+}
+
+export function removeCollider(tag: GameObj) {
+	return [destroy(tag)];
 }

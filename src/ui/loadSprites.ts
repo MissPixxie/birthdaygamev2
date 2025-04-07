@@ -25,10 +25,12 @@ export async function loadSprites() {
 		},
 	});
 
-	kaBoom.loadSprite("ghost", "../ghostMove2.png", {
-		sliceX: 3,
+	kaBoom.loadSprite("ghost", "../ghostMovement.png", {
+		sliceX: 7,
 		anims: {
 			move: { from: 0, to: 2, loop: true, speed: 2, pingpong: true },
+			alert: 3,
+			attack: { from: 4, to: 6, loop: true, speed: 2, pingpong: true },
 		},
 	});
 

@@ -6,6 +6,7 @@ export type GameState = {
 	currentScene: string;
 	playerHp: number;
 	playerIsInFightMode: boolean;
+	hasEnteredLivingRoom: boolean;
 };
 
 export type Entities = {
@@ -14,6 +15,7 @@ export type Entities = {
 	ekko: GameObj | null;
 	balloon: GameObj | null;
 	ghost: GameObj | null;
+	livingRoom: GameObj | null;
 };
 
 export const entities: Entities = {
@@ -22,6 +24,7 @@ export const entities: Entities = {
 	ekko: null,
 	balloon: null,
 	ghost: null,
+	livingRoom: null,
 };
 
 export type MapData = {
