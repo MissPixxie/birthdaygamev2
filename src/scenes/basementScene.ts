@@ -6,6 +6,7 @@ import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { gameState } from "../stateManager/stateManager";
 import createGhost, { setGhostMovement } from "../entities/ghost";
+import { GameObj } from "kaboom";
 
 export default function basementScene(
 	kaBoom: Kaboom,
@@ -41,6 +42,9 @@ export default function basementScene(
 					continue;
 				}
 				if (entity.name === "ghost") {
+					if (state.current().isGhostDead) {
+						return;
+					}
 					entities.ghost = map.add(
 						createGhost(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
@@ -81,8 +85,8 @@ export default function basementScene(
 			}
 		});
 
-		kaBoom.onCollide("player", "ghost", () => {
-			//checkHealth();
+		entities.player.onCollide("ghost", () => {
+			if (entities.player) checkHealth(entities.player);
 			//if (entities.player && entities.ghost)
 			//	handleBounceAnim(entities.player, entities.ghost);
 		});
@@ -152,22 +156,23 @@ export default function basementScene(
 		// 		// });
 		// 	}
 
-		// 	function checkHealth() {
-		// 		console.log(state.current().playerHp);
-		// 		if (state.current().playerHp === 0) {
-		// 			if (entities.player) destroy(entities.player);
-		// 			state.set("playerHp", 5);
-		// 			kaBoom.go("hallwayScene", previousSceneData);
-		// 		} else {
-		// 			let newHp = state.current().playerHp - 1;
-		// 			if (newHp < 0) {
-		// 				newHp = 0;
-		// 			}
-		// 			state.set("playerHp", newHp);
-		// 			console.log(state.current().playerHp);
-		// 			return;
-		// 		}
-		// 	}
+		function checkHealth(player: GameObj) {
+			console.log(state.current().playerHp);
+			if (state.current().playerHp === 0) {
+				if (entities.player) destroy(entities.player);
+				state.set("playerHp", 5);
+				kaBoom.go("hallwayScene", previousSceneData);
+			} else {
+				let newHp = state.current().playerHp - 1;
+				player.hurt(1);
+				if (newHp < 0) {
+					newHp = 0;
+				}
+				state.set("playerHp", newHp);
+				console.log(state.current().playerHp);
+				return;
+			}
+		}
 	}
 
 	setPlayerMovement(kaBoom, entities.player!);

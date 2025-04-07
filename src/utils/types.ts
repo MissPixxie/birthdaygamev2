@@ -7,6 +7,7 @@ export type GameState = {
 	playerHp: number;
 	playerIsInFightMode: boolean;
 	hasEnteredLivingRoom: boolean;
+	isGhostDead: boolean;
 };
 
 export type Entities = {

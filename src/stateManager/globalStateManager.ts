@@ -8,6 +8,7 @@ function initStateManager() {
 		playerHp: 5,
 		playerIsInFightMode: false,
 		hasEnteredLivingRoom: false,
+		isGhostDead: false,
 	};
 
 	return {
@@ -36,6 +37,7 @@ export default function globalStateManager() {
 		playerHp: 5,
 		playerIsInFightMode: false,
 		hasEnteredLivingRoom: false,
+		isGhostDead: false,
 	};
 
 	function createInstance() {
