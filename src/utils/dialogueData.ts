@@ -21,4 +21,5 @@ export const dialogueData = {
 	chiffer:
 		"Dz csxåzv qcsr aoeql ytpwo, eiy xvk jc arbs ymy dhirsdftzy, zpå tv uoä?",
 	livingRoom: "OH NO!" + "<br>" + "Ekko och Ahri har blivit kidnappade",
+	help: "Detta är en hjälp sida",
 };

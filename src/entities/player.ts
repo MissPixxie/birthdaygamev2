@@ -1,5 +1,5 @@
 import { GameObj, Vec2 } from "kaboom";
-import { Kaboom } from "../kaboomCtx";
+import { kaBoom, Kaboom } from "../kaboomCtx";
 import { playAnimIfNotPlaying, keysPressed } from "../utils.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 
@@ -103,4 +103,44 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 			state.set("playerIsInFightMode", true);
 		}
 	});
+
+	kaBoom.onKeyPress("space", () => {
+		if (!state.current().playerIsInFightMode) {
+			return;
+		}
+		console.log("space pressed");
+		state.set("freezePlayer", true);
+		if (state.current().freezePlayer)
+			kaBoom.add(generateBullet(kaBoom.vec2(player.pos.x, player.pos.y)));
+		kaBoom.wait(0.1, () => {
+			state.set("freezePlayer", false);
+		});
+	});
+
+	kaBoom.onKeyPress("h", () => {
+		if (!state.current().playerIsInFightMode) {
+			return;
+		}
+		console.log("space pressed");
+		state.set("freezePlayer", true);
+		if (state.current().freezePlayer)
+			kaBoom.add(generateBullet(kaBoom.vec2(player.pos.x, player.pos.y)));
+		kaBoom.wait(0.1, () => {
+			state.set("freezePlayer", false);
+		});
+	});
+}
+
+function generateBullet(pos: Vec2) {
+	return [
+		kaBoom.sprite("bullet"),
+		kaBoom.area({ shape: new kaBoom.Rect(kaBoom.vec2(0, 0), 5, 1) }),
+		kaBoom.body({ isStatic: false }),
+		kaBoom.pos(pos),
+		kaBoom.anchor("center"),
+		{
+			speed: 70,
+		},
+		"bullet",
+	];
 }

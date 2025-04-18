@@ -8,6 +8,7 @@ import basementMapData from "./public/map4.json";
 import hallwayScene from "./src/scenes/hallwayScene.ts";
 import { loadSprites } from "./src/ui/loadSprites.ts";
 import basementScene from "./src/scenes/basementScene.ts";
+import "./src/utils/sidePanelLogic.ts";
 
 kaBoom.scene("apartmentScene", (previousSceneData) => {
 	apartmentScene(kaBoom, apartmentMapData, previousSceneData);
@@ -22,7 +23,7 @@ kaBoom.scene("basementScene", (previousSceneData) => {
 });
 
 loadSprites().then(() => {
-	console.log(kaBoom.Asset);
+	console.log("resurser laddade");
 	kaBoom.go("apartmentScene");
 });
 // const scenes = {

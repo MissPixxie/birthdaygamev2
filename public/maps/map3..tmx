@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="1" nextlayerid="3" nextobjectid="25">
+ <tileset firstgid="1" name="spritesheet" tilewidth="16" tileheight="16" tilecount="1209" columns="39">
+  <image source="spritesheet.png" width="624" height="496"/>
+ </tileset>
+ <tileset firstgid="1210" name="greyFloor" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="greyFloor.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1211" name="greyFloorTopline" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="greyFloorTopline.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1212" name="greyFloorCorner" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="greyFloorCorner.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1213" name="stair" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stair.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1214" name="stairTop" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairTop.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1215" name="stairDarker1" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairDarker1.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1216" name="stairTopDarker1" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairTopDarker1.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1217" name="stairDarker2" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairDarker2.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1218" name="stairTopDarker2" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairTopDarker2.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1219" name="stairDarker3" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairDarker3.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1220" name="stairTopDarker3" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairTopDarker3.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1221" name="stairNorail" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairNorail.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1222" name="stairEnding" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairEnding.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1223" name="stairEnding2" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairEnding2.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1224" name="redWall" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="redWall.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1225" name="redWallCorner" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="redWallCorner.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1226" name="redWallSide" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="redWallSide.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1227" name="redWallTop" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="redWallTop.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1228" name="greyFloorCornerStairEnd" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="greyFloorCornerStairEnd.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1229" name="stairNoRailDarker" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="stairNoRailDarker.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1230" name="greyFloorCornerDarker" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="greyFloorCornerDarker.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1231" name="greyFloorCornerDarker" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="greyFloorCornerDarker.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="1232" name="greyFloorDarker" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="greyFloorDarker.png" width="16" height="16"/>
+ </tileset>
+ <layer id="1" name="Rutlager 1" width="32" height="16" offsetx="-32" offsety="-64">
+  <data encoding="csv">
+   <chunk x="-16" y="-16" width="16" height="16">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2147484873,1227,1227,1227,1227,
+0,0,0,0,0,0,0,0,0,0,0,2147484874,1224,1224,1224,1224,
+0,0,0,0,0,0,0,0,0,0,0,1073743044,1073743042,1073743040,1073743038,1211,
+0,0,0,0,0,0,0,0,0,0,0,1219,1217,1215,1213,1073743047,
+0,0,0,0,0,0,0,0,0,0,0,1073743037,1073743037,1073743037,1073743037,1223,
+0,0,0,0,0,0,0,0,0,0,0,1214,1214,1214,1214,1073743035,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613948,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1210,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073743035
+</chunk>
+   <chunk x="0" y="-16" width="16" height="16">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1227,1227,1225,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1224,1224,1226,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1211,1211,1212,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1210,1210,2684355771,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1210,1210,2684355771,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1210,1210,2684355771,1227,1227,1227,1225,0,0,0,0,0,0,0,0,0,
+1610613947,1210,2684355771,1224,1224,1224,1226,0,0,0,0,0,0,0,0,0,
+1210,1210,1210,1073743046,1073743038,1073743040,1230,0,0,0,0,0,0,0,0,0,
+1210,1210,1210,1210,1221,1229,1232,0,0,0,0,0,0,0,0,0,
+1073743035,1073743035,1073743035,1222,1214,1215,1073743054,0,0,0,0,0,0,0,0,0
+</chunk>
+  </data>
+ </layer>
+ <objectgroup id="2" name="boundaries">
+  <object id="3" name="wall" x="-80" y="-160" width="128" height="32"/>
+  <object id="6" name="wall" x="48" y="-160" width="16" height="112"/>
+  <object id="7" name="wall" x="64" y="-80" width="48" height="32"/>
+  <object id="10" name="wall" x="-32" y="0" width="128" height="16"/>
+  <object id="12" name="wall" x="-96" y="-64" width="96" height="16"/>
+  <object id="13" name="wall" x="-96" y="-160" width="16" height="96"/>
+  <object id="15" name="wall" x="-80" y="-99" width="67.3333" height="6"/>
+  <object id="16" name="basement" x="-79.3333" y="-128" width="38.3333" height="27.6667"/>
+  <object id="17" name="secondFloor" x="-80" y="-93.3333" width="39.6667" height="26.3333"/>
+  <object id="19" name="wall" x="112" y="-80" width="16" height="48"/>
+  <object id="20" name="wall" x="96" y="0" width="32" height="16"/>
+  <object id="21" name="wall" x="112" y="-16" width="16" height="16"/>
+  <object id="22" name="wall" x="-32" y="-48" width="16" height="16"/>
+  <object id="24" name="apartment" x="-32" y="-32" width="16" height="32"/>
+ </objectgroup>
+</map>

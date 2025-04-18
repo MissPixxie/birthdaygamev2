@@ -64,19 +64,12 @@ export function displayChifferDialogue(
 
 	const closeBtn = document.getElementById("close-chiffer") as HTMLElement;
 	function onCloseBtnClick() {
-		// if (
-		// 	event.type === "click" ||
-		// 	(event.type === "keydown" && event.code === "Space")
-		// ) {
-		// 	console.log(event.code);
-
 		onDisplayEnd();
 		dialogueUI.style.display = "none";
 		dialogue.innerHTML = "";
 		clearInterval(intervalRef);
 		closeBtn.removeEventListener("click", onCloseBtnClick);
 		closeBtn.removeEventListener("keydown", onCloseBtnClick);
-		//}
 	}
 
 	closeBtn.addEventListener("click", onCloseBtnClick);

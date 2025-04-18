@@ -13,18 +13,11 @@ import {
 } from "../utils/dialogueLogic.ts";
 
 import { colorizeBackground } from "../utils.ts";
-import { gameState } from "../stateManager/stateManager.js";
 import { Kaboom } from "../kaboomCtx.ts";
 import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 import { GameObj } from "kaboom";
-
-// const entities: Entities = {
-// 	player: null,
-// 	ahri: null,
-// 	ekko: null,
-// 	balloon: null,
-// };
+import createTv from "../entities/tv.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -43,8 +36,10 @@ export default function apartmentScene(
 	]);
 
 	const layers = apartmentMapData.layers;
-	//const player = map.add(makePlayer(kaBoom));
+
 	// BOUNDARIES //
+
+	// loop through the layers of the json file to create boundaries, colliders and add objects
 	for (const layer of layers) {
 		if (layer.name === "boundaries") {
 			drawBoundaries(kaBoom, map, layer);
@@ -65,7 +60,6 @@ export default function apartmentScene(
 					entity.name === "player" &&
 					state.current().previousScene !== "hallwayScene"
 				) {
-					//const player = map.add(makePlayer(kaBoom));
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
@@ -77,21 +71,12 @@ export default function apartmentScene(
 					);
 					continue;
 				}
-				// if (entity.name === "livingRoom") {
-				// 	entities.livingRoom = map.add([
-				// 		kaBoom.area({
-				// 			shape: new kaBoom.Rect(
-				// 				kaBoom.vec2(0),
-				// 				entity.x,
-				// 				entity.y
-				// 			),
-				// 		}),
-				// 		kaBoom.pos(entity.x, entity.y),
-				// 		kaBoom.body({ isStatic: true }),
-				// 		"livingRoom",
-				// 	]);
-				// 	continue;
-				// }
+				if (entity.name === "tv") {
+					entities.tv = map.add(
+						createTv(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					continue;
+				}
 			}
 		}
 	}
@@ -140,7 +125,6 @@ export default function apartmentScene(
 				state.set("freezePlayer", false);
 			});
 			destroy(livingRoom);
-			//if (entities.livingRoom) removeCollider(entities.livingRoom);
 			state.set("hasEnteredLivingRoom", true);
 		});
 

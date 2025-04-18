@@ -17,6 +17,7 @@ export type Entities = {
 	balloon: GameObj | null;
 	ghost: GameObj | null;
 	livingRoom: GameObj | null;
+	tv: GameObj | null;
 };
 
 export const entities: Entities = {
@@ -26,6 +27,7 @@ export const entities: Entities = {
 	balloon: null,
 	ghost: null,
 	livingRoom: null,
+	tv: null,
 };
 
 export type MapData = {
