@@ -116,19 +116,23 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 			state.set("freezePlayer", false);
 		});
 	});
+}
 
-	kaBoom.onKeyPress("h", () => {
-		if (!state.current().playerIsInFightMode) {
-			return;
-		}
-		console.log("space pressed");
-		state.set("freezePlayer", true);
-		if (state.current().freezePlayer)
-			kaBoom.add(generateBullet(kaBoom.vec2(player.pos.x, player.pos.y)));
-		kaBoom.wait(0.1, () => {
-			state.set("freezePlayer", false);
-		});
-	});
+kaBoom.onKeyPress("w", () => {
+	console.log("w key pressed");
+	state.set("freezePlayer", true);
+	const itemArray = get(state.current().itemsToPickup);
+	const item = itemArray.find((items) =>
+		items.is(state.current().itemsToPickup)
+	);
+	pickUpItem(item!);
+});
+
+function pickUpItem(item: GameObj) {
+	destroy(item);
+	state.set("freezePlayer", false);
+	state.set("itemsToPickup", "null");
+	return;
 }
 
 function generateBullet(pos: Vec2) {

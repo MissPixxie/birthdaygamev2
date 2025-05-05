@@ -782,7 +782,7 @@
          "objects":[],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -907,11 +907,11 @@
                  "visible":true,
                  "width":0,
                  "x":360.666666666667,
-                 "y":134.666666666667
+                 "y":132.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],

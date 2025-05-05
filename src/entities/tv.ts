@@ -5,7 +5,7 @@ import { state } from "../stateManager/globalStateManager";
 export default function createTv(kaBoom: Kaboom, pos: Vec2) {
 	return [
 		kaBoom.sprite("tv", { anim: "closed" }),
-		kaBoom.area(),
+		kaBoom.area({ shape: new kaBoom.Rect(kaBoom.vec2(3, 4), 1, 12) }),
 		kaBoom.pos(pos),
 		kaBoom.body({ isStatic: true }),
 		kaBoom.anchor("center"),
@@ -29,5 +29,6 @@ export function displayHint(onDisplayEnd: CallableFunction) {
 		dialogueUI.style.display = "none";
 		onDisplayEnd();
 		state.set("freezePlayer", false);
+		state.set("isFirstTimeInteracting", false);
 	});
 }

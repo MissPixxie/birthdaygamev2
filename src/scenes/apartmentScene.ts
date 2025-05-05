@@ -18,6 +18,7 @@ import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 import { GameObj } from "kaboom";
 import createTv, { displayHint } from "../entities/tv.ts";
+import createKey from "../entities/key.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -77,6 +78,14 @@ export default function apartmentScene(
 					);
 					continue;
 				}
+				if (entity.name === "key") {
+					entities.key = map.add(
+						createKey(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.key.play("hide");
+					entities.key.status = "hidden";
+					continue;
+				}
 			}
 		}
 	}
@@ -119,6 +128,7 @@ export default function apartmentScene(
 
 		entities.player.onCollide("livingRoom", async (livingRoom: GameObj) => {
 			if (state.current().hasEnteredLivingRoom) {
+				destroy(livingRoom);
 				return;
 			}
 			await displayDialogue(dialogueData["livingRoom"], () => {
@@ -141,20 +151,32 @@ export default function apartmentScene(
 		});
 
 		entities.player.onCollide("tv", () => {
+			state.set("tvCollision", true);
+			state.set("itemsToPickup", "key");
 			if (state.current().isFirstTimeInteracting) {
 				displayHint(() => {
 					state.set("freezePlayer", false);
 				});
 			}
-			kaBoom.onKeyPress("e", () => {
-				if (entities.tv!.status === "open") {
-					entities.tv!.play("closed");
-					entities.tv!.status = "closed";
-				} else {
-					entities.tv!.play("open");
-					entities.tv!.status = "open";
-				}
-			});
+			if (state.current().tvCollision) {
+				kaBoom.onKeyPress("e", () => {
+					console.log(state.current().itemsToPickup);
+					if (entities.tv!.status === "open") {
+						entities.tv!.play("closed");
+						entities.tv!.status = "closed";
+						entities.key!.play("hide");
+					} else {
+						entities.tv!.play("open");
+						entities.tv!.status = "open";
+						if (!state.current().hasKey) {
+							entities.key!.play("show");
+						}
+					}
+				});
+			}
+		});
+		entities.player.onCollideEnd("tv", () => {
+			state.set("tvCollision", false);
 		});
 
 		entities.player.onCollide("hallway", () => {
@@ -163,6 +185,28 @@ export default function apartmentScene(
 				kaBoom.go("hallwayScene", previousSceneData);
 			}
 		});
+
+		kaBoom.onKeyPress("w", () => {
+			console.log("w key pressed");
+			state.set("freezePlayer", true);
+
+			destroy(entities.key!);
+			state.set("freezePlayer", false);
+
+			// const itemArray = get(state.current().itemsToPickup);
+			// const item = itemArray.find((items) =>
+			// 	items.is(state.current().itemsToPickup)
+			// );
+			// pickUpItem(item!);
+		});
+
+		function pickUpItem(item: GameObj) {
+			console.log(item);
+			destroy(item);
+			state.set("freezePlayer", false);
+			state.set("itemsToPickup", "null");
+			return;
+		}
 	}
 	setPlayerMovement(kaBoom, entities.player!);
 

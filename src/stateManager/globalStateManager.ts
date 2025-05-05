@@ -9,7 +9,10 @@ function initStateManager() {
 		playerIsInFightMode: false,
 		hasEnteredLivingRoom: false,
 		isFirstTimeInteracting: true,
+		tvCollision: false,
 		isGhostDead: false,
+		hasKey: false,
+		itemsToPickup: "null",
 		backpack: [],
 	};
 
@@ -40,7 +43,10 @@ export default function globalStateManager() {
 		playerIsInFightMode: false,
 		hasEnteredLivingRoom: false,
 		isFirstTimeInteracting: true,
+		tvCollision: false,
 		isGhostDead: false,
+		hasKey: false,
+		itemsToPickup: "null",
 		backpack: [],
 	};
 
