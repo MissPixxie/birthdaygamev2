@@ -11,8 +11,17 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 });
 
+window.addEventListener("DOMContentLoaded", () => {
+	const helpIcon = document.getElementById("backpackIcon") as HTMLElement;
+
+	helpIcon.addEventListener("click", () => {
+		displayBackpack(dialogueData["help"], () => {
+			state.set("freezePlayer", false);
+		});
+	});
+});
+
 export function displayHelpPanel(text: string, onDisplayEnd: CallableFunction) {
-	console.log("hello");
 	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"help-textbox-container"
@@ -39,6 +48,22 @@ export function displayHelpPanel(text: string, onDisplayEnd: CallableFunction) {
 		dialogueUI.style.display = "none";
 		dialogue.innerHTML = "";
 		clearInterval(intervalRef);
+		closeBtn.removeEventListener("click", onCloseBtnClick);
+	}
+	closeBtn.addEventListener("click", onCloseBtnClick);
+}
+
+export function displayBackpack(text: string, onDisplayEnd: CallableFunction) {
+	state.set("freezePlayer", true);
+	const dialogueUI = document.getElementById(
+		"backpack-textbox-container"
+	) as HTMLElement;
+	dialogueUI.style.display = "block";
+
+	const closeBtn = document.getElementById("close-backpack") as HTMLElement;
+	function onCloseBtnClick() {
+		onDisplayEnd();
+		dialogueUI.style.display = "none";
 		closeBtn.removeEventListener("click", onCloseBtnClick);
 	}
 	closeBtn.addEventListener("click", onCloseBtnClick);

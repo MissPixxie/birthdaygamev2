@@ -7,7 +7,9 @@ export type GameState = {
 	playerHp: number;
 	playerIsInFightMode: boolean;
 	hasEnteredLivingRoom: boolean;
+	isFirstTimeInteracting: boolean;
 	isGhostDead: boolean;
+	backpack: [];
 };
 
 export type Entities = {

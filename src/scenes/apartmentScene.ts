@@ -17,7 +17,7 @@ import { Kaboom } from "../kaboomCtx.ts";
 import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 import { GameObj } from "kaboom";
-import createTv from "../entities/tv.ts";
+import createTv, { displayHint } from "../entities/tv.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -141,8 +141,19 @@ export default function apartmentScene(
 		});
 
 		entities.player.onCollide("tv", () => {
-			displayDialogue(dialogueData["tv"], () => {
-				state.set("freezePlayer", false);
+			if (state.current().isFirstTimeInteracting) {
+				displayHint(() => {
+					state.set("freezePlayer", false);
+				});
+			}
+			kaBoom.onKeyPress("e", () => {
+				if (entities.tv!.status === "open") {
+					entities.tv!.play("closed");
+					entities.tv!.status = "closed";
+				} else {
+					entities.tv!.play("open");
+					entities.tv!.status = "open";
+				}
 			});
 		});
 

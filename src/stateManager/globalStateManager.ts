@@ -8,7 +8,9 @@ function initStateManager() {
 		playerHp: 5,
 		playerIsInFightMode: false,
 		hasEnteredLivingRoom: false,
+		isFirstTimeInteracting: true,
 		isGhostDead: false,
+		backpack: [],
 	};
 
 	return {
@@ -37,7 +39,9 @@ export default function globalStateManager() {
 		playerHp: 5,
 		playerIsInFightMode: false,
 		hasEnteredLivingRoom: false,
+		isFirstTimeInteracting: true,
 		isGhostDead: false,
+		backpack: [],
 	};
 
 	function createInstance() {

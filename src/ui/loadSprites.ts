@@ -85,13 +85,15 @@ export async function loadSprites() {
 		await kaBoom.loadSprite("bullet", "../bullet.png");
 
 		await kaBoom.loadSprite("tv", "../tvAnim.png", {
-			sliceX: 2,
-			sliceY: 1,
+			sliceX: 1,
+			sliceY: 2,
 			anims: {
 				closed: 0,
 				open: 1,
 			},
 		});
+
+		await kaBoom.loadSprite("key", "../key.png");
 
 		console.log("Alla resurser är laddade!");
 	} catch (error) {

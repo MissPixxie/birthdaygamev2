@@ -43,6 +43,22 @@
 				filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
 			}
 
+			.textbox {
+				position: absolute;
+				left: 30%;
+				right: 10%;
+				bottom: 18vh;
+				max-width: 40%;
+				min-height: 10vh;
+				background-color: white;
+				border-radius: 3px;
+				outline: solid;
+				padding: 2rem;
+				display: flex;
+				flex-direction: column;
+				filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+			}
+
 			#first-textbox {
 				display: flex;
 				flex-wrap: wrap;
@@ -86,6 +102,15 @@
 					opacity: 100%;
 				}
 			}
+			@keyframes fadeInOut {
+				from {
+					opacity: 0%;
+				}
+				to {
+					opacity: 80%;
+				}
+			}
+
 			.ui-start-btn {
 				width: 30%;
 				animation-name: fadeIn;
@@ -186,6 +211,29 @@
 				image-rendering: pixelated;
 				object-fit: contain;
 			}
+
+			.arrow {
+				image-rendering: pixelated;
+				object-fit: contain;
+				scale: 0.8;
+			}
+
+			.space {
+				image-rendering: pixelated;
+				object-fit: contain;
+				scale: 0.6;
+			}
+			.textAndControll {
+				width: 80%;
+				height: 80px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-content: center;
+			}
+			.help-title {
+				align-self: center;
+			}
 		</style>
 	</head>
 	<body>
@@ -219,6 +267,7 @@
 					</div>
 				</div>
 
+				<!-------HELP------>
 				<div id="helpIconContainer">
 					<div
 						style="
@@ -234,20 +283,145 @@
 						<img src="./public/backpack.png" id="backpackIcon" />
 					</div>
 				</div>
+
 				<div id="help-textbox-container" style="display: none">
-					<div id="help-textbox" class="textboxCommon">
-						<p id="help-dialogue" class="ui-text"></p>
-						<div id="help-btn-container">
-							<button
-								id="close-help"
-								class="uiCommonBtn ui-close-btn"
-							>
+					<div id="help-textbox" class="textbox">
+						<div class="textAndControll">
+							<h4 class="help-title">Move left</h4>
+							<img
+								src="./public/arrowLeft.png"
+								id="arrowLeft"
+								class="arrow"
+							/>
+						</div>
+						<div class="textAndControll">
+							<h4 class="help-title">Move Right</h4>
+							<img
+								src="./public/arrowRight.png"
+								id="arrowRight"
+								class="arrow"
+							/>
+						</div>
+						<div class="textAndControll">
+							<h4 class="help-title">Move down</h4>
+							<img
+								src="./public/arrowDown.png"
+								id="arrowDown"
+								class="arrow"
+							/>
+						</div>
+						<div class="textAndControll">
+							<h4 class="help-title">Move up</h4>
+							<img
+								src="./public/arrowUp.png"
+								id="arrowUp"
+								class="arrow"
+							/>
+						</div>
+						<div class="textAndControll">
+							<h4 class="help-title">Pick up</h4>
+							<img
+								src="./public/E.png"
+								id="controllE"
+								class="arrow"
+							/>
+						</div>
+						<div class="textAndControll">
+							<h4 class="help-title">Shoot</h4>
+							<img
+								src="./public/space.png"
+								id="controllSpace"
+								class="space"
+							/>
+						</div>
+						<div
+							id="help-btn-container"
+							style="
+								display: flex;
+								justify-content: center;
+								margin-top: 15%;
+							"
+						>
+							<button id="close-help" class="uiCommonBtn">
 								Close
 							</button>
 						</div>
 					</div>
 				</div>
 
+				<!-------BACKPACK------>
+
+				<div id="backpack-textbox-container" style="display: none">
+					<div id="backpack-textbox" class="textbox">
+						<div class="textAndControll">
+							<h4>Slot One</h4>
+							<img
+								src="./public/arrowLeft.png"
+								id="arrowLeft"
+								class="arrow"
+							/>
+						</div>
+						<div class="textAndControll">
+							<h4>Slot Two</h4>
+							<img
+								src="./public/arrowRight.png"
+								id="arrowRight"
+								class="arrow"
+							/>
+						</div>
+						<div
+							id="help-btn-container"
+							style="
+								display: flex;
+								justify-content: center;
+								margin-top: 15%;
+							"
+						>
+							<button id="close-backpack" class="uiCommonBtn">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!----HINT---->
+				<div
+					id="hint"
+					style="
+						position: relative;
+						left: 51%;
+						top: 39%;
+						display: none;
+					"
+				>
+					<div
+						style="
+							position: absolute;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							background-color: white;
+							width: 35px;
+							height: 35px;
+							border-radius: 5px;
+							animation: fadeInOut 1.2s infinite alternate;
+							filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+						"
+					>
+						<img
+							src="./public/E.png"
+							id="hintE"
+							style="
+								position: relative;
+								image-rendering: pixelated;
+								scale: 1.5;
+								object-fit: contain;
+							"
+						/>
+					</div>
+				</div>
+
+				<!-------AHRI------>
 				<div id="ahri-textbox-container" style="display: none">
 					<div id="ahri-textbox" class="textboxCommon ahritextbox">
 						<p
@@ -292,6 +466,7 @@
 					</div>
 				</div>
 
+				<!----CHIFFER---->
 				<div id="chiffer-container" style="display: none">
 					<div id="chiffer-textbox" class="textboxCommon">
 						<div class="inner-textbox">
