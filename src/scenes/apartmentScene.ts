@@ -1,11 +1,11 @@
 import { scaleFactor } from "../constants.ts";
 import createPlayer from "../entities/player.js";
-import createAhri from "../entities/ahri.js";
-import createEkko from "../entities/ekko.js";
+// import createAhri from "../entities/ahri.js";
+// import createEkko from "../entities/ekko.js";
 import createBalloon from "../entities/balloon.js";
 import { setPlayerMovement } from "../entities/player.ts";
 import { dialogueData } from "../utils/dialogueData.ts";
-import { drawBoundaries, removeCollider } from "../utils/boundaries.ts";
+import { drawBoundaries } from "../utils/boundaries.ts";
 import {
 	displayAhriDialogue,
 	displayChifferDialogue,
@@ -139,12 +139,6 @@ export default function apartmentScene(
 			state.set("hasEnteredLivingRoom", true);
 		});
 
-		entities.player.onCollide("chiffer", () => {
-			displayChifferDialogue(dialogueData["chiffer"], () => {
-				state.set("freezePlayer", false);
-			});
-		});
-
 		entities.player.onCollide("computer", () => {
 			displayDialogue(dialogueData["computer"], () => {
 				state.set("freezePlayer", false);
@@ -206,13 +200,13 @@ export default function apartmentScene(
 			// pickUpItem(item!);
 		});
 
-		function pickUpItem(item: GameObj) {
-			console.log(item);
-			destroy(item);
-			state.set("freezePlayer", false);
-			state.set("itemsToPickup", "null");
-			return;
-		}
+		// function pickUpItem(item: GameObj) {
+		// 	console.log(item);
+		// 	destroy(item);
+		// 	state.set("freezePlayer", false);
+		// 	state.set("itemsToPickup", "null");
+		// 	return;
+		// }
 	}
 	setPlayerMovement(kaBoom, entities.player!);
 

@@ -234,6 +234,17 @@
 			.help-title {
 				align-self: center;
 			}
+
+			.itemSlot {
+				border: 1px solid white;
+				width: 200px;
+				height: 200px;
+			}
+
+			.itemSlot img {
+				background-color: aqua;
+				object-fit: contain;
+			}
 		</style>
 	</head>
 	<body>
@@ -352,22 +363,39 @@
 				<!-------BACKPACK------>
 
 				<div id="backpack-textbox-container" style="display: none">
-					<div id="backpack-textbox" class="textbox">
-						<div class="textAndControll">
-							<h4>Slot One</h4>
-							<img
-								src="./public/arrowLeft.png"
-								id="arrowLeft"
-								class="arrow"
-							/>
-						</div>
-						<div class="textAndControll">
-							<h4>Slot Two</h4>
-							<img
-								src="./public/arrowRight.png"
-								id="arrowRight"
-								class="arrow"
-							/>
+					<div
+						id="backpack-textbox"
+						class="textbox"
+						style="display: flex; justify-content: center"
+					>
+						<div
+							id="slots"
+							style="
+								display: flex;
+								flex-direction: row;
+								flex-wrap: wrap;
+								margin: auto;
+								width: 606px;
+							"
+						>
+							<div class="itemSlot">
+								<img src="./public/key.png" id="key" style="display: none;"/>
+							</div>
+							<div class="itemSlot">
+								<img src="./public/arrowRight.png" />
+							</div>
+							<div class="itemSlot">
+								<img src="./public/arrowRight.png" />
+							</div>
+							<div class="itemSlot">
+								<img src="./public/arrowRight.png" />
+							</div>
+							<div class="itemSlot">
+								<img src="./public/arrowRight.png" />
+							</div>
+							<div class="itemSlot">
+								<img src="./public/arrowRight.png" />
+							</div>
 						</div>
 						<div
 							id="help-btn-container"
