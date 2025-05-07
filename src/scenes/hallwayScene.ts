@@ -4,6 +4,8 @@ import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
 import { Entities, GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
+import { displayDialogue } from "../utils/dialogueLogic";
+import { dialogueData } from "../utils/dialogueData";
 
 export default function hallwayScene(
 	kaBoom: Kaboom,
@@ -79,19 +81,31 @@ export default function hallwayScene(
 				kaBoom.go("apartmentScene", previousSceneData);
 			}
 		});
-		// entities.player.onCollide("stair", () => {
-		// 	if (entities.player !== null) {
-		// 		entities.player.move(0, 10);
-		// 	}
-		// });
+
+		entities.player.onCollide("wallHanging", () => {
+			displayDialogue(dialogueData["riddle"], () => {
+				state.set("freezePlayer", false);
+			});
+			state.set("hasSeenRiddle", true);
+		});
 
 		entities.player.onCollide("basement", () => {
-			if (state.current().currentScene === "basementScene") return;
-			else {
+			if (
+				state.current().hasSeenRiddle &&
+				state.current().hasEnteredPassPhrase
+			) {
 				kaBoom.go("basementScene", previousSceneData);
+			} else if (!state.current().hasSeenRiddle) {
+				displayDialogue(dialogueData["passPhrase"], () => {
+					state.set("freezePlayer", false);
+				});
+			} else {
+				displayDialogue(dialogueData["enterPassPhrase"], () => {
+					state.set("freezePlayer", false);
+				});
 			}
 		});
 	}
-	console.log(entities.player);
+
 	setPlayerMovement(kaBoom, entities.player!);
 }

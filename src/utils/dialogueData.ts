@@ -21,4 +21,7 @@ export const dialogueData = {
 	livingRoom: "OH NO!" + "<br>" + "Ekko och Ahri har blivit kidnappade",
 	help: "Detta är en hjälp sida",
 	keyMissing: "Dörren är låst....",
+	passPhrase: "Vad är det hemliga ordet?",
+	enterPassPhrase: "slå in lösenord",
+	riddle: "......",
 };

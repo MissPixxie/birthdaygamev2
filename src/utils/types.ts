@@ -10,8 +10,9 @@ export type GameState = {
 	isFirstTimeInteracting: boolean;
 	tvCollision: boolean;
 	isGhostDead: boolean;
-	hasKey: boolean;
+	hasEnteredPassPhrase: boolean;
 	itemsToPickup: string;
+	hasSeenRiddle: boolean;
 	backpack: string[];
 };
 

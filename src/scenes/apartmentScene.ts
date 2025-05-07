@@ -8,7 +8,7 @@ import { dialogueData } from "../utils/dialogueData.ts";
 import { drawBoundaries } from "../utils/boundaries.ts";
 import {
 	displayAhriDialogue,
-	displayChifferDialogue,
+	displayRiddleDialogue,
 	displayDialogue,
 } from "../utils/dialogueLogic.ts";
 
@@ -163,7 +163,7 @@ export default function apartmentScene(
 					} else {
 						entities.tv!.play("open");
 						entities.tv!.status = "open";
-						if (!state.current().hasKey) {
+						if (!getItem("key")) {
 							entities.key!.play("show");
 						}
 					}

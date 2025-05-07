@@ -36,8 +36,8 @@ export async function displayDialogue(
 	closeBtn.addEventListener("click", onCloseBtnClick);
 }
 
-// CHIFFER //
-export function displayChifferDialogue(
+// RIDDLE //
+export function displayRiddleDialogue(
 	text: string,
 	onDisplayEnd: CallableFunction
 ) {

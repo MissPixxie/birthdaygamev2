@@ -11,8 +11,9 @@ function initStateManager() {
 		isFirstTimeInteracting: true,
 		tvCollision: false,
 		isGhostDead: false,
-		hasKey: false,
+		hasEnteredPassPhrase: false,
 		itemsToPickup: "null",
+		hasSeenRiddle: false,
 		backpack: [],
 	};
 
@@ -45,8 +46,9 @@ export default function globalStateManager() {
 		isFirstTimeInteracting: true,
 		tvCollision: false,
 		isGhostDead: false,
-		hasKey: false,
+		hasEnteredPassPhrase: false,
 		itemsToPickup: "null",
+		hasSeenRiddle: false,
 		backpack: [],
 	};
 
