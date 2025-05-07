@@ -19,6 +19,7 @@ import { state } from "../stateManager/globalStateManager.ts";
 import { GameObj } from "kaboom";
 import createTv, { displayHint } from "../entities/tv.ts";
 import createKey from "../entities/key.ts";
+import { addToBackpack, getItem } from "../utils/backpack.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -181,7 +182,11 @@ export default function apartmentScene(
 
 		entities.player.onCollide("hallway", () => {
 			if (state.current().currentScene === "hallwayScene") return;
-			else {
+			else if (!getItem("key")) {
+				displayDialogue(dialogueData["keyMissing"], () => {
+					state.set("freezePlayer", false);
+				});
+			} else {
 				kaBoom.go("hallwayScene", previousSceneData);
 			}
 		});
@@ -192,6 +197,7 @@ export default function apartmentScene(
 
 			destroy(entities.key!);
 			state.set("freezePlayer", false);
+			addToBackpack("key");
 
 			// const itemArray = get(state.current().itemsToPickup);
 			// const item = itemArray.find((items) =>

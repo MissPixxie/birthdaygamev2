@@ -12,7 +12,7 @@ export type GameState = {
 	isGhostDead: boolean;
 	hasKey: boolean;
 	itemsToPickup: string;
-	backpack: [];
+	backpack: string[];
 };
 
 export type Items = "key" | "part1" | "part2" | "null";
