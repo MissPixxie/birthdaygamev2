@@ -189,11 +189,12 @@ export default function apartmentScene(
 
 		entities.player.onCollide("hallway", () => {
 			if (state.current().currentScene === "hallwayScene") return;
-			else if (!getItem("key")) {
-				displayDialogue(dialogueData["keyMissing"], () => {
-					state.set("freezePlayer", false);
-				});
-			} else {
+			//else if (!getItem("key")) {
+			// displayDialogue(dialogueData["keyMissing"], () => {
+			// 	state.set("freezePlayer", false);
+			// });
+			//}
+			else {
 				kaBoom.go("hallwayScene", previousSceneData);
 			}
 		});

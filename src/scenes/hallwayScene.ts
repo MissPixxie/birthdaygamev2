@@ -6,6 +6,7 @@ import { Entities, GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { displayDialogue, displayRiddleDialogue } from "../utils/dialogueLogic";
 import { dialogueData } from "../utils/dialogueData";
+import createNeighborDoor from "../entities/neighborDoor";
 
 export default function hallwayScene(
 	kaBoom: Kaboom,
@@ -49,6 +50,15 @@ export default function hallwayScene(
 					);
 					continue;
 				}
+				if (entity.name === "neighborDoor") {
+					entities.neighborDoor = map.add(
+						createNeighborDoor(
+							kaBoom,
+							kaBoom.vec2(entity.x, entity.y)
+						)
+					);
+					continue;
+				}
 			}
 		}
 	}
@@ -80,6 +90,11 @@ export default function hallwayScene(
 			else {
 				kaBoom.go("apartmentScene", previousSceneData);
 			}
+		});
+
+		entities.player.onCollide("neighborDoor", () => {
+			console.log("neighborDoor");
+			entities.neighborDoor!.play("open");
 		});
 
 		entities.player.onCollide("wallHanging", () => {
