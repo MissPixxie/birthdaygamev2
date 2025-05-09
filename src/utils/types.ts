@@ -29,6 +29,7 @@ export type Entities = {
 	key: GameObj | null;
 	duck: GameObj | null;
 	neighborDoor: GameObj | null;
+	eyes: GameObj | null;
 };
 
 export const entities: Entities = {
@@ -42,6 +43,7 @@ export const entities: Entities = {
 	key: null,
 	duck: null,
 	neighborDoor: null,
+	eyes: null,
 };
 
 export type MapData = {

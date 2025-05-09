@@ -112,11 +112,20 @@ export async function loadSprites() {
 		});
 
 		await kaBoom.loadSprite("neighborDoor", "../doorAnim.png", {
+			sliceX: 4,
+			sliceY: 2,
+			anims: {
+				closed: 0,
+				open: { from: 4, to: 7, loop: true, speed: 1 },
+			},
+		});
+
+		await kaBoom.loadSprite("eyes", "../eyes.png", {
 			sliceX: 2,
 			sliceY: 1,
 			anims: {
-				closed: 0,
-				open: 1,
+				show: 0,
+				hide: 1,
 			},
 		});
 

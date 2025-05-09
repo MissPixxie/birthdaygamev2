@@ -7,6 +7,7 @@ import { state } from "../stateManager/globalStateManager";
 import { displayDialogue, displayRiddleDialogue } from "../utils/dialogueLogic";
 import { dialogueData } from "../utils/dialogueData";
 import createNeighborDoor from "../entities/neighborDoor";
+import createEyes from "../entities/eyes";
 
 export default function hallwayScene(
 	kaBoom: Kaboom,
@@ -59,6 +60,13 @@ export default function hallwayScene(
 					);
 					continue;
 				}
+				if (entity.name === "eyes") {
+					entities.eyes = map.add(
+						createEyes(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.eyes.play("hide");
+					continue;
+				}
 			}
 		}
 	}
@@ -95,6 +103,7 @@ export default function hallwayScene(
 		entities.player.onCollide("neighborDoor", () => {
 			console.log("neighborDoor");
 			entities.neighborDoor!.play("open");
+			entities.eyes!.play("show");
 		});
 
 		entities.player.onCollide("wallHanging", () => {
