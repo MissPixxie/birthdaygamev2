@@ -20,6 +20,7 @@ import { GameObj } from "kaboom";
 import createTv, { displayHint } from "../entities/tv.ts";
 import createKey from "../entities/key.ts";
 import { addToBackpack, getItem } from "../utils/backpack.ts";
+import createDuck from "../entities/duck.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -85,6 +86,13 @@ export default function apartmentScene(
 					);
 					entities.key.play("hide");
 					entities.key.status = "hidden";
+					continue;
+				}
+				if (entity.name === "duck") {
+					entities.key = map.add(
+						createDuck(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.key.play("show");
 					continue;
 				}
 			}

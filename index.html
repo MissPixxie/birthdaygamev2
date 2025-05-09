@@ -378,10 +378,18 @@
 							"
 						>
 							<div class="itemSlot">
-								<img src="./public/key1.png" id="key" style="display: none;"/>
+								<img
+									src="./public/key1.png"
+									id="key"
+									style="display: none"
+								/>
 							</div>
 							<div class="itemSlot">
-								<img src="./public/arrowRight.png" />
+								<img
+									src="./public/arrowRight.png"
+									id="weapon"
+									style="display: none"
+								/>
 							</div>
 							<div class="itemSlot">
 								<img src="./public/arrowRight.png" />
@@ -448,54 +456,14 @@
 					</div>
 				</div>
 
-				<!-------AHRI------>
-				<div id="ahri-textbox-container" style="display: none">
-					<div id="ahri-textbox" class="textboxCommon ahritextbox">
-						<p
-							id="ahri-dialogue"
-							class="ui-text"
-							style="align-self: flex-start"
-						></p>
-						<div
-							id="choice-input-container"
-							style="margin: 2% 0% 0% 0%"
-						>
-							<button
-								id="pokemonGo"
-								class="uiCommonBtn ui-choice-btn"
-							>
-								Pokemon Go
-							</button>
-							<button
-								id="wobble"
-								class="uiCommonBtn ui-choice-btn"
-							>
-								Wobble skål
-							</button>
-							<button
-								id="swimming"
-								class="uiCommonBtn ui-choice-btn"
-							>
-								Bada
-							</button>
-						</div>
-						<div
-							id="ahri-btn-container"
-							style="align-self: flex-end"
-						>
-							<button
-								id="ahri-close"
-								class="uiCommonBtn ui-close-btn"
-							>
-								Close
-							</button>
-						</div>
-					</div>
-				</div>
-
 				<!----CHIFFER---->
 				<div id="chiffer-container" style="display: none">
 					<div id="chiffer-textbox" class="textboxCommon">
+						<p
+							id="chiffer-dialogue"
+							class="ui-text"
+							style="margin-top: 1%"
+						></p>
 						<div class="inner-textbox">
 							<h5>Key phrase:</h5>
 							<div class="input-container">
@@ -537,15 +505,11 @@
 									id="check-key"
 									class="uiCommonBtn ui-check-btn"
 								>
-									Check key
+									Enter Passphrase
 								</button>
 							</div>
 						</div>
-						<p
-							id="chiffer-dialogue"
-							class="ui-text"
-							style="margin-top: 1%"
-						></p>
+
 						<div id="btn-container">
 							<button
 								id="close-chiffer"

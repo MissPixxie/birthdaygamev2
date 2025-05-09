@@ -40,7 +40,7 @@ export async function displayDialogue(
 export function displayRiddleDialogue(
 	text: string,
 	onDisplayEnd: CallableFunction
-) {
+): Boolean {
 	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"chiffer-container"
@@ -62,6 +62,41 @@ export function displayRiddleDialogue(
 		clearInterval(intervalRef);
 	}, 5);
 
+	const checkBtn = document.getElementById("check-key") as HTMLElement;
+	function onCheckBtnClick(): Boolean {
+		state.set("hasEnteredPassPhrase", true);
+		// const input1 = document.getElementById("input-1") as HTMLInputElement;
+		// input1.value.toLowerCase();
+		// const input2 = document.getElementById("input-2") as HTMLInputElement;
+		// input2.value.toLowerCase();
+		// const input3 = document.getElementById("input-3") as HTMLInputElement;
+		// input3.value.toLowerCase();
+		// const input4 = document.getElementById("input-4") as HTMLInputElement;
+		// input4.value.toLowerCase();
+		// checkLetter(input1, "input-1", "l");
+		// checkLetter(input2, "input-2", "o");
+		// checkLetter(input3, "input-3", "v");
+		// checkLetter(input4, "input-4", "e");
+		return true;
+	}
+	checkBtn.addEventListener("click", onCheckBtnClick);
+
+	function checkLetter(
+		elementValue: HTMLInputElement,
+		element: string,
+		correctValue: string
+	) {
+		if (elementValue.toString() === correctValue) {
+			document.getElementById(element)!.style.borderColor = "green";
+		} else {
+			const dialogue = document.getElementById(
+				"chiffer-dialogue"
+			) as HTMLElement;
+			dialogue.innerText = "Fel svar. Prova igen.";
+			document.getElementById(element)!.style.borderColor = "red";
+		}
+	}
+
 	const closeBtn = document.getElementById("close-chiffer") as HTMLElement;
 	function onCloseBtnClick() {
 		onDisplayEnd();
@@ -74,6 +109,11 @@ export function displayRiddleDialogue(
 
 	closeBtn.addEventListener("click", onCloseBtnClick);
 	closeBtn.addEventListener("keydown", onCloseBtnClick);
+	if (onCheckBtnClick()) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 // AHRI //

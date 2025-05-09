@@ -4,7 +4,7 @@ import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
 import { Entities, GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
-import { displayDialogue } from "../utils/dialogueLogic";
+import { displayDialogue, displayRiddleDialogue } from "../utils/dialogueLogic";
 import { dialogueData } from "../utils/dialogueData";
 
 export default function hallwayScene(
@@ -100,9 +100,15 @@ export default function hallwayScene(
 					state.set("freezePlayer", false);
 				});
 			} else {
-				displayDialogue(dialogueData["enterPassPhrase"], () => {
-					state.set("freezePlayer", false);
-				});
+				const riddle = displayRiddleDialogue(
+					dialogueData["enterPassPhrase"],
+					() => {
+						state.set("freezePlayer", false);
+					}
+				);
+				if (riddle) {
+					kaBoom.go("basementScene", previousSceneData);
+				}
 			}
 		});
 	}
