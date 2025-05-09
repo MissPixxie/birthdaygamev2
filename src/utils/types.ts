@@ -11,12 +11,12 @@ export type GameState = {
 	tvCollision: boolean;
 	isGhostDead: boolean;
 	hasEnteredPassPhrase: boolean;
-	itemsToPickup: string;
+	itemToPickup: Items;
 	hasSeenRiddle: boolean;
 	backpack: string[];
 };
 
-export type Items = "key" | "part1" | "part2" | "null";
+export type Items = "key" | "duck" | "weapon" | "null";
 
 export type Entities = {
 	player: GameObj | null;
@@ -27,6 +27,7 @@ export type Entities = {
 	livingRoom: GameObj | null;
 	tv: GameObj | null;
 	key: GameObj | null;
+	duck: GameObj | null;
 };
 
 export const entities: Entities = {
@@ -38,6 +39,7 @@ export const entities: Entities = {
 	livingRoom: null,
 	tv: null,
 	key: null,
+	duck: null,
 };
 
 export type MapData = {

@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map2.json"
+        }
+    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -630,7 +638,7 @@
                  "y":191.666666666667
                 }, 
                 {
-                 "height":16.6666666666667,
+                 "height":10.6666666666667,
                  "id":122,
                  "name":"chiffer",
                  "rotation":0,

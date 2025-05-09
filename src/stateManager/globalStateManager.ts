@@ -12,7 +12,7 @@ function initStateManager() {
 		tvCollision: false,
 		isGhostDead: false,
 		hasEnteredPassPhrase: false,
-		itemsToPickup: "null",
+		itemToPickup: "null",
 		hasSeenRiddle: false,
 		backpack: [],
 	};
@@ -47,7 +47,7 @@ export default function globalStateManager() {
 		tvCollision: false,
 		isGhostDead: false,
 		hasEnteredPassPhrase: false,
-		itemsToPickup: "null",
+		itemToPickup: "null",
 		hasSeenRiddle: false,
 		backpack: [],
 	};

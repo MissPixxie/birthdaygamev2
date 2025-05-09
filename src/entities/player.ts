@@ -118,23 +118,6 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 	});
 }
 
-kaBoom.onKeyPress("w", () => {
-	console.log("w key pressed");
-	state.set("freezePlayer", true);
-	const itemArray = get(state.current().itemsToPickup);
-	const item = itemArray.find((items) =>
-		items.is(state.current().itemsToPickup)
-	);
-	pickUpItem(item!);
-});
-
-function pickUpItem(item: GameObj) {
-	destroy(item);
-	state.set("freezePlayer", false);
-	state.set("itemsToPickup", "null");
-	return;
-}
-
 function generateBullet(pos: Vec2) {
 	return [
 		kaBoom.sprite("bullet"),

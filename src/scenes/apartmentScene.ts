@@ -89,10 +89,10 @@ export default function apartmentScene(
 					continue;
 				}
 				if (entity.name === "duck") {
-					entities.key = map.add(
+					entities.duck = map.add(
 						createDuck(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
-					entities.key.play("show");
+					entities.duck.play("show");
 					continue;
 				}
 			}
@@ -153,9 +153,14 @@ export default function apartmentScene(
 			});
 		});
 
+		entities.player.onCollide("duck", () => {
+			console.log("duck collide");
+			state.set("itemToPickup", "duck");
+		});
+
 		entities.player.onCollide("tv", () => {
 			state.set("tvCollision", true);
-			state.set("itemsToPickup", "key");
+			state.set("itemToPickup", "key");
 			if (state.current().isFirstTimeInteracting) {
 				displayHint(() => {
 					state.set("freezePlayer", false);
@@ -163,7 +168,7 @@ export default function apartmentScene(
 			}
 			if (state.current().tvCollision) {
 				kaBoom.onKeyPress("e", () => {
-					console.log(state.current().itemsToPickup);
+					console.log(state.current().itemToPickup);
 					if (entities.tv!.status === "open") {
 						entities.tv!.play("closed");
 						entities.tv!.status = "closed";
@@ -194,27 +199,25 @@ export default function apartmentScene(
 		});
 
 		kaBoom.onKeyPress("w", () => {
-			console.log("w key pressed");
 			state.set("freezePlayer", true);
 
-			destroy(entities.key!);
+			const itemArray = get(state.current().itemToPickup, {
+				recursive: true,
+			});
+			const item = itemArray.find((items) =>
+				items.is(state.current().itemToPickup)
+			);
+
+			if (!item) {
+				console.warn("Item does not exist.");
+				state.set("freezePlayer", false);
+				return;
+			}
+			addToBackpack(state.current().itemToPickup);
+			destroy(item!);
 			state.set("freezePlayer", false);
-			addToBackpack("key");
-
-			// const itemArray = get(state.current().itemsToPickup);
-			// const item = itemArray.find((items) =>
-			// 	items.is(state.current().itemsToPickup)
-			// );
-			// pickUpItem(item!);
+			state.set("itemToPickup", "null");
 		});
-
-		// function pickUpItem(item: GameObj) {
-		// 	console.log(item);
-		// 	destroy(item);
-		// 	state.set("freezePlayer", false);
-		// 	state.set("itemsToPickup", "null");
-		// 	return;
-		// }
 	}
 	setPlayerMovement(kaBoom, entities.player!);
 

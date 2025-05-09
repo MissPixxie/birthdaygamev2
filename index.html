@@ -239,10 +239,15 @@
 				border: 1px solid white;
 				width: 200px;
 				height: 200px;
+				display: flex;
+				justify-content: center;
 			}
 
 			.itemSlot img {
 				object-fit: contain;
+				align-self: center;
+				scale: 4;
+				image-rendering: pixelated;
 			}
 		</style>
 	</head>
@@ -362,11 +367,7 @@
 				<!-------BACKPACK------>
 
 				<div id="backpack-textbox-container" style="display: none">
-					<div
-						id="backpack-textbox"
-						class="textbox"
-						style="display: flex; justify-content: center"
-					>
+					<div id="backpack-textbox" class="textbox">
 						<div
 							id="slots"
 							style="
@@ -375,6 +376,7 @@
 								flex-wrap: wrap;
 								margin: auto;
 								width: 606px;
+								margin-top: 5%;
 							"
 						>
 							<div class="itemSlot">
@@ -392,7 +394,11 @@
 								/>
 							</div>
 							<div class="itemSlot">
-								<img src="./public/arrowRight.png" />
+								<img
+									src="./public/duck2.png"
+									id="duck"
+									style="display: none"
+								/>
 							</div>
 							<div class="itemSlot">
 								<img src="./public/arrowRight.png" />
