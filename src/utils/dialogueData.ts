@@ -1,3 +1,6 @@
+import { state } from "../stateManager/globalStateManager";
+import { getItem } from "./backpack";
+
 export const dialogueData = {
 	firstPrompt:
 		"Grattis på födelsedagen älskling!" +
@@ -30,4 +33,39 @@ export const dialogueData = {
 		"Vad som väntar ser du ej här, sök i din värld, för svaret är där" +
 		"<br>" +
 		"Men glöm ej spelet, din resa är lång - när du har funnit, fortsätt där du en gång kom ifrån",
+};
+
+// export const neighborDialogue = [
+// 	"Ughm....",
+// 	"Våra hundar har blivit kidnappade, har du sett något?",
+// 	"Jag snackar inte gratis mannen...",
+// ];
+
+// export const neighborDialogue2 = [
+// 	"Vad har du åt mig?",
+// 	"Sa ju att jag inte snackar gratis bror",
+// 	getItem("duck")
+// 		? "Jag såg Torsten med dom vid en stor gräsplätt där Carl bor, kommer inte ihåg helt va rätt bäng"
+// 		: "Kom tillbaka när du har något vettigt åt mig",
+// ];
+
+// export const neighborDialogue3 = ["Gräsplätt...Carl...ugh..."];
+
+export const neighborDialogue = {
+	firstDialogue: [
+		"Ughm....",
+		"Våra hundar har blivit kidnappade, har du sett något?",
+		"Jag snackar inte gratis mannen...",
+	],
+	secondDialogueNoDuck: [
+		"Vad har du åt mig?",
+		"Sa ju att jag inte snackar gratis bror",
+		"Kom tillbaka när du har något vettigt åt mig",
+	],
+	secondDialogueGotDuck: [
+		"Vad har du åt mig?",
+		"FUUUUUCK YEAAAHH, okej såhär",
+		"Jag såg Torsten med dom vid en stor gräsplätt där Carl bor, '<br>' kommer inte ihåg helt va rätt bäng",
+	],
+	thirdDialogue: ["Gräsplätt...Carl...ugh..."],
 };

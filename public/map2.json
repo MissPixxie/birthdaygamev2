@@ -920,6 +920,18 @@
                  "width":0,
                  "x":247.666666666667,
                  "y":134
+                }, 
+                {
+                 "height":0,
+                 "id":148,
+                 "name":"sparkle",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":409.666666666667,
+                 "y":214.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -928,7 +940,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":148,
+ "nextobjectid":149,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

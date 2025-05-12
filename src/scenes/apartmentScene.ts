@@ -6,11 +6,7 @@ import createBalloon from "../entities/balloon.js";
 import { setPlayerMovement } from "../entities/player.ts";
 import { dialogueData } from "../utils/dialogueData.ts";
 import { drawBoundaries } from "../utils/boundaries.ts";
-import {
-	displayAhriDialogue,
-	displayRiddleDialogue,
-	displayDialogue,
-} from "../utils/dialogueLogic.ts";
+import { displayDialogue } from "../utils/dialogueLogic.ts";
 
 import { colorizeBackground } from "../utils.ts";
 import { Kaboom } from "../kaboomCtx.ts";
@@ -21,6 +17,7 @@ import createTv, { displayHint } from "../entities/tv.ts";
 import createKey from "../entities/key.ts";
 import { addToBackpack, getItem } from "../utils/backpack.ts";
 import createDuck from "../entities/duck.ts";
+import { createGlowEffect, createSparkleEffect } from "../ui/particles.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -95,6 +92,22 @@ export default function apartmentScene(
 					entities.duck.play("show");
 					continue;
 				}
+				// if (entity.name === "sparkle") {
+				// 	console.log(entity.name);
+				// 	const sparkle = createSparkleEffect(
+				// 		kaBoom,
+				// 		kaBoom.vec2(entity.x, entity.y)
+				// 	);
+				// 	const glow = createGlowEffect(
+				// 		kaBoom,
+				// 		kaBoom.vec2(entity.x, entity.y)
+				// 	);
+				// 	// kaBoom.onUpdate(() => {
+				// 	// 	glow.pos.x = sprite.pos.x; // Uppdatera position för glödande effekt
+				// 	// 	glow.pos.y = sprite.pos.y;
+				// 	// });
+				// 	continue;
+				// }
 			}
 		}
 	}
@@ -127,7 +140,7 @@ export default function apartmentScene(
 					entities.ahri.play("awake");
 					entities.ahri.status = "awake";
 				}
-				displayAhriDialogue(dialogueData["ahri"], () => {
+				displayDialogue(dialogueData["ahri"], () => {
 					state.set("freezePlayer", false);
 					entities.ahri!.play("idle");
 					entities.ahri!.status = "idle";
@@ -167,7 +180,7 @@ export default function apartmentScene(
 				});
 			}
 			if (state.current().tvCollision) {
-				kaBoom.onKeyPress("e", () => {
+				kaBoom.onKeyPress("o", () => {
 					console.log(state.current().itemToPickup);
 					if (entities.tv!.status === "open") {
 						entities.tv!.play("closed");
@@ -199,7 +212,7 @@ export default function apartmentScene(
 			}
 		});
 
-		kaBoom.onKeyPress("w", () => {
+		kaBoom.onKeyPress("e", () => {
 			state.set("freezePlayer", true);
 
 			const itemArray = get(state.current().itemToPickup, {

@@ -116,7 +116,7 @@ export async function loadSprites() {
 			sliceY: 2,
 			anims: {
 				closed: 0,
-				open: { from: 4, to: 7, loop: true, speed: 1 },
+				open: { from: 4, to: 7, loop: true, speed: 2.5 },
 			},
 		});
 
@@ -128,6 +128,8 @@ export async function loadSprites() {
 				hide: 1,
 			},
 		});
+
+		await kaBoom.loadSprite("particle", "../particle.png");
 
 		console.log("Alla resurser är laddade!");
 	} catch (error) {

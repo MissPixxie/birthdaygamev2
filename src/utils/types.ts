@@ -13,6 +13,8 @@ export type GameState = {
 	hasEnteredPassPhrase: boolean;
 	itemToPickup: Items;
 	hasSeenRiddle: boolean;
+	talkedToNeighbor: number;
+	hasSeenSecondDialogue: boolean;
 	backpack: string[];
 };
 
@@ -30,6 +32,7 @@ export type Entities = {
 	duck: GameObj | null;
 	neighborDoor: GameObj | null;
 	eyes: GameObj | null;
+	sparkle: GameObj | null;
 };
 
 export const entities: Entities = {
@@ -44,6 +47,7 @@ export const entities: Entities = {
 	duck: null,
 	neighborDoor: null,
 	eyes: null,
+	sparkle: null,
 };
 
 export type MapData = {

@@ -7,12 +7,14 @@ import { state } from "../stateManager/globalStateManager";
 import { gameState } from "../stateManager/stateManager";
 import createGhost, { setGhostMovement } from "../entities/ghost";
 import { GameObj } from "kaboom";
+import { colorizeBackground } from "../utils";
 
 export default function basementScene(
 	kaBoom: Kaboom,
 	basementMapData: MapData,
 	previousSceneData: GameState
 ) {
+	colorizeBackground(kaBoom, "#a2aed5");
 	state.changeScene("basementScene");
 	console.log(state.current());
 

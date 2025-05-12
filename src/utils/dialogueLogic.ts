@@ -1,4 +1,7 @@
+import { kaBoom } from "../kaboomCtx";
 import { state } from "../stateManager/globalStateManager";
+import { getItem } from "./backpack";
+import { dialogueData, neighborDialogue } from "./dialogueData";
 
 // DIALOGUE //
 export async function displayDialogue(
@@ -23,7 +26,7 @@ export async function displayDialogue(
 			return;
 		}
 		clearInterval(intervalRef);
-	}, 5);
+	}, 3);
 
 	const closeBtn = document.getElementById("close") as HTMLElement;
 	function onCloseBtnClick() {
@@ -33,6 +36,9 @@ export async function displayDialogue(
 		clearInterval(intervalRef);
 		closeBtn.removeEventListener("click", onCloseBtnClick);
 	}
+	kaBoom.onKeyPress("space", () => {
+		onCloseBtnClick();
+	});
 	closeBtn.addEventListener("click", onCloseBtnClick);
 }
 
@@ -116,83 +122,68 @@ export function displayRiddleDialogue(
 	}
 }
 
-// AHRI //
-export function displayAhriDialogue(
-	text: string,
-	onDisplayEnd: CallableFunction
-) {
+export function startNeighborDialogue(onDisplayEnd: CallableFunction) {
 	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
-		"ahri-textbox-container"
+		"textbox-container"
 	) as HTMLElement;
-	const dialogue = document.getElementById("ahri-dialogue") as HTMLElement;
+	const dialogue = document.getElementById("dialogue") as HTMLElement;
 
 	dialogueUI.style.display = "block";
 
-	let index = 0;
-	let currentText = "";
-	const intervalRef = setInterval(() => {
-		if (index < text.length) {
-			currentText += text[index];
-			dialogue.innerHTML = currentText;
-			index++;
-			return;
-		}
-		clearInterval(intervalRef);
-	}, 5);
-
-	document
-		.getElementById("pokemonGo")!
-		.addEventListener("click", returnChoiceText);
-	document
-		.getElementById("wobble")!
-		.addEventListener("click", returnChoiceText);
-	document
-		.getElementById("swimming")!
-		.addEventListener("click", returnChoiceText);
-
-	function returnChoiceText(event: Event) {
-		const target = event.target as HTMLElement;
-		const choice = target.id;
-
-		let text = "";
-		switch (choice) {
-			case "pokemonGo":
-				text = "Pokemon Go är roligt, då går vi och utforskar mycket!";
-				break;
-			case "wobble":
-				text = "Wobble skål är min favorit också!!";
-				break;
-			case "swimming":
-				text =
-					"Bada i havet kan vara roligt, men jag vågar inte simma...";
-				break;
-		}
-		return removeButtonsShowAnswer(text);
-	}
-
-	function removeButtonsShowAnswer(text: string) {
+	function displayNextDialogue(text: string) {
 		console.log(text);
-		let index = 0;
-		let currentText = "";
-		const intervalRef = setInterval(() => {
-			if (index < text.length) {
-				currentText += text[index];
-				dialogue.innerHTML = currentText;
-				index++;
-				return;
-			}
-			clearInterval(intervalRef);
-		}, 5);
+		return new Promise<void>((resolve) => {
+			let index = 0;
+			let currentText = "";
+			const intervalRef = setInterval(() => {
+				if (index < text.length) {
+					currentText += text[index];
+					dialogue.innerHTML = currentText;
+					index++;
+					return;
+				}
+				clearInterval(intervalRef);
+				resolve();
+			}, 3);
+		});
 	}
 
-	const closeBtn = document.getElementById("ahri-close") as HTMLElement;
-	function onCloseBtnClick() {
-		onDisplayEnd();
-		dialogueUI.style.display = "none";
-		dialogue.innerHTML = "";
-		clearInterval(intervalRef);
-		closeBtn.removeEventListener("click", onCloseBtnClick);
+	let dialogueIndex = 0;
+
+	async function nextDialogueStep(dialogueText: string[]) {
+		console.log(dialogueText);
+		console.log(dialogueIndex);
+		if (dialogueIndex < dialogueText.length) {
+			await displayNextDialogue(dialogueText[dialogueIndex]);
+			dialogueIndex++;
+		} else {
+			onDisplayEnd();
+			dialogueUI.style.display = "none";
+			dialogue.innerHTML = "";
+			dialogueIndex = 0;
+		}
 	}
-	closeBtn.addEventListener("click", onCloseBtnClick);
+
+	async function dialogueToShow() {
+		const talkedToNeighbor = state.current().talkedToNeighbor;
+		const hasItem = getItem("duck");
+
+		if (state.current().talkedToNeighbor < 1) {
+			await nextDialogueStep(neighborDialogue.firstDialogue);
+		} else if (hasItem && talkedToNeighbor >= 1) {
+			await nextDialogueStep(neighborDialogue.secondDialogueGotDuck);
+			state.set("hasSeenSecondDialogue", true);
+		} else if (state.current().hasSeenSecondDialogue) {
+			await nextDialogueStep(neighborDialogue.thirdDialogue);
+		} else {
+			await nextDialogueStep(neighborDialogue.secondDialogueNoDuck);
+		}
+	}
+
+	kaBoom.onKeyPress("space", () => {
+		dialogueToShow();
+	});
+
+	dialogueToShow();
 }

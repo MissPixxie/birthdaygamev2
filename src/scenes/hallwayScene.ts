@@ -2,18 +2,24 @@ import { scaleFactor } from "../constants";
 import createPlayer, { setPlayerMovement } from "../entities/player";
 import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
-import { Entities, GameState, MapData, entities } from "../utils/types";
+import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
-import { displayDialogue, displayRiddleDialogue } from "../utils/dialogueLogic";
+import {
+	displayDialogue,
+	displayRiddleDialogue,
+	startNeighborDialogue,
+} from "../utils/dialogueLogic";
 import { dialogueData } from "../utils/dialogueData";
-import createNeighborDoor from "../entities/neighborDoor";
+import createNeighborDoor, { closeDoor } from "../entities/neighborDoor";
 import createEyes from "../entities/eyes";
+import { colorizeBackground } from "../utils";
 
 export default function hallwayScene(
 	kaBoom: Kaboom,
 	hallwayMapData: MapData,
 	previousSceneData: GameState
 ) {
+	colorizeBackground(kaBoom, "#a2aed5");
 	state.changeScene("hallwayScene");
 	console.log(state.current());
 
@@ -101,9 +107,20 @@ export default function hallwayScene(
 		});
 
 		entities.player.onCollide("neighborDoor", () => {
-			console.log("neighborDoor");
 			entities.neighborDoor!.play("open");
+			entities.neighborDoor!.status = "open";
 			entities.eyes!.play("show");
+			startNeighborDialogue(() => {
+				state.set("freezePlayer", false);
+				state.set(
+					"talkedToNeighbor",
+					state.current().talkedToNeighbor + 1
+				);
+			});
+			// entities.player!.onCollideEnd("neighborDoor", () => {
+			// 	entities.neighborDoor!.play("closed");
+			// 	entities.eyes!.play("hide");
+			// });
 		});
 
 		entities.player.onCollide("wallHanging", () => {
@@ -114,6 +131,8 @@ export default function hallwayScene(
 		});
 
 		entities.player.onCollide("basement", () => {
+			state.set("hasEnteredPassPhrase", true);
+			state.set("hasSeenRiddle", true);
 			if (
 				state.current().hasSeenRiddle &&
 				state.current().hasEnteredPassPhrase
@@ -138,4 +157,5 @@ export default function hallwayScene(
 	}
 
 	setPlayerMovement(kaBoom, entities.player!);
+	closeDoor(entities.neighborDoor, entities.eyes);
 }

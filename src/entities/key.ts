@@ -1,6 +1,5 @@
-import kaboom, { GameObj, Vec2 } from "kaboom";
-import { kaBoom, Kaboom } from "../kaboomCtx";
-import { state } from "../stateManager/globalStateManager";
+import { Vec2 } from "kaboom";
+import { Kaboom } from "../kaboomCtx";
 
 export default function createKey(kaBoom: Kaboom, pos: Vec2) {
 	return [

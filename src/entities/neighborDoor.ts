@@ -1,6 +1,5 @@
-import kaboom, { GameObj, Vec2 } from "kaboom";
+import { GameObj, Vec2 } from "kaboom";
 import { kaBoom, Kaboom } from "../kaboomCtx";
-import { state } from "../stateManager/globalStateManager";
 
 export default function createNeighborDoor(kaBoom: Kaboom, pos: Vec2) {
 	return [
@@ -12,8 +11,26 @@ export default function createNeighborDoor(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.scale(1),
 		kaBoom.z(0),
 		{
-			status: "hidden",
+			status: "closed",
+			range: 30,
 		},
 		"neighborDoor",
 	];
+}
+
+export function closeDoor(door: GameObj | null, eyes: GameObj | null) {
+	const player = kaBoom.get("player", { recursive: true })[0]; // Hämta spelaren
+	if (!door || !player) {
+		console.error("Can't find door or player");
+		return;
+	}
+
+	kaBoom.onUpdate(() => {
+		const distance = door.pos.dist(player.pos);
+		if (distance > door.range && door.status !== "closed") {
+			door.status = "closed";
+			door.play("closed");
+			eyes!.play("hide");
+		}
+	});
 }

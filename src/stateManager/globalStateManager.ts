@@ -14,6 +14,8 @@ function initStateManager() {
 		hasEnteredPassPhrase: false,
 		itemToPickup: "null",
 		hasSeenRiddle: false,
+		talkedToNeighbor: 0,
+		hasSeenSecondDialogue: false,
 		backpack: [],
 	};
 
@@ -49,6 +51,8 @@ export default function globalStateManager() {
 		hasEnteredPassPhrase: false,
 		itemToPickup: "null",
 		hasSeenRiddle: false,
+		talkedToNeighbor: 0,
+		hasSeenSecondDialogue: false,
 		backpack: [],
 	};
 
