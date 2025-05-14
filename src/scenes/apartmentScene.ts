@@ -12,11 +12,12 @@ import { colorizeBackground } from "../utils.ts";
 import { Kaboom } from "../kaboomCtx.ts";
 import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
-import { GameObj } from "kaboom";
+import { GameObj, KaboomCtx, Vec2 } from "kaboom";
 import createTv, { displayHint } from "../entities/tv.ts";
 import createKey from "../entities/key.ts";
 import { addToBackpack, getItem } from "../utils/backpack.ts";
 import createDuck from "../entities/duck.ts";
+import createBedTable from "../entities/bedTable.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -73,6 +74,12 @@ export default function apartmentScene(
 				if (entity.name === "tv") {
 					entities.tv = map.add(
 						createTv(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					continue;
+				}
+				if (entity.name === "bedTable") {
+					entities.bedTable = map.add(
+						createBedTable(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
 					continue;
 				}
@@ -147,16 +154,47 @@ export default function apartmentScene(
 			}
 		});
 
+		entities.player.onCollide("bedTable", () => {
+			console.log("bedTable");
+			state.set("collisionWith", "bedTable");
+			state.set("itemToPickup", "weapon");
+			if (state.current().isFirstTimeInteracting) {
+				displayHint(() => {
+					state.set("freezePlayer", false);
+				});
+			}
+			console.log(state.current().collisionWith);
+			if (state.current().collisionWith === "bedTable") {
+				kaBoom.onKeyPress("o", () => {
+					if (entities.bedTable!.status === "open") {
+						entities.bedTable!.play("closed");
+						entities.bedTable!.status = "closed";
+						entities.weapon!.play("hide");
+					} else {
+						entities.bedTable!.play("open");
+						entities.bedTable!.status = "open";
+						if (!getItem("weapon")) {
+							entities.weapon!.play("show");
+						}
+					}
+				});
+			}
+		});
+
+		entities.player.onCollideEnd("bedTable", () => {
+			state.set("collisionWith", "null");
+		});
+
 		entities.player.onCollide("livingRoom", async (livingRoom: GameObj) => {
+			state.set("freezePlayer", true);
 			if (state.current().hasEnteredLivingRoom) {
 				destroy(livingRoom);
 				return;
 			}
 			await displayDialogue(dialogueData["livingRoom"], () => {
 				state.set("freezePlayer", false);
+				state.set("hasEnteredLivingRoom", true);
 			});
-			destroy(livingRoom);
-			state.set("hasEnteredLivingRoom", true);
 		});
 
 		entities.player.onCollide("computer", () => {
@@ -171,14 +209,14 @@ export default function apartmentScene(
 		});
 
 		entities.player.onCollide("tv", () => {
-			state.set("tvCollision", true);
+			state.set("collisionWith", "tv");
 			state.set("itemToPickup", "key");
 			if (state.current().isFirstTimeInteracting) {
 				displayHint(() => {
 					state.set("freezePlayer", false);
 				});
 			}
-			if (state.current().tvCollision) {
+			if (state.current().collisionWith === "tv") {
 				kaBoom.onKeyPress("o", () => {
 					console.log(state.current().itemToPickup);
 					if (entities.tv!.status === "open") {
@@ -196,7 +234,7 @@ export default function apartmentScene(
 			}
 		});
 		entities.player.onCollideEnd("tv", () => {
-			state.set("tvCollision", false);
+			state.set("collisionWith", "null");
 		});
 
 		entities.player.onCollide("hallway", () => {
@@ -233,10 +271,4 @@ export default function apartmentScene(
 		});
 	}
 	setPlayerMovement(kaBoom, entities.player!);
-
-	// setCamScale(kaBoom);
-
-	// kaBoom.onResize(() => {
-	//   setCamScale(kaBoom);
-	// });
 }

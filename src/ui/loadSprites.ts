@@ -93,6 +93,15 @@ export async function loadSprites() {
 			},
 		});
 
+		await kaBoom.loadSprite("bedTable", "../bedTableAnim.png", {
+			sliceX: 2,
+			sliceY: 1,
+			anims: {
+				open: 0,
+				closed: 1,
+			},
+		});
+
 		await kaBoom.loadSprite("key", "../key.png", {
 			sliceX: 2,
 			sliceY: 1,

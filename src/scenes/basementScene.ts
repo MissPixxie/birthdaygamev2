@@ -1,5 +1,8 @@
 import { scaleFactor } from "../constants";
-import createPlayer, { setPlayerMovement } from "../entities/player";
+import createPlayer, {
+	playShootAnimation,
+	setPlayerMovement,
+} from "../entities/player";
 import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
 import { GameState, MapData, entities } from "../utils/types";
@@ -93,7 +96,17 @@ export default function basementScene(
 		});
 
 		kaBoom.onKeyPress("f", () => {
-			shoot(map);
+			if (entities.player!.isAttacking) return;
+
+			entities.player!.isAttacking = true;
+
+			// Spela skjutanimation
+			playShootAnimation(entities.player!);
+
+			// Skjut kulor
+			shoot(map, () => {
+				entities.player!.isAttacking = false;
+			});
 		});
 
 		function checkHealth(player: GameObj) {

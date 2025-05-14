@@ -1,20 +1,26 @@
+import { kaBoom } from "../kaboomCtx";
 import { state } from "../stateManager/globalStateManager";
 import { dialogueData } from "./dialogueData";
+import { setCurrentActivePanel } from "./uiManager";
 
 window.addEventListener("DOMContentLoaded", () => {
 	const helpIcon = document.getElementById("helpIcon") as HTMLElement;
+	const backpackIcon = document.getElementById("backpackIcon") as HTMLElement;
 
 	helpIcon.addEventListener("click", () => {
 		displayHelpPanel(dialogueData["help"], () => {
 			state.set("freezePlayer", false);
 		});
 	});
-});
 
-window.addEventListener("DOMContentLoaded", () => {
-	const helpIcon = document.getElementById("backpackIcon") as HTMLElement;
+	// helpIcon.addEventListener("keypress", (event) => {
+	// 	console.log(event.code);
+	// 	if (event.code === "space") {
+	// 		console.log("Space-tangenten trycktes ned!");
+	// 	}
+	// });
 
-	helpIcon.addEventListener("click", () => {
+	backpackIcon.addEventListener("click", () => {
 		displayBackpack(() => {
 			state.set("freezePlayer", false);
 		});
@@ -22,11 +28,11 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 export function displayHelpPanel(text: string, onDisplayEnd: CallableFunction) {
+	setCurrentActivePanel("help");
 	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"help-textbox-container"
 	) as HTMLElement;
-
 	const dialogue = document.getElementById("help-dialogue") as HTMLElement;
 	dialogueUI.style.display = "block";
 
@@ -44,16 +50,24 @@ export function displayHelpPanel(text: string, onDisplayEnd: CallableFunction) {
 
 	const closeBtn = document.getElementById("close-help") as HTMLElement;
 	function onCloseBtnClick() {
+		console.log("onclosebtnclick");
 		onDisplayEnd();
 		dialogueUI.style.display = "none";
 		dialogue.innerHTML = "";
 		clearInterval(intervalRef);
 		closeBtn.removeEventListener("click", onCloseBtnClick);
+		setCurrentActivePanel(null);
 	}
+
+	kaBoom.onKeyPress("space", () => {
+		onCloseBtnClick();
+	});
+
 	closeBtn.addEventListener("click", onCloseBtnClick);
 }
 
 export function displayBackpack(onDisplayEnd: CallableFunction) {
+	setCurrentActivePanel("backpack");
 	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"backpack-textbox-container"
@@ -65,6 +79,11 @@ export function displayBackpack(onDisplayEnd: CallableFunction) {
 		onDisplayEnd();
 		dialogueUI.style.display = "none";
 		closeBtn.removeEventListener("click", onCloseBtnClick);
+		setCurrentActivePanel(null);
 	}
+
+	kaBoom.onKeyPress("space", () => {
+		onCloseBtnClick();
+	});
 	closeBtn.addEventListener("click", onCloseBtnClick);
 }

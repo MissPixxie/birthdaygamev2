@@ -5,10 +5,9 @@ export type GameState = {
 	previousScene: string;
 	currentScene: string;
 	playerHp: number;
-	playerIsInFightMode: boolean;
 	hasEnteredLivingRoom: boolean;
 	isFirstTimeInteracting: boolean;
-	tvCollision: boolean;
+	collisionWith: "tv" | "bedTable" | "null";
 	isGhostDead: boolean;
 	hasEnteredPassPhrase: boolean;
 	itemToPickup: Items;
@@ -28,6 +27,8 @@ export type Entities = {
 	ghost: GameObj | null;
 	livingRoom: GameObj | null;
 	tv: GameObj | null;
+	bedTable: GameObj | null;
+	weapon: GameObj | null;
 	key: GameObj | null;
 	duck: GameObj | null;
 	neighborDoor: GameObj | null;
@@ -43,6 +44,8 @@ export const entities: Entities = {
 	ghost: null,
 	livingRoom: null,
 	tv: null,
+	bedTable: null,
+	weapon: null,
 	key: null,
 	duck: null,
 	neighborDoor: null,

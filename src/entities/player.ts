@@ -1,5 +1,5 @@
 import { GameObj, Vec2 } from "kaboom";
-import { kaBoom, Kaboom } from "../kaboomCtx";
+import { Kaboom } from "../kaboomCtx";
 import { playAnimIfNotPlaying, keysPressed } from "../utils.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 
@@ -18,6 +18,7 @@ export default function createPlayer(kaBoom: Kaboom, pos: Vec2) {
 			direction: "down",
 			isInDialogue: false,
 			isAttacking: false,
+			lastHorizontalDirection: "right",
 		},
 		"player",
 	];
@@ -25,7 +26,7 @@ export default function createPlayer(kaBoom: Kaboom, pos: Vec2) {
 
 export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 	kaBoom.onKeyDown((key) => {
-		if (state.current().freezePlayer) return;
+		if (player.isAttacking) return;
 
 		if (["left"].includes(key) && !keysPressed(kaBoom, ["up", "down"])) {
 			player.flipX = true;
@@ -33,6 +34,7 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 
 			player.move(-player.speed, 0);
 			player.direction = "left";
+			player.lastHorizontalDirection = "left";
 			return;
 		}
 		if (["right"].includes(key) && !keysPressed(kaBoom, ["up", "down"])) {
@@ -40,6 +42,7 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 			playAnimIfNotPlaying(player, "walk-side");
 			player.move(player.speed, 0);
 			player.direction = "right";
+			player.lastHorizontalDirection = "right";
 			return;
 		}
 		if (["up"].includes(key)) {
@@ -59,61 +62,27 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 	kaBoom.onKeyRelease(() => {
 		player.stop();
 		if (player.direction === "down") {
-			if (state.current().playerIsInFightMode) {
-				player.play("battle-idle-down");
-			} else {
-				player.play("idle-down");
-			}
+			player.play("idle-down");
 			return;
 		}
 		if (player.direction === "up") {
-			if (state.current().playerIsInFightMode) {
-				player.play("battle-idle-up");
-			} else {
-				player.play("idle-up");
-			}
+			player.play("idle-up");
 			return;
 		} else {
-			if (state.current().playerIsInFightMode) {
-				player.play("battle-idle-side");
-			} else {
-				player.play("idle-side");
-			}
+			player.play("idle-side");
 		}
-	});
-
-	kaBoom.onKeyPress("shift", () => {
-		if (state.current().playerIsInFightMode) {
-			state.set("playerIsInFightMode", false);
-		} else {
-			state.set("playerIsInFightMode", true);
-		}
-	});
-
-	kaBoom.onKeyPress("space", () => {
-		if (!state.current().playerIsInFightMode) {
-			return;
-		}
-		console.log("space pressed");
-		state.set("freezePlayer", true);
-		if (state.current().freezePlayer)
-			kaBoom.add(generateBullet(kaBoom.vec2(player.pos.x, player.pos.y)));
-		kaBoom.wait(0.1, () => {
-			state.set("freezePlayer", false);
-		});
 	});
 }
 
-function generateBullet(pos: Vec2) {
-	return [
-		kaBoom.sprite("bullet"),
-		kaBoom.area({ shape: new kaBoom.Rect(kaBoom.vec2(0, 0), 5, 1) }),
-		kaBoom.body({ isStatic: false }),
-		kaBoom.pos(pos),
-		kaBoom.anchor("center"),
-		{
-			speed: 70,
-		},
-		"bullet",
-	];
+export function playShootAnimation(player: GameObj) {
+	if (
+		["left", "right"].includes(player.direction) ||
+		["left", "right"].includes(player.lastHorizontalDirection)
+	) {
+		playAnimIfNotPlaying(player, "battle-idle-side");
+	} else if (player.direction === "up") {
+		playAnimIfNotPlaying(player, "battle-idle-up");
+	} else if (player.direction === "down") {
+		playAnimIfNotPlaying(player, "battle-idle-down");
+	}
 }

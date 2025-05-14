@@ -1,7 +1,7 @@
 import { GameObj, Vec2 } from "kaboom";
 import { kaBoom } from "../kaboomCtx";
 
-export function shoot(map: GameObj) {
+export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 	const player = kaBoom.get("player", { recursive: true })[0];
 	const ghost = kaBoom.get("ghost", { recursive: true })[0];
 	const bulletXPOS = player.pos.x;
@@ -10,18 +10,25 @@ export function shoot(map: GameObj) {
 	let direction: Vec2;
 	let offsetX = 0;
 
+	// Check player direction so bullet moves in right direction
 	if (player.direction === "left") {
-		player.play("battle-idle-side");
 		direction = kaBoom.vec2(-1, 0);
 		offsetX = -5;
 	} else if (player.direction === "right") {
-		player.play("battle-idle-side");
 		direction = kaBoom.vec2(1, 0);
 		offsetX = 6;
 	} else if (player.direction === "up") {
-		return;
+		direction =
+			player.lastHorizontalDirection === "left"
+				? kaBoom.vec2(-1, 0)
+				: kaBoom.vec2(1, 0);
+		offsetX = player.lastHorizontalDirection === "left" ? -5 : 6;
 	} else if (player.direction === "down") {
-		return;
+		direction =
+			player.lastHorizontalDirection === "left"
+				? kaBoom.vec2(-1, 0)
+				: kaBoom.vec2(1, 0);
+		offsetX = player.lastHorizontalDirection === "left" ? -5 : 6;
 	} else {
 		direction = kaBoom.vec2(0, 0);
 		offsetX = 0;
@@ -29,17 +36,20 @@ export function shoot(map: GameObj) {
 
 	const bullet = map.add(createBullet(bulletXPOS, bulletYPOS, offsetX));
 
+	// Bullet movement
 	bullet.onUpdate(() => {
-		bullet.pos.x += direction.x * bullet.speed * kaBoom.dt(); // Rörelse i x-led
-		bullet.pos.y += direction.y * bullet.speed * kaBoom.dt(); // Rörelse i y-led
+		bullet.pos.x += direction.x * bullet.speed * kaBoom.dt();
+		bullet.pos.y += direction.y * bullet.speed * kaBoom.dt();
 	});
 
+	// Removes collision with player object
 	bullet.onBeforePhysicsResolve((collision) => {
 		if (collision.target.is("player")) {
 			collision.preventResolution();
 		}
 	});
 
+	// Removes ghost and bullet objects in case of collision
 	bullet.onCollide((object) => {
 		if (object.is("player")) {
 			return;
@@ -51,8 +61,11 @@ export function shoot(map: GameObj) {
 			bullet.destroy();
 		}
 	});
+
+	onShootEnd();
 }
 
+// Create bullet object
 function createBullet(posX: number, posY: number, offsetX: number) {
 	return [
 		kaBoom.sprite("bullet"),
