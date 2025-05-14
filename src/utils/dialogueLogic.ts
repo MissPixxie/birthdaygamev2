@@ -158,10 +158,10 @@ export function startNeighborDialogue(onDisplayEnd: CallableFunction) {
 			await displayNextDialogue(dialogueText[dialogueIndex]);
 			dialogueIndex++;
 		} else {
-			onDisplayEnd();
 			dialogueUI.style.display = "none";
 			dialogue.innerHTML = "";
 			dialogueIndex = 0;
+			onDisplayEnd();
 		}
 	}
 

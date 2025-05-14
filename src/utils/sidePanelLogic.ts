@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	const helpIcon = document.getElementById("backpackIcon") as HTMLElement;
 
 	helpIcon.addEventListener("click", () => {
-		displayBackpack(dialogueData["help"], () => {
+		displayBackpack(() => {
 			state.set("freezePlayer", false);
 		});
 	});
@@ -53,7 +53,7 @@ export function displayHelpPanel(text: string, onDisplayEnd: CallableFunction) {
 	closeBtn.addEventListener("click", onCloseBtnClick);
 }
 
-export function displayBackpack(text: string, onDisplayEnd: CallableFunction) {
+export function displayBackpack(onDisplayEnd: CallableFunction) {
 	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"backpack-textbox-container"

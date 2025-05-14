@@ -17,7 +17,6 @@ import createTv, { displayHint } from "../entities/tv.ts";
 import createKey from "../entities/key.ts";
 import { addToBackpack, getItem } from "../utils/backpack.ts";
 import createDuck from "../entities/duck.ts";
-import { createGlowEffect, createSparkleEffect } from "../ui/particles.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,

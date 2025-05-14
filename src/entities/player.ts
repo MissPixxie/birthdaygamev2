@@ -29,42 +29,27 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 
 		if (["left"].includes(key) && !keysPressed(kaBoom, ["up", "down"])) {
 			player.flipX = true;
-			if (state.current().playerIsInFightMode) {
-				playAnimIfNotPlaying(player, "battle-walk-side");
-			} else {
-				playAnimIfNotPlaying(player, "walk-side");
-			}
+			playAnimIfNotPlaying(player, "walk-side");
+
 			player.move(-player.speed, 0);
 			player.direction = "left";
 			return;
 		}
 		if (["right"].includes(key) && !keysPressed(kaBoom, ["up", "down"])) {
 			player.flipX = false;
-			if (state.current().playerIsInFightMode) {
-				playAnimIfNotPlaying(player, "battle-walk-side");
-			} else {
-				playAnimIfNotPlaying(player, "walk-side");
-			}
+			playAnimIfNotPlaying(player, "walk-side");
 			player.move(player.speed, 0);
 			player.direction = "right";
 			return;
 		}
 		if (["up"].includes(key)) {
-			if (state.current().playerIsInFightMode) {
-				playAnimIfNotPlaying(player, "battle-walk-up");
-			} else {
-				playAnimIfNotPlaying(player, "walk-up");
-			}
+			playAnimIfNotPlaying(player, "walk-up");
 			player.move(0, -player.speed);
 			player.direction = "up";
 			return;
 		}
 		if (["down"].includes(key)) {
-			if (state.current().playerIsInFightMode) {
-				playAnimIfNotPlaying(player, "battle-walk-down");
-			} else {
-				playAnimIfNotPlaying(player, "walk-down");
-			}
+			playAnimIfNotPlaying(player, "walk-down");
 			player.move(0, player.speed);
 			player.direction = "down";
 			return;

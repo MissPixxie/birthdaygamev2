@@ -1,4 +1,4 @@
-import kaboom, { GameObj, Vec2 } from "kaboom";
+import { Vec2 } from "kaboom";
 import { kaBoom, Kaboom } from "../kaboomCtx";
 import { state } from "../stateManager/globalStateManager";
 
@@ -27,8 +27,8 @@ export function displayHint(onDisplayEnd: CallableFunction) {
 
 	kaBoom.onKeyPress("e", () => {
 		dialogueUI.style.display = "none";
-		onDisplayEnd();
 		state.set("freezePlayer", false);
 		state.set("isFirstTimeInteracting", false);
+		onDisplayEnd();
 	});
 }

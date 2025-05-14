@@ -1,6 +1,3 @@
-import { state } from "../stateManager/globalStateManager";
-import { getItem } from "./backpack";
-
 export const dialogueData = {
 	firstPrompt:
 		"Grattis på födelsedagen älskling!" +
@@ -35,22 +32,6 @@ export const dialogueData = {
 		"Men glöm ej spelet, din resa är lång - när du har funnit, fortsätt där du en gång kom ifrån",
 };
 
-// export const neighborDialogue = [
-// 	"Ughm....",
-// 	"Våra hundar har blivit kidnappade, har du sett något?",
-// 	"Jag snackar inte gratis mannen...",
-// ];
-
-// export const neighborDialogue2 = [
-// 	"Vad har du åt mig?",
-// 	"Sa ju att jag inte snackar gratis bror",
-// 	getItem("duck")
-// 		? "Jag såg Torsten med dom vid en stor gräsplätt där Carl bor, kommer inte ihåg helt va rätt bäng"
-// 		: "Kom tillbaka när du har något vettigt åt mig",
-// ];
-
-// export const neighborDialogue3 = ["Gräsplätt...Carl...ugh..."];
-
 export const neighborDialogue = {
 	firstDialogue: [
 		"Ughm....",
@@ -58,14 +39,14 @@ export const neighborDialogue = {
 		"Jag snackar inte gratis mannen...",
 	],
 	secondDialogueNoDuck: [
-		"Vad har du åt mig?",
-		"Sa ju att jag inte snackar gratis bror",
-		"Kom tillbaka när du har något vettigt åt mig",
+		"Ey, vad har du typ... för mig? Eller... du vet vad jag menar...?",
+		"Men asså, jag sa ju, bror, jag snackar inte gratis, okej? Måste vara nåt... värdefullt, typ.",
+		"Så... ja, kom tillbaka när du har nåt... som känns, liksom... rätt, du vet?",
 	],
 	secondDialogueGotDuck: [
 		"Vad har du åt mig?",
-		"FUUUUUCK YEAAAHH, okej såhär",
-		"Jag såg Torsten med dom vid en stor gräsplätt där Carl bor, '<br>' kommer inte ihåg helt va rätt bäng",
+		"FUUUUUCK YEAAAHH, okej, okej... så här... hmmm, vad var jag... jo, jo, såhär, kolla...",
+		"Så jag såg Torsten, eller vad... ah, med dom där, du vet, vid en... gräsplätt, stor som fan... där Carl bor, typ... eller... vänta, vad sa jag nu, haha... ehh... kommer inte riktigt ihåg, men jag var rätt bäng då också, så...",
 	],
 	thirdDialogue: ["Gräsplätt...Carl...ugh..."],
 };

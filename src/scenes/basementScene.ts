@@ -8,6 +8,7 @@ import { gameState } from "../stateManager/stateManager";
 import createGhost, { setGhostMovement } from "../entities/ghost";
 import { GameObj } from "kaboom";
 import { colorizeBackground } from "../utils";
+import { shoot } from "../utils/weapon";
 
 export default function basementScene(
 	kaBoom: Kaboom,
@@ -89,74 +90,11 @@ export default function basementScene(
 
 		entities.player.onCollide("ghost", () => {
 			if (entities.player) checkHealth(entities.player);
-			//if (entities.player && entities.ghost)
-			//	handleBounceAnim(entities.player, entities.ghost);
 		});
 
-		// entities.player.onCollide("ghost", async () => {
-		// 	if (!entities.player) {
-		// 		return;
-		// 	}
-		// 	checkHealth();
-		// 	if (entities.ghost)
-		// 		handleBounceAnim(entities.player, entities.ghost);
-		// });
-
-		// 	function handleBounceAnim(player: GameObj, enemy: GameObj) {
-		// 		if (!player || !enemy) return;
-
-		// 		const horizontalDiff = player.pos.x - enemy.pos.x;
-		// 		const verticalDiff = player.pos.y - enemy.pos.y;
-
-		// 		let targetPos = null;
-
-		// 		if (Math.abs(horizontalDiff) > Math.abs(verticalDiff)) {
-		// 			const direction = horizontalDiff > 0 ? 1 : -1;
-		// 			targetPos = vec2(player.pos.x + 30 * direction, player.pos.y);
-		// 		} else {
-		// 			const verticalDirection = verticalDiff > 0 ? -1 : 1;
-		// 			targetPos = vec2(
-		// 				player.pos.x,
-		// 				player.pos.y + 30 * verticalDirection
-		// 			);
-		// 		}
-		// 		if (targetPos && entities.player) {
-		// 			handleOpacityChange(entities.player);
-		// 			tween(
-		// 				entities.player.pos,
-		// 				targetPos,
-		// 				0.5,
-		// 				(newPos) => {
-		// 					if (entities.player) entities.player.pos = newPos;
-		// 				},
-		// 				easings.easeInOutBounce
-		// 			);
-		// 		}
-		// 	}
-
-		// 	async function handleOpacityChange(player: GameObj) {
-		// 		await tween(
-		// 			player.opacity,
-		// 			0,
-		// 			1,
-		// 			(val) => {
-		// 				player.opacity = val;
-		// 			},
-		// 			easings.linear
-		// 		);
-		// 		tween(
-		// 			player.opacity,
-		// 			1,
-		// 			0,
-		// 			(val) => {
-		// 				player.opacity = val;
-		// 			},
-		// 			easings.linear
-		// 		);
-		// 		// wait(0.1, () => {
-		// 		// 	if (entities.player) entities.player.opacity = 1;
-		// 		// });
-		// 	}
+		kaBoom.onKeyPress("f", () => {
+			shoot(map);
+		});
 
 		function checkHealth(player: GameObj) {
 			console.log(state.current().playerHp);
