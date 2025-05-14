@@ -18,6 +18,7 @@ import createKey from "../entities/key.ts";
 import { addToBackpack, getItem } from "../utils/backpack.ts";
 import createDuck from "../entities/duck.ts";
 import createBedTable from "../entities/bedTable.ts";
+import createWeapon from "../entities/weapon.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -81,6 +82,14 @@ export default function apartmentScene(
 					entities.bedTable = map.add(
 						createBedTable(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
+					continue;
+				}
+				if (entity.name === "weapon") {
+					entities.weapon = map.add(
+						createWeapon(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.weapon.play("hide");
+					entities.weapon.status = "hidden";
 					continue;
 				}
 				if (entity.name === "key") {

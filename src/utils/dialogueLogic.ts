@@ -1,7 +1,7 @@
 import { kaBoom } from "../kaboomCtx";
 import { state } from "../stateManager/globalStateManager";
 import { getItem } from "./backpack";
-import { dialogueData, neighborDialogue } from "./dialogueData";
+import { neighborDialogue } from "./dialogueData";
 
 // DIALOGUE //
 export async function displayDialogue(
@@ -87,21 +87,21 @@ export function displayRiddleDialogue(
 	}
 	checkBtn.addEventListener("click", onCheckBtnClick);
 
-	function checkLetter(
-		elementValue: HTMLInputElement,
-		element: string,
-		correctValue: string
-	) {
-		if (elementValue.toString() === correctValue) {
-			document.getElementById(element)!.style.borderColor = "green";
-		} else {
-			const dialogue = document.getElementById(
-				"chiffer-dialogue"
-			) as HTMLElement;
-			dialogue.innerText = "Fel svar. Prova igen.";
-			document.getElementById(element)!.style.borderColor = "red";
-		}
-	}
+	// function checkLetter(
+	// 	elementValue: HTMLInputElement,
+	// 	element: string,
+	// 	correctValue: string
+	// ) {
+	// 	if (elementValue.toString() === correctValue) {
+	// 		document.getElementById(element)!.style.borderColor = "green";
+	// 	} else {
+	// 		const dialogue = document.getElementById(
+	// 			"chiffer-dialogue"
+	// 		) as HTMLElement;
+	// 		dialogue.innerText = "Fel svar. Prova igen.";
+	// 		document.getElementById(element)!.style.borderColor = "red";
+	// 	}
+	// }
 
 	const closeBtn = document.getElementById("close-chiffer") as HTMLElement;
 	function onCloseBtnClick() {
