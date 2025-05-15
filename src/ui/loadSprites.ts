@@ -80,6 +80,9 @@ export async function loadSprites() {
 		await kaBoom.loadSprite("hallwayMap", "../map3.png");
 		await kaBoom.loadSprite("basementMap", "../map4.png");
 		await kaBoom.loadSprite("basementRoom1Map", "../map5.png");
+		await kaBoom.loadSprite("basementRoom2Map", "../map5.png");
+		await kaBoom.loadSprite("basementRoom3Map", "../map5.png");
+		await kaBoom.loadSprite("basementRoom4Map", "../map5.png");
 		console.log("map sprites laddade!");
 
 		console.log("Laddar bullet sprite...");
