@@ -13,11 +13,11 @@ export default function basementRoom4Scene(
 	previousSceneData: GameState
 ) {
 	colorizeBackground(kaBoom, "#a2aed5");
-	state.changeScene("basementRoom1Scene");
+	state.changeScene("basementRoom4Scene");
 	console.log(state.current());
 
 	const map = kaBoom.add([
-		kaBoom.sprite("basementRoom1Map"),
+		kaBoom.sprite("basementRoom4Map"),
 		kaBoom.pos(0),
 		kaBoom.scale(scaleFactor),
 	]);

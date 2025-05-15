@@ -38,15 +38,15 @@ kaBoom.scene("basementRoom1Scene", (previousSceneData) => {
 });
 
 kaBoom.scene("basementRoom2Scene", (previousSceneData) => {
-	basementRoom2Scene(kaBoom, basementRoom1MapData, previousSceneData);
+	basementRoom2Scene(kaBoom, basementRoom2MapData, previousSceneData);
 });
 
 kaBoom.scene("basementRoom3Scene", (previousSceneData) => {
-	basementRoom3Scene(kaBoom, basementRoom1MapData, previousSceneData);
+	basementRoom3Scene(kaBoom, basementRoom3MapData, previousSceneData);
 });
 
 kaBoom.scene("basementRoom4Scene", (previousSceneData) => {
-	basementRoom4Scene(kaBoom, basementRoom1MapData, previousSceneData);
+	basementRoom4Scene(kaBoom, basementRoom4MapData, previousSceneData);
 });
 
 loadSprites().then(() => {

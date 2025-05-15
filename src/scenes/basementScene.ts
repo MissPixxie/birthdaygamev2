@@ -47,6 +47,42 @@ export default function basementScene(
 					);
 					continue;
 				}
+				if (
+					entity.name === "playerRoom1" &&
+					state.current().previousScene !== "hallwayScene"
+				) {
+					entities.player = map.add(
+						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					continue;
+				}
+				if (
+					entity.name === "playerRoom2" &&
+					state.current().previousScene !== "basementScene"
+				) {
+					entities.player = map.add(
+						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					continue;
+				}
+				// if (
+				// 	entity.name === "playerRoom3" &&
+				// 	state.current().previousScene !== "basementScene"
+				// ) {
+				// 	entities.player = map.add(
+				// 		createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+				// 	);
+				// 	continue;
+				// }
+				// if (
+				// 	entity.name === "playerRoom4" &&
+				// 	state.current().previousScene !== "basementScene"
+				// ) {
+				// 	entities.player = map.add(
+				// 		createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+				// 	);
+				// 	continue;
+				// }
 				if (entity.name === "ghost") {
 					if (state.current().isGhostDead) {
 						return;
@@ -100,6 +136,14 @@ export default function basementScene(
 			//}
 			else {
 				kaBoom.go("hallwayScene", previousSceneData);
+			}
+		});
+
+		entities.player.onCollide("basementRoom1", () => {
+			gameState.setFreezePlayer(true);
+			if (state.current().currentScene === "basementRoom1") return;
+			else {
+				kaBoom.go("basementRoom1Scene", previousSceneData);
 			}
 		});
 
