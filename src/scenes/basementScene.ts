@@ -91,6 +91,18 @@ export default function basementScene(
 			}
 		});
 
+		entities.player.onCollide("hallway", () => {
+			if (state.current().currentScene === "hallwayScene") return;
+			//else if (!getItem("key")) {
+			// displayDialogue(dialogueData["keyMissing"], () => {
+			// 	state.set("freezePlayer", false);
+			// });
+			//}
+			else {
+				kaBoom.go("hallwayScene", previousSceneData);
+			}
+		});
+
 		entities.player.onCollide("ghost", () => {
 			if (entities.player) checkHealth(entities.player);
 		});

@@ -5,10 +5,12 @@ import { background } from "./src/constants.ts";
 import apartmentMapData from "./public/map2.json";
 import hallwayMapData from "./public/map3.json";
 import basementMapData from "./public/map4.json";
+import basementRoom1MapData from "./public/map5.json";
 import hallwayScene from "./src/scenes/hallwayScene.ts";
 import { loadSprites } from "./src/ui/loadSprites.ts";
 import basementScene from "./src/scenes/basementScene.ts";
 import "./src/utils/sidePanelLogic.ts";
+import basementRoom1Scene from "./src/scenes/basementRoom1Scene.ts";
 // import { getCurrentActivePanel } from "./src/utils/uiManager.ts";
 // import { closeBackpack, closeHelp } from "./src/utils/sidePanelLogic.ts";
 // import { closeDialogue } from "./src/utils/dialogueLogic.ts";
@@ -23,6 +25,10 @@ kaBoom.scene("hallwayScene", (previousSceneData) => {
 
 kaBoom.scene("basementScene", (previousSceneData) => {
 	basementScene(kaBoom, basementMapData, previousSceneData);
+});
+
+kaBoom.scene("basementRoom1Scene", (previousSceneData) => {
+	basementRoom1Scene(kaBoom, basementRoom1MapData, previousSceneData);
 });
 
 loadSprites().then(() => {
