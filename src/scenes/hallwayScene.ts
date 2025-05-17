@@ -21,7 +21,8 @@ export default function hallwayScene(
 ) {
 	colorizeBackground(kaBoom, "#a2aed5");
 	state.changeScene("hallwayScene");
-	console.log(state.current());
+	console.log("current scene " + state.current().currentScene);
+	console.log("previous scene " + state.current().previousScene);
 
 	const map = kaBoom.add([
 		kaBoom.sprite("hallwayMap"),
@@ -137,6 +138,7 @@ export default function hallwayScene(
 				state.current().hasSeenRiddle &&
 				state.current().hasEnteredPassPhrase
 			) {
+				state.changeScene("basementScene");
 				kaBoom.go("basementScene", previousSceneData);
 			} else if (!state.current().hasSeenRiddle) {
 				displayDialogue(dialogueData["passPhrase"], () => {
@@ -149,9 +151,9 @@ export default function hallwayScene(
 						state.set("freezePlayer", false);
 					}
 				);
-				if (riddle) {
-					kaBoom.go("basementScene", previousSceneData);
-				}
+				// if (riddle) {
+				// 	kaBoom.go("basementScene", previousSceneData);
+				// }
 			}
 		});
 	}

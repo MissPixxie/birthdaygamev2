@@ -4,7 +4,6 @@ import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
 import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
-import { gameState } from "../stateManager/stateManager";
 import { colorizeBackground } from "../utils";
 
 export default function basementRoom1Scene(
@@ -13,8 +12,9 @@ export default function basementRoom1Scene(
 	previousSceneData: GameState
 ) {
 	colorizeBackground(kaBoom, "#a2aed5");
-	state.changeScene("basementRoom1Scene");
-	console.log(state.current());
+	//state.changeScene("basementRoom1Scene");
+	console.log("current scene " + state.current().currentScene);
+	console.log("previous scene " + state.current().previousScene);
 
 	const map = kaBoom.add([
 		kaBoom.sprite("basementRoom1Map"),
@@ -69,9 +69,9 @@ export default function basementRoom1Scene(
 
 		//// COLLIDERS ////
 		entities.player.onCollide("basement", () => {
-			gameState.setFreezePlayer(true);
 			if (state.current().currentScene === "basementScene") return;
 			else {
+				state.changeScene("basementScene");
 				kaBoom.go("basementScene", previousSceneData);
 			}
 		});

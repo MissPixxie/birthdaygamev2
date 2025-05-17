@@ -7,7 +7,6 @@ import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
 import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
-import { gameState } from "../stateManager/stateManager";
 import createGhost, { setGhostMovement } from "../entities/ghost";
 import { GameObj } from "kaboom";
 import { colorizeBackground } from "../utils";
@@ -19,8 +18,9 @@ export default function basementScene(
 	previousSceneData: GameState
 ) {
 	colorizeBackground(kaBoom, "#a2aed5");
-	state.changeScene("basementScene");
-	console.log(state.current());
+	//state.changeScene("basementScene");
+	console.log("current scene " + state.current().currentScene);
+	console.log("previous scene " + state.current().previousScene);
 
 	const map = kaBoom.add([
 		kaBoom.sprite("basementMap"),
@@ -49,7 +49,7 @@ export default function basementScene(
 				}
 				if (
 					entity.name === "playerRoom1" &&
-					state.current().previousScene !== "hallwayScene"
+					state.current().previousScene === "basementRoom1Scene"
 				) {
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
@@ -58,40 +58,40 @@ export default function basementScene(
 				}
 				if (
 					entity.name === "playerRoom2" &&
-					state.current().previousScene !== "basementScene"
+					state.current().previousScene === "basementRoom2Scene"
 				) {
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
 					continue;
 				}
-				// if (
-				// 	entity.name === "playerRoom3" &&
-				// 	state.current().previousScene !== "basementScene"
-				// ) {
-				// 	entities.player = map.add(
-				// 		createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
-				// 	);
-				// 	continue;
-				// }
-				// if (
-				// 	entity.name === "playerRoom4" &&
-				// 	state.current().previousScene !== "basementScene"
-				// ) {
-				// 	entities.player = map.add(
-				// 		createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
-				// 	);
-				// 	continue;
-				// }
-				if (entity.name === "ghost") {
-					if (state.current().isGhostDead) {
-						return;
-					}
-					entities.ghost = map.add(
-						createGhost(kaBoom, kaBoom.vec2(entity.x, entity.y))
+				if (
+					entity.name === "playerRoom3" &&
+					state.current().previousScene === "basementRoom3Scene"
+				) {
+					entities.player = map.add(
+						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
 					continue;
 				}
+				if (
+					entity.name === "playerRoom4" &&
+					state.current().previousScene === "basementRoom4Scene"
+				) {
+					entities.player = map.add(
+						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					continue;
+				}
+				// if (entity.name === "ghost") {
+				// 	if (state.current().isGhostDead) {
+				// 		return;
+				// 	}
+				// 	entities.ghost = map.add(
+				// 		createGhost(kaBoom, kaBoom.vec2(entity.x, entity.y))
+				// 	);
+				// 	continue;
+				// }
 			}
 		}
 	}
@@ -119,13 +119,6 @@ export default function basementScene(
 		});
 
 		//// COLLIDERS ////
-		entities.player.onCollide("hallway", () => {
-			gameState.setFreezePlayer(true);
-			if (state.current().currentScene === "hallwayScene") return;
-			else {
-				kaBoom.go("hallwayScene", previousSceneData);
-			}
-		});
 
 		entities.player.onCollide("hallway", () => {
 			if (state.current().currentScene === "hallwayScene") return;
@@ -140,10 +133,34 @@ export default function basementScene(
 		});
 
 		entities.player.onCollide("basementRoom1", () => {
-			gameState.setFreezePlayer(true);
-			if (state.current().currentScene === "basementRoom1") return;
+			if (state.current().currentScene === "basementRoom1Scene") return;
 			else {
+				state.changeScene("basementRoom1Scene");
 				kaBoom.go("basementRoom1Scene", previousSceneData);
+			}
+		});
+
+		entities.player.onCollide("basementRoom2", () => {
+			if (state.current().currentScene === "basementRoom2Scene") return;
+			else {
+				state.changeScene("basementRoom2Scene");
+				kaBoom.go("basementRoom2Scene", previousSceneData);
+			}
+		});
+
+		entities.player.onCollide("basementRoom3", () => {
+			if (state.current().currentScene === "basementRoom3Scene") return;
+			else {
+				state.changeScene("basementRoom3Scene");
+				kaBoom.go("basementRoom3Scene", previousSceneData);
+			}
+		});
+
+		entities.player.onCollide("basementRoom4", () => {
+			if (state.current().currentScene === "basementRoom4Scene") return;
+			else {
+				state.changeScene("basementRoom4Scene");
+				kaBoom.go("basementRoom4Scene", previousSceneData);
 			}
 		});
 

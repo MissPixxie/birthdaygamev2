@@ -26,6 +26,7 @@ function initStateManager() {
 			gameState[property] = value;
 		},
 		changeScene(newScene: string) {
+			console.log(newScene);
 			gameState.previousScene = gameState.currentScene;
 			gameState.currentScene = newScene;
 		},

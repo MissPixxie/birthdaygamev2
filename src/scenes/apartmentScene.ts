@@ -12,7 +12,7 @@ import { colorizeBackground } from "../utils.ts";
 import { Kaboom } from "../kaboomCtx.ts";
 import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
-import { GameObj, KaboomCtx, Vec2 } from "kaboom";
+import { GameObj } from "kaboom";
 import createTv, { displayHint } from "../entities/tv.ts";
 import createKey from "../entities/key.ts";
 import { addToBackpack, getItem } from "../utils/backpack.ts";
@@ -26,7 +26,6 @@ export default function apartmentScene(
 	previousSceneData: GameState
 ) {
 	state.changeScene("apartmentScene");
-	//console.log(state.current());
 
 	colorizeBackground(kaBoom, "#a2aed5");
 
