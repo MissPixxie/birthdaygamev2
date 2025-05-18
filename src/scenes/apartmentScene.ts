@@ -10,7 +10,7 @@ import { displayDialogue } from "../utils/dialogueLogic.ts";
 
 import { colorizeBackground } from "../utils.ts";
 import { Kaboom } from "../kaboomCtx.ts";
-import { GameState, Layers, MapData, entities } from "../utils/types.ts";
+import { GameState, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 import { GameObj } from "kaboom";
 import createTv, { displayHint } from "../entities/tv.ts";

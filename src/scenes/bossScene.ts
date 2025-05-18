@@ -5,6 +5,7 @@ import { Kaboom } from "../kaboomCtx";
 import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { colorizeBackground } from "../utils";
+import createBoss, { setBossMovement } from "../entities/boss";
 
 export default function bossScene(
 	kaBoom: Kaboom,
@@ -32,13 +33,17 @@ export default function bossScene(
 		}
 		if (layer.name === "spawnpoint") {
 			for (const entity of layer.objects!) {
-				if (
-					entity.name === "playerBoss" &&
-					state.current().previousScene === "basementScene"
-				) {
+				if (entity.name === "playerBoss") {
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
+					continue;
+				}
+				if (entity.name === "boss") {
+					entities.boss = map.add(
+						createBoss(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.boss.play("idle");
 					continue;
 				}
 			}
@@ -78,4 +83,5 @@ export default function bossScene(
 	}
 
 	setPlayerMovement(kaBoom, entities.player!);
+	setBossMovement(entities.boss!);
 }

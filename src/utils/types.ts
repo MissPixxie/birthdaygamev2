@@ -26,6 +26,7 @@ export type Entities = {
 	ekko: GameObj | null;
 	balloon: GameObj | null;
 	ghost: GameObj | null;
+	boss: GameObj | null;
 	livingRoom: GameObj | null;
 	tv: GameObj | null;
 	bedTable: GameObj | null;
@@ -44,6 +45,7 @@ export const entities: Entities = {
 	ekko: null,
 	balloon: null,
 	ghost: null,
+	boss: null,
 	livingRoom: null,
 	tv: null,
 	bedTable: null,

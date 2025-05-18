@@ -122,87 +122,13 @@ export function displayRiddleDialogue(
 	}
 }
 
-// export function startNeighborDialogue(onDisplayEnd: CallableFunction) {
-// 	state.set("freezePlayer", true);
-// 	const dialogueUI = document.getElementById(
-// 		"textbox-container"
-// 	) as HTMLElement;
-// 	const dialogue = document.getElementById("dialogue") as HTMLElement;
-
-// 	dialogueUI.style.display = "block";
-
-// 	function displayNextDialogue(text: string) {
-// 		console.log(text);
-// 		return new Promise<void>((resolve) => {
-// 			let index = 0;
-// 			let currentText = "";
-// 			const intervalRef = setInterval(() => {
-// 				if (index < text.length) {
-// 					currentText += text[index];
-// 					dialogue.innerHTML = currentText;
-// 					index++;
-// 					return;
-// 				}
-// 				clearInterval(intervalRef);
-// 				resolve();
-// 			}, 3);
-// 		});
-// 	}
-
-// 	let dialogueIndex = 0;
-
-// 	async function nextDialogueStep(dialogueText: string[]) {
-// 		console.log(dialogueText);
-// 		console.log(dialogueIndex);
-// 		if (dialogueIndex < dialogueText.length) {
-// 			await displayNextDialogue(dialogueText[dialogueIndex]);
-// 			dialogueIndex++;
-// 		} else {
-// 			dialogueUI.style.display = "none";
-// 			dialogue.innerHTML = "";
-// 			dialogueIndex = 0;
-// 			onDisplayEnd();
-// 		}
-// 	}
-
-// 	async function dialogueToShow() {
-// 		const talkedToNeighbor = state.current().talkedToNeighbor;
-// 		const hasItem = getItem("duck");
-// 		const duck = kaBoom.get("duck", { recursive: true })[0];
-// 		console.log(state.current().hasSeenSecondDialogue);
-// 		console.log(state.current().handedOverDuck);
-
-// 		if (state.current().talkedToNeighbor < 1) {
-// 			await nextDialogueStep(neighborDialogue.firstDialogue);
-// 		} else if (hasItem && talkedToNeighbor >= 1) {
-// 			await nextDialogueStep(neighborDialogue.secondDialogueGotDuck);
-// 			state.set("hasSeenSecondDialogue", true);
-// 			state.set("handedOverDuck", true);
-// 			duck.destroy();
-// 		} else if (
-// 			state.current().hasSeenSecondDialogue &&
-// 			state.current().handedOverDuck
-// 		) {
-// 			await nextDialogueStep(neighborDialogue.thirdDialogue);
-// 		} else {
-// 			await nextDialogueStep(neighborDialogue.secondDialogueNoDuck);
-// 		}
-// 	}
-
-// 	kaBoom.onKeyPress("space", () => {
-// 		dialogueToShow();
-// 	});
-
-// 	dialogueToShow();
-// }
-
 let isDialogActive = false;
 export function startNeighborDialogue(
 	text: string[],
 	onDisplayEnd: CallableFunction
 ) {
 	if (isDialogActive) return;
-	isDialogActive = true; // Markera att dialogen är aktiv
+	isDialogActive = true;
 	state.set("freezePlayer", true);
 	const dialogueUI = document.getElementById(
 		"textbox-container"

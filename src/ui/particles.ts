@@ -1,5 +1,5 @@
-import { GameObj, Vec2 } from "kaboom";
-import { kaBoom, Kaboom } from "../kaboomCtx";
+import { Vec2 } from "kaboom";
+import { Kaboom } from "../kaboomCtx";
 
 export function createParticle(kaBoom: Kaboom, pos: Vec2) {
 	return [

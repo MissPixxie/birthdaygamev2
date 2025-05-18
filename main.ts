@@ -18,7 +18,7 @@ import basementRoom1Scene from "./src/scenes/basementRoom1Scene.ts";
 import basementRoom2Scene from "./src/scenes/basementRoom2Scene.ts";
 import basementRoom3Scene from "./src/scenes/basementRoom3Scene.ts";
 import basementRoom4Scene from "./src/scenes/basementRoom4Scene.ts";
-import basementRoom4Scene from "./src/scenes/basementRoom4Scene.ts";
+import bossScene from "./src/scenes/bossScene.ts";
 // import { getCurrentActivePanel } from "./src/utils/uiManager.ts";
 // import { closeBackpack, closeHelp } from "./src/utils/sidePanelLogic.ts";
 // import { closeDialogue } from "./src/utils/dialogueLogic.ts";
@@ -57,7 +57,7 @@ kaBoom.scene("bossScene", (previousSceneData) => {
 
 loadSprites().then(() => {
 	console.log("resurser laddade");
-	kaBoom.go("apartmentScene");
+	kaBoom.go("bossScene");
 });
 
 // const scenes = {

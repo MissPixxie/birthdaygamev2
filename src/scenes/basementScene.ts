@@ -149,11 +149,19 @@ export default function basementScene(
 			}
 		});
 
+		// entities.player.onCollide("basementRoom3", () => {
+		// 	if (state.current().currentScene === "basementRoom3Scene") return;
+		// 	else {
+		// 		state.changeScene("basementRoom3Scene");
+		// 		kaBoom.go("basementRoom3Scene", previousSceneData);
+		// 	}
+		// });
+
 		entities.player.onCollide("basementRoom3", () => {
 			if (state.current().currentScene === "basementRoom3Scene") return;
 			else {
 				state.changeScene("basementRoom3Scene");
-				kaBoom.go("basementRoom3Scene", previousSceneData);
+				kaBoom.go("bossScene", previousSceneData);
 			}
 		});
 
