@@ -1,5 +1,6 @@
 import { GameObj, Vec2 } from "kaboom";
 import { kaBoom } from "../kaboomCtx";
+import { state } from "../stateManager/globalStateManager";
 
 export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 	const player = kaBoom.get("player", { recursive: true })[0];
@@ -57,6 +58,7 @@ export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 		if (object.is("ghost")) {
 			ghost.destroy();
 			bullet.destroy();
+			state.set("isGhostDead", true);
 		} else {
 			bullet.destroy();
 		}

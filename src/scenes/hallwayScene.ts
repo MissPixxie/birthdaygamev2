@@ -19,7 +19,7 @@ export default function hallwayScene(
 	hallwayMapData: MapData,
 	previousSceneData: GameState
 ) {
-	colorizeBackground(kaBoom, "#a2aed5");
+	colorizeBackground(kaBoom, "#50585e");
 	state.changeScene("hallwayScene");
 	console.log("current scene " + state.current().currentScene);
 	console.log("previous scene " + state.current().previousScene);

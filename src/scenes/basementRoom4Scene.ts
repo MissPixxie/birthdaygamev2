@@ -11,7 +11,7 @@ export default function basementRoom4Scene(
 	basementRoom4MapData: MapData,
 	previousSceneData: GameState
 ) {
-	colorizeBackground(kaBoom, "#a2aed5");
+	colorizeBackground(kaBoom, "#50585e");
 	console.log("current scene " + state.current().currentScene);
 	console.log("previous scene " + state.current().previousScene);
 

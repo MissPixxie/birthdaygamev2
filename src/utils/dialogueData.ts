@@ -24,12 +24,18 @@ export const dialogueData = {
 	passPhrase: "Vad är det hemliga ordet?",
 	enterPassPhrase: "slå in lösenord",
 	riddle: "......",
-	outOfGameRiddle:
-		"Här tar spelet paus ett tag, nu krävs en handling - inget drag." +
+	IRL:
+		"Här tar spelet paus ett tag," +
 		"<br>" +
-		"Vad som väntar ser du ej här, sök i din värld, för svaret är där" +
+		"nu krävs en handling - inget drag." +
 		"<br>" +
-		"Men glöm ej spelet, din resa är lång - när du har funnit, fortsätt där du en gång kom ifrån",
+		"Vad som väntar ser du ej här," +
+		"<br>" +
+		"sök i din värld, för svaret är där" +
+		"<br>" +
+		"Men glöm ej spelet, din resa är lång -" +
+		"<br>" +
+		"när du har funnit, fortsätt där du en gång kom ifrån",
 };
 
 export const neighborDialogue = {

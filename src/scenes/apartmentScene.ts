@@ -10,7 +10,7 @@ import { displayDialogue } from "../utils/dialogueLogic.ts";
 
 import { colorizeBackground } from "../utils.ts";
 import { Kaboom } from "../kaboomCtx.ts";
-import { GameState, MapData, entities } from "../utils/types.ts";
+import { GameState, Layers, MapData, entities } from "../utils/types.ts";
 import { state } from "../stateManager/globalStateManager.ts";
 import { GameObj } from "kaboom";
 import createTv, { displayHint } from "../entities/tv.ts";
@@ -19,6 +19,7 @@ import { addToBackpack, getItem } from "../utils/backpack.ts";
 import createDuck from "../entities/duck.ts";
 import createBedTable from "../entities/bedTable.ts";
 import createWeapon from "../entities/weapon.ts";
+import { createParticle } from "../ui/particles.ts";
 
 export default function apartmentScene(
 	kaBoom: Kaboom,
@@ -27,7 +28,7 @@ export default function apartmentScene(
 ) {
 	state.changeScene("apartmentScene");
 
-	colorizeBackground(kaBoom, "#a2aed5");
+	colorizeBackground(kaBoom, "#50585e");
 
 	const map = kaBoom.add([
 		kaBoom.sprite("apartmentMap"),
@@ -106,22 +107,39 @@ export default function apartmentScene(
 					entities.duck.play("show");
 					continue;
 				}
-				// if (entity.name === "sparkle") {
-				// 	console.log(entity.name);
-				// 	const sparkle = createSparkleEffect(
-				// 		kaBoom,
-				// 		kaBoom.vec2(entity.x, entity.y)
-				// 	);
-				// 	const glow = createGlowEffect(
-				// 		kaBoom,
-				// 		kaBoom.vec2(entity.x, entity.y)
-				// 	);
-				// 	// kaBoom.onUpdate(() => {
-				// 	// 	glow.pos.x = sprite.pos.x; // Uppdatera position för glödande effekt
-				// 	// 	glow.pos.y = sprite.pos.y;
-				// 	// });
-				// 	continue;
-				// }
+				if (entity.name === "particle") {
+					entities.particle = map.add(
+						createParticle(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.particle.play("glow");
+					continue;
+				}
+				if (entity.name === "particle2") {
+					setTimeout(() => {
+						entities.particle = map.add(
+							createParticle(
+								kaBoom,
+								kaBoom.vec2(entity.x, entity.y)
+							)
+						);
+						entities.particle.play("glow");
+					}, 1500);
+
+					continue;
+				}
+				if (entity.name === "particle3") {
+					setTimeout(() => {
+						entities.particle = map.add(
+							createParticle(
+								kaBoom,
+								kaBoom.vec2(entity.x, entity.y)
+							)
+						);
+						entities.particle.play("glow");
+					}, 2600);
+
+					continue;
+				}
 			}
 		}
 	}
@@ -163,7 +181,6 @@ export default function apartmentScene(
 		});
 
 		entities.player.onCollide("bedTable", () => {
-			console.log("bedTable");
 			state.set("collisionWith", "bedTable");
 			state.set("itemToPickup", "weapon");
 			if (state.current().isFirstTimeInteracting) {
@@ -171,7 +188,6 @@ export default function apartmentScene(
 					state.set("freezePlayer", false);
 				});
 			}
-			console.log(state.current().collisionWith);
 			if (state.current().collisionWith === "bedTable") {
 				kaBoom.onKeyPress("o", () => {
 					if (entities.bedTable!.status === "open") {
@@ -191,6 +207,13 @@ export default function apartmentScene(
 
 		entities.player.onCollideEnd("bedTable", () => {
 			state.set("collisionWith", "null");
+		});
+
+		entities.player.onCollide("IRL", async () => {
+			state.set("freezePlayer", true);
+			await displayDialogue(dialogueData["IRL"], () => {
+				state.set("freezePlayer", false);
+			});
 		});
 
 		entities.player.onCollide("livingRoom", async (livingRoom: GameObj) => {
@@ -247,10 +270,10 @@ export default function apartmentScene(
 
 		entities.player.onCollide("hallway", () => {
 			if (state.current().currentScene === "hallwayScene") return;
-			//else if (!getItem("key")) {
-			// displayDialogue(dialogueData["keyMissing"], () => {
-			// 	state.set("freezePlayer", false);
-			// });
+			// else if (!getItem("key")) {
+			// 	displayDialogue(dialogueData["keyMissing"], () => {
+			// 		state.set("freezePlayer", false);
+			// 	});
 			//}
 			else {
 				kaBoom.go("hallwayScene", previousSceneData);

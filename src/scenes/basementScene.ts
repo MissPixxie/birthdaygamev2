@@ -17,7 +17,7 @@ export default function basementScene(
 	basementMapData: MapData,
 	previousSceneData: GameState
 ) {
-	colorizeBackground(kaBoom, "#a2aed5");
+	colorizeBackground(kaBoom, "#50585e");
 	//state.changeScene("basementScene");
 	console.log("current scene " + state.current().currentScene);
 	console.log("previous scene " + state.current().previousScene);
@@ -83,15 +83,15 @@ export default function basementScene(
 					);
 					continue;
 				}
-				// if (entity.name === "ghost") {
-				// 	if (state.current().isGhostDead) {
-				// 		return;
-				// 	}
-				// 	entities.ghost = map.add(
-				// 		createGhost(kaBoom, kaBoom.vec2(entity.x, entity.y))
-				// 	);
-				// 	continue;
-				// }
+				if (entity.name === "ghost") {
+					if (state.current().isGhostDead) {
+						continue;
+					}
+					entities.ghost = map.add(
+						createGhost(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					continue;
+				}
 			}
 		}
 	}
@@ -172,11 +172,8 @@ export default function basementScene(
 			if (entities.player!.isAttacking) return;
 
 			entities.player!.isAttacking = true;
-
-			// Spela skjutanimation
 			playShootAnimation(entities.player!);
 
-			// Skjut kulor
 			shoot(map, () => {
 				entities.player!.isAttacking = false;
 			});

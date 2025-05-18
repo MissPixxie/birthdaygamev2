@@ -151,7 +151,21 @@ export async function loadSprites() {
 			},
 		});
 
-		await kaBoom.loadSprite("particle", "../particle.png");
+		await kaBoom.loadSprite("particle", "../particleAnim2.png", {
+			sliceX: 5,
+			sliceY: 1,
+			anims: {
+				show: 0,
+				hide: 1,
+				glow: {
+					from: 0,
+					to: 4,
+					loop: true,
+					pingpong: true,
+					speed: 3.7,
+				},
+			},
+		});
 
 		console.log("Alla resurser är laddade!");
 	} catch (error) {
