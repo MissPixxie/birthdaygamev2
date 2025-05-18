@@ -26,12 +26,13 @@ export default function createPlayer(kaBoom: Kaboom, pos: Vec2) {
 
 export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 	kaBoom.onKeyDown((key) => {
-		if (player.isAttacking) return;
-
 		if (["left"].includes(key) && !keysPressed(kaBoom, ["up", "down"])) {
 			player.flipX = true;
-			playAnimIfNotPlaying(player, "walk-side");
-
+			if (!player.isAttacking) {
+				playAnimIfNotPlaying(player, "walk-side");
+			} else {
+				playAnimIfNotPlaying(player, "battle-walk-side");
+			}
 			player.move(-player.speed, 0);
 			player.direction = "left";
 			player.lastHorizontalDirection = "left";
@@ -39,20 +40,32 @@ export function setPlayerMovement(kaBoom: Kaboom, player: GameObj) {
 		}
 		if (["right"].includes(key) && !keysPressed(kaBoom, ["up", "down"])) {
 			player.flipX = false;
-			playAnimIfNotPlaying(player, "walk-side");
+			if (!player.isAttacking) {
+				playAnimIfNotPlaying(player, "walk-side");
+			} else {
+				playAnimIfNotPlaying(player, "battle-walk-side");
+			}
 			player.move(player.speed, 0);
 			player.direction = "right";
 			player.lastHorizontalDirection = "right";
 			return;
 		}
 		if (["up"].includes(key)) {
-			playAnimIfNotPlaying(player, "walk-up");
+			if (!player.isAttacking) {
+				playAnimIfNotPlaying(player, "walk-up");
+			} else {
+				playAnimIfNotPlaying(player, "battle-walk-up");
+			}
 			player.move(0, -player.speed);
 			player.direction = "up";
 			return;
 		}
 		if (["down"].includes(key)) {
-			playAnimIfNotPlaying(player, "walk-down");
+			if (!player.isAttacking) {
+				playAnimIfNotPlaying(player, "walk-down");
+			} else {
+				playAnimIfNotPlaying(player, "battle-walk-down");
+			}
 			player.move(0, player.speed);
 			player.direction = "down";
 			return;

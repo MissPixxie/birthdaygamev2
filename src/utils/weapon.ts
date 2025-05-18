@@ -34,7 +34,6 @@ export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 		direction = kaBoom.vec2(0, 0);
 		offsetX = 0;
 	}
-
 	const bullet = map.add(createBullet(bulletXPOS, bulletYPOS, offsetX));
 
 	// Bullet movement
