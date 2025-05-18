@@ -52,7 +52,7 @@ export const neighborDialogue = {
 	secondDialogueGotDuck: [
 		"Vad har du åt mig?",
 		"FUUUUUCK YEAAAHH, okej, okej... så här... hmmm, vad var jag... jo, jo, såhär, kolla...",
-		"Så jag såg Torsten, eller vad... ah, med dom där, du vet, vid en... gräsplätt, stor som fan... där Carl bor, typ... eller... vänta, vad sa jag nu, haha... ehh... kommer inte riktigt ihåg, men jag var rätt bäng då också, så...",
+		"Så jag såg Torsten, eller vad... ah, med dom där, du vet, vid en... gräsplätt, stor som fan... där Carl bor, typ... eller... vänta, ehh... kommer inte riktigt ihåg, men jag var rätt bäng då också haha, så...",
 	],
-	thirdDialogue: ["Gräsplätt...Carl...ugh..."],
+	thirdDialogue: ["Gräsplätt...Carl...mmm..."],
 };

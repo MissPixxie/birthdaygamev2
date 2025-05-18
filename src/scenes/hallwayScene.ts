@@ -9,10 +9,11 @@ import {
 	displayRiddleDialogue,
 	startNeighborDialogue,
 } from "../utils/dialogueLogic";
-import { dialogueData } from "../utils/dialogueData";
+import { dialogueData, neighborDialogue } from "../utils/dialogueData";
 import createNeighborDoor, { closeDoor } from "../entities/neighborDoor";
 import createEyes from "../entities/eyes";
 import { colorizeBackground } from "../utils";
+import { getItem } from "../utils/backpack";
 
 export default function hallwayScene(
 	kaBoom: Kaboom,
@@ -108,20 +109,52 @@ export default function hallwayScene(
 		});
 
 		entities.player.onCollide("neighborDoor", () => {
+			if (entities.neighborDoor!.status === "open") return;
+
 			entities.neighborDoor!.play("open");
 			entities.neighborDoor!.status = "open";
 			entities.eyes!.play("show");
-			startNeighborDialogue(() => {
-				state.set("freezePlayer", false);
-				state.set(
-					"talkedToNeighbor",
-					state.current().talkedToNeighbor + 1
+			const hasDuck = getItem("duck");
+
+			if (state.current().talkedToNeighbor >= 1 && hasDuck) {
+				if (state.current().hasSeenSecondDialogue) {
+					startNeighborDialogue(
+						neighborDialogue.thirdDialogue,
+						() => {
+							state.set("freezePlayer", false);
+						}
+					);
+				} else {
+					startNeighborDialogue(
+						neighborDialogue.secondDialogueGotDuck,
+						() => {
+							state.set("freezePlayer", false);
+							state.set("hasSeenSecondDialogue", true);
+							state.set("handedOverDuck", true);
+						}
+					);
+				}
+			} else if (
+				state.current().hasSeenSecondDialogue &&
+				state.current().handedOverDuck
+			) {
+				startNeighborDialogue(neighborDialogue.thirdDialogue, () => {
+					state.set("freezePlayer", false);
+				});
+			} else if (state.current().talkedToNeighbor >= 1 && !hasDuck) {
+				startNeighborDialogue(
+					neighborDialogue.secondDialogueNoDuck,
+					() => {
+						state.set("freezePlayer", false);
+					}
 				);
-			});
-			// entities.player!.onCollideEnd("neighborDoor", () => {
-			// 	entities.neighborDoor!.play("closed");
-			// 	entities.eyes!.play("hide");
-			// });
+			} else {
+				startNeighborDialogue(neighborDialogue.firstDialogue, () => {
+					state.set("freezePlayer", false);
+				});
+			}
+			let newTalkedToNeighbor = state.current().talkedToNeighbor + 1;
+			state.set("talkedToNeighbor", newTalkedToNeighbor);
 		});
 
 		entities.player.onCollide("wallHanging", () => {
@@ -151,9 +184,9 @@ export default function hallwayScene(
 						state.set("freezePlayer", false);
 					}
 				);
-				// if (riddle) {
-				// 	kaBoom.go("basementScene", previousSceneData);
-				// }
+				if (riddle) {
+					kaBoom.go("basementScene", previousSceneData);
+				}
 			}
 		});
 	}

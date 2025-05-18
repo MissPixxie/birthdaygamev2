@@ -13,6 +13,7 @@ export type GameState = {
 	itemToPickup: Items;
 	hasSeenRiddle: boolean;
 	talkedToNeighbor: number;
+	handedOverDuck: boolean;
 	hasSeenSecondDialogue: boolean;
 	backpack: string[];
 };
