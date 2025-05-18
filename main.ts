@@ -9,6 +9,7 @@ import basementRoom1MapData from "./public/map5.json";
 import basementRoom2MapData from "./public/map6.json";
 import basementRoom3MapData from "./public/map7.json";
 import basementRoom4MapData from "./public/map8.json";
+import bossMapData from "./public/map9.json";
 import hallwayScene from "./src/scenes/hallwayScene.ts";
 import { loadSprites } from "./src/ui/loadSprites.ts";
 import basementScene from "./src/scenes/basementScene.ts";
@@ -16,6 +17,7 @@ import "./src/utils/sidePanelLogic.ts";
 import basementRoom1Scene from "./src/scenes/basementRoom1Scene.ts";
 import basementRoom2Scene from "./src/scenes/basementRoom2Scene.ts";
 import basementRoom3Scene from "./src/scenes/basementRoom3Scene.ts";
+import basementRoom4Scene from "./src/scenes/basementRoom4Scene.ts";
 import basementRoom4Scene from "./src/scenes/basementRoom4Scene.ts";
 // import { getCurrentActivePanel } from "./src/utils/uiManager.ts";
 // import { closeBackpack, closeHelp } from "./src/utils/sidePanelLogic.ts";
@@ -47,6 +49,10 @@ kaBoom.scene("basementRoom3Scene", (previousSceneData) => {
 
 kaBoom.scene("basementRoom4Scene", (previousSceneData) => {
 	basementRoom4Scene(kaBoom, basementRoom4MapData, previousSceneData);
+});
+
+kaBoom.scene("bossScene", (previousSceneData) => {
+	bossScene(kaBoom, bossMapData, previousSceneData);
 });
 
 loadSprites().then(() => {
