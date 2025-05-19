@@ -56,13 +56,20 @@ export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 			return;
 		}
 		if (object.is("ghost")) {
-			ghost.destroy();
+			ghost.hurt(1);
+			if (ghost.hp() === 0) {
+				ghost.destroy();
+				state.set("isGhostDead", true);
+			}
 			bullet.destroy();
-			state.set("isGhostDead", true);
 		} else if (object.is("boss")) {
-			boss.destroy();
+			boss.hurt(1);
+			console.log(boss.hp());
+			if (boss.hp() === 0) {
+				boss.destroy();
+				state.set("isBossDead", true);
+			}
 			bullet.destroy();
-			state.set("isBossDead", true);
 		} else {
 			bullet.destroy();
 		}

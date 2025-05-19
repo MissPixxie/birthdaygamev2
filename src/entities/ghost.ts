@@ -20,13 +20,14 @@ export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 			"patrol-right",
 			"attack",
 			"retreat",
+			"hurt",
 		]),
 		{
 			speed: 20,
 			pursuitSpeed: 50,
 			range: 100,
 		},
-		kaBoom.health(3),
+		kaBoom.health(10),
 		"ghost",
 	];
 }
@@ -81,7 +82,24 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 			ghost.pursuitSpeed
 		);
 	});
+	// play hurt anim
+	// check last movement state
+	// play that state after hurt anim
+	ghost.onStateEnter("hurt", async () => {
+		await kaBoom.wait(0.1);
+		if (ghost.pos.dist(player.pos) < ghost.range) {
+			ghost.enterState("attack");
+			ghost.play("attack");
+			return;
+		}
+		ghost.enterState("patrol-left");
+	});
+
 	ghost.onCollide("player", () => {
 		ghost.hurt(1);
+	});
+
+	ghost.onCollide("bullet", () => {
+		ghost.play("hurt");
 	});
 }

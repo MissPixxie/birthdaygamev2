@@ -11,7 +11,7 @@ export default function createBoss(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.pos(pos),
 		kaBoom.anchor("center"),
 		kaBoom.opacity(),
-		kaBoom.health(50),
+		kaBoom.health(5),
 		kaBoom.z(1),
 		kaBoom.state("idle", [
 			"idle",
