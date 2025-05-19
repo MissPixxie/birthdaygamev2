@@ -5,6 +5,7 @@ import { state } from "../stateManager/globalStateManager";
 export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 	const player = kaBoom.get("player", { recursive: true })[0];
 	const ghost = kaBoom.get("ghost", { recursive: true })[0];
+	const boss = kaBoom.get("boss", { recursive: true })[0];
 	const bulletXPOS = player.pos.x;
 	const bulletYPOS = player.pos.y;
 
@@ -58,6 +59,10 @@ export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 			ghost.destroy();
 			bullet.destroy();
 			state.set("isGhostDead", true);
+		} else if (object.is("boss")) {
+			boss.destroy();
+			bullet.destroy();
+			state.set("isBossDead", true);
 		} else {
 			bullet.destroy();
 		}

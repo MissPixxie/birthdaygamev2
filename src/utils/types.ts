@@ -9,6 +9,7 @@ export type GameState = {
 	isFirstTimeInteracting: boolean;
 	collisionWith: "tv" | "bedTable" | "null";
 	isGhostDead: boolean;
+	isBossDead: boolean;
 	hasEnteredPassPhrase: boolean;
 	itemToPickup: Items;
 	hasSeenRiddle: boolean;

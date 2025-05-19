@@ -14,6 +14,7 @@ export default function createBoss(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.health(50),
 		kaBoom.z(1),
 		kaBoom.state("idle", [
+			"idle",
 			"initial",
 			"alert",
 			"chase",
@@ -39,25 +40,30 @@ export function setBossMovement(boss: GameObj | null) {
 		console.error("Can't find boss or player");
 		return;
 	}
+	boss.enterState("idle");
 
-	// kaBoom.onUpdate(() => {
-	// 	const distance = boss.pos.dist(player.pos);
-	// 	if (distance > boss.range) {
-	// 		boss.enterState("initial");
-	// 	}
-	// });
-	boss.onStateUpdate("initial", () => {
+	boss.onStateEnter("idle", () => {
+		boss.play("idle");
+	});
+
+	boss.onStateUpdate("idle", () => {
 		if (boss.pos.dist(player.pos) < boss.range) {
-			boss.play("initial");
+			boss.enterState("initial");
+			return;
 		}
 	});
 
-	// boss.onStateEnter("idle", () => {
-	// 	if (boss.pos.dist(player.pos) < boss.range) {
-	// 		boss.enterState("initial");
-	// 		boss.play("initial");
-	// 	}
-	// });
+	boss.onStateEnter("initial", () => {
+		boss.play("initial");
+	});
+
+	boss.onStateUpdate("initial", () => {
+		if (boss.pos.dist(player.pos) > boss.range) {
+			boss.enterState("idle");
+			return;
+		}
+	});
+
 	boss.onCollide("player", () => {
 		boss.hurt(1);
 	});

@@ -1,11 +1,16 @@
 import { scaleFactor } from "../constants";
-import createPlayer, { setPlayerMovement } from "../entities/player";
+import createPlayer, {
+	playShootAnimation,
+	setPlayerMovement,
+} from "../entities/player";
 import { drawBoundaries } from "../utils/boundaries";
 import { Kaboom } from "../kaboomCtx";
 import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { colorizeBackground } from "../utils";
 import createBoss, { setBossMovement } from "../entities/boss";
+import { addToBackpack, getItem } from "../utils/backpack";
+import { shoot } from "../utils/weapon";
 
 export default function bossScene(
 	kaBoom: Kaboom,
@@ -70,6 +75,23 @@ export default function bossScene(
 					kaBoom.easings.linear
 				);
 			}
+		});
+
+		addToBackpack("weapon");
+		kaBoom.onKeyPress("f", () => {
+			if (!getItem("weapon")) {
+				return;
+			}
+			entities.player!.isAttacking = true;
+			playShootAnimation(entities.player!);
+
+			shoot(map, () => {
+				entities.player!.isAttacking = false;
+				state.set("freezePlayer", false);
+			});
+		});
+		kaBoom.onKeyRelease("f", () => {
+			entities.player!.isAttacking = false;
 		});
 
 		//// COLLIDERS ////

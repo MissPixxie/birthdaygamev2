@@ -108,6 +108,7 @@ export default function hallwayScene(
 			}
 		});
 
+		// FIX DIALOGUE
 		entities.player.onCollide("neighborDoor", () => {
 			if (entities.neighborDoor!.status === "open") return;
 

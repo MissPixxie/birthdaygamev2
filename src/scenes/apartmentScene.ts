@@ -234,6 +234,7 @@ export default function apartmentScene(
 			});
 		});
 
+		// remove duck when handed over
 		entities.player.onCollide("duck", () => {
 			console.log("duck collide");
 			state.set("itemToPickup", "duck");

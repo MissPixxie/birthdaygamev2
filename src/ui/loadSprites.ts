@@ -170,12 +170,13 @@ export async function loadSprites() {
 
 		await kaBoom.loadSprite("boss", "../torstenAnim.png", {
 			sliceX: 1,
-			sliceY: 4,
+			sliceY: 3,
 			anims: {
 				idle: 0,
 				initial: {
-					from: 2,
-					to: 3,
+					from: 1,
+					to: 2,
+					loop: true,
 					pingpong: true,
 					speed: 2.5,
 				},
