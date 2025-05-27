@@ -54,7 +54,8 @@ export async function loadSprites() {
 
 		console.log("Laddar ghost sprite...");
 		await kaBoom.loadSprite("ghost", "../ghostMovement.png", {
-			sliceX: 8,
+			sliceX: 7,
+			sliceY: 2,
 			anims: {
 				move: {
 					from: 0,
@@ -66,12 +67,13 @@ export async function loadSprites() {
 				alert: 3,
 				attack: {
 					from: 4,
-					to: 7,
+					to: 6,
 					loop: true,
 					speed: 2,
 					pingpong: true,
 				},
-				hurt: 7,
+				hurt: { from: 9, to: 10 },
+				dead: { from: 7, to: 8, loop: true, speed: 2.5 },
 			},
 		});
 		console.log("Ghost sprite laddad!");

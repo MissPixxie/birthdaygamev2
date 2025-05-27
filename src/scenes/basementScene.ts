@@ -11,7 +11,7 @@ import createGhost, { setGhostMovement } from "../entities/ghost";
 import { GameObj } from "kaboom";
 import { colorizeBackground } from "../utils";
 import { shoot } from "../utils/weapon";
-import { getItem } from "../utils/backpack";
+import { addToBackpack, getItem } from "../utils/backpack";
 
 export default function basementScene(
 	kaBoom: Kaboom,
@@ -177,6 +177,7 @@ export default function basementScene(
 			if (entities.player) checkHealth(entities.player);
 		});
 
+		addToBackpack("weapon");
 		kaBoom.onKeyPress("f", () => {
 			if (!getItem("weapon")) {
 				return;

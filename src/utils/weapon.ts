@@ -56,11 +56,11 @@ export function shoot(map: GameObj, onShootEnd: CallableFunction) {
 			return;
 		}
 		if (object.is("ghost")) {
-			ghost.hurt(1);
-			if (ghost.hp() === 0) {
-				ghost.destroy();
-				state.set("isGhostDead", true);
-			}
+			// ghost.hurt(1);
+			// if (ghost.hp() === 0) {
+			// 	ghost.destroy();
+			// 	state.set("isGhostDead", true);
+			// }
 			bullet.destroy();
 		} else if (object.is("boss")) {
 			boss.hurt(1);

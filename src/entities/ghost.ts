@@ -1,5 +1,6 @@
 import { GameObj, KaboomCtx, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
+import { playAnimIfNotPlaying } from "../utils";
 
 export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 	return [
@@ -21,25 +22,28 @@ export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 			"attack",
 			"retreat",
 			"hurt",
+			"dead",
 		]),
 		{
 			speed: 20,
 			pursuitSpeed: 50,
 			range: 100,
+			isHurting: false,
 		},
-		kaBoom.health(10),
+		kaBoom.health(5),
 		"ghost",
 	];
 }
 
 export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	const player = kaBoom.get("player", { recursive: true })[0];
+
 	ghost.onStateEnter("patrol-left", async () => {
 		await kaBoom.wait(7);
 		if (ghost.state === "patrol-left") ghost.enterState("patrol-right");
 	});
 	ghost.onStateUpdate("patrol-left", () => {
-		console.log(ghost.state);
+		if (ghost.isHurting) return;
 		if (ghost.pos.dist(player.pos) < ghost.range) {
 			ghost.play("alert");
 			ghost.enterState("alert");
@@ -53,7 +57,7 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 		if (ghost.state === "patrol-right") ghost.enterState("patrol-left");
 	});
 	ghost.onStateUpdate("patrol-right", () => {
-		console.log(ghost.state);
+		if (ghost.isHurting) return;
 		if (ghost.pos.dist(player.pos) < ghost.range) {
 			ghost.play("alert");
 			ghost.enterState("alert");
@@ -65,6 +69,9 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	ghost.onStateEnter("alert", async () => {
 		await kaBoom.wait(0.1);
 		if (ghost.pos.dist(player.pos) < ghost.range) {
+			if (ghost.isHurting) {
+				ghost.enterState("hurt");
+			}
 			ghost.enterState("attack");
 			ghost.play("attack");
 			return;
@@ -72,6 +79,7 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 		ghost.enterState("patrol-left");
 	});
 	ghost.onStateUpdate("attack", () => {
+		if (ghost.isHurting) return;
 		if (ghost.pos.dist(player.pos) > ghost.range) {
 			ghost.enterState("alert");
 			return;
@@ -82,17 +90,26 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 			ghost.pursuitSpeed
 		);
 	});
-	// play hurt anim
-	// check last movement state
-	// play that state after hurt anim
+
 	ghost.onStateEnter("hurt", async () => {
-		await kaBoom.wait(0.1);
-		if (ghost.pos.dist(player.pos) < ghost.range) {
-			ghost.enterState("attack");
-			ghost.play("attack");
-			return;
-		}
+		await kaBoom.wait(0.001);
+		ghost.play("hurt");
+		await kaBoom.wait(0.09);
+		ghost.isHurting = false;
 		ghost.enterState("patrol-left");
+	});
+
+	ghost.onStateEnter("hurt", async () => {
+		await kaBoom.wait(0.001);
+		ghost.play("hurt");
+		await kaBoom.wait(0.09);
+		ghost.isHurting = false;
+		ghost.enterState("patrol-left");
+	});
+
+	ghost.onStateEnter("dead", () => {
+		ghost.play("dead");
+		ghost.isHurting = false;
 	});
 
 	ghost.onCollide("player", () => {
@@ -100,6 +117,14 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	});
 
 	ghost.onCollide("bullet", () => {
-		ghost.play("hurt");
+		console.log(ghost.hp());
+		if (ghost.hp() === 0) {
+			//ghost.destroy();
+			ghost.enterState("dead");
+		} else {
+			ghost.hurt(1);
+			ghost.isHurting = true;
+			ghost.enterState("hurt");
+		}
 	});
 }

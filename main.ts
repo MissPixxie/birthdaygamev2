@@ -57,7 +57,7 @@ kaBoom.scene("bossScene", (previousSceneData) => {
 
 loadSprites().then(() => {
 	console.log("resurser laddade");
-	kaBoom.go("apartmentScene");
+	kaBoom.go("hallwayScene");
 });
 
 // const scenes = {
