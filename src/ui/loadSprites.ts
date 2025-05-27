@@ -171,6 +171,8 @@ export async function loadSprites() {
 			},
 		});
 
+		await kaBoom.loadSprite("woodWall", "../woodWall.png");
+
 		await kaBoom.loadSprite("boss", "../torstenAnim.png", {
 			sliceX: 1,
 			sliceY: 3,
