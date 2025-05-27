@@ -13,7 +13,7 @@ import { dialogueData, neighborDialogue } from "../utils/dialogueData";
 import createNeighborDoor, { closeDoor } from "../entities/neighborDoor";
 import createEyes from "../entities/eyes";
 import { colorizeBackground } from "../utils";
-import { getItem } from "../utils/backpack";
+import { getItem, removeItemFromBackpack } from "../utils/backpack";
 
 export default function hallwayScene(
 	kaBoom: Kaboom,
@@ -132,6 +132,8 @@ export default function hallwayScene(
 							state.set("freezePlayer", false);
 							state.set("hasSeenSecondDialogue", true);
 							state.set("handedOverDuck", true);
+							entities.duck!.destroy();
+							removeItemFromBackpack("duck");
 						}
 					);
 				}

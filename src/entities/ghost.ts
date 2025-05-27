@@ -1,6 +1,7 @@
 import { GameObj, KaboomCtx, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
 import { playAnimIfNotPlaying } from "../utils";
+import { state } from "../stateManager/globalStateManager";
 
 export default function createGhost(kaBoom: Kaboom, pos: Vec2) {
 	return [
@@ -110,6 +111,7 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	ghost.onStateEnter("dead", () => {
 		ghost.play("dead");
 		ghost.isHurting = false;
+		state.set("isGhostDead", true);
 	});
 
 	ghost.onCollide("player", () => {
@@ -119,7 +121,6 @@ export function setGhostMovement(kaBoom: KaboomCtx, ghost: GameObj) {
 	ghost.onCollide("bullet", () => {
 		console.log(ghost.hp());
 		if (ghost.hp() === 0) {
-			//ghost.destroy();
 			ghost.enterState("dead");
 		} else {
 			ghost.hurt(1);

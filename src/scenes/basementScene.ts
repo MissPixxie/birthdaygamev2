@@ -174,7 +174,15 @@ export default function basementScene(
 		});
 
 		entities.player.onCollide("ghost", () => {
-			if (entities.player) checkHealth(entities.player);
+			if (entities.player!.hp() === 0) {
+				entities.player!.destroy();
+				kaBoom.go("hallwayScene");
+			} else {
+				if (state.current().isGhostDead) return;
+				else {
+					entities.player!.hurt(1);
+				}
+			}
 		});
 
 		addToBackpack("weapon");
@@ -195,10 +203,9 @@ export default function basementScene(
 		});
 
 		function checkHealth(player: GameObj) {
-			console.log(state.current().playerHp);
-			if (state.current().playerHp === 0) {
-				if (entities.player) destroy(entities.player);
-				state.set("playerHp", 5);
+			if (entities.player!.hp() === 0) {
+				destroy(entities.player!);
+				//state.set("playerHp", 5);
 				kaBoom.go("hallwayScene", previousSceneData);
 			} else {
 				let newHp = state.current().playerHp - 1;
@@ -207,7 +214,6 @@ export default function basementScene(
 					newHp = 0;
 				}
 				state.set("playerHp", newHp);
-				console.log(state.current().playerHp);
 				return;
 			}
 		}

@@ -100,7 +100,7 @@ export default function apartmentScene(
 					entities.key.status = "hidden";
 					continue;
 				}
-				if (entity.name === "duck") {
+				if (entity.name === "duck" && !state.current().handedOverDuck) {
 					entities.duck = map.add(
 						createDuck(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
@@ -181,6 +181,7 @@ export default function apartmentScene(
 		});
 
 		entities.player.onCollide("bedTable", () => {
+			console.log("bedTable");
 			state.set("collisionWith", "bedTable");
 			state.set("itemToPickup", "weapon");
 			if (state.current().isFirstTimeInteracting) {
@@ -236,11 +237,11 @@ export default function apartmentScene(
 
 		// remove duck when handed over
 		entities.player.onCollide("duck", () => {
-			console.log("duck collide");
 			state.set("itemToPickup", "duck");
 		});
 
 		entities.player.onCollide("tv", () => {
+			console.log("tv");
 			state.set("collisionWith", "tv");
 			state.set("itemToPickup", "key");
 			if (state.current().isFirstTimeInteracting) {
