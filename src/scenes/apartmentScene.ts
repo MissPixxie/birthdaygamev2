@@ -206,8 +206,15 @@ export default function apartmentScene(
 			}
 		});
 
-		entities.player.onCollideEnd("bedTable", () => {
-			state.set("collisionWith", "null");
+		kaBoom.onUpdate(() => {
+			const distance = entities.bedTable!.pos.dist(entities.player!.pos);
+			if (
+				distance > entities.bedTable!.range &&
+				state.current().collisionWith === "bedTable"
+			) {
+				state.set("collisionWith", "null");
+				console.log("left bedTable area");
+			}
 		});
 
 		entities.player.onCollide("IRL", async () => {
@@ -235,7 +242,6 @@ export default function apartmentScene(
 			});
 		});
 
-		// remove duck when handed over
 		entities.player.onCollide("duck", () => {
 			state.set("itemToPickup", "duck");
 		});
@@ -251,7 +257,6 @@ export default function apartmentScene(
 			}
 			if (state.current().collisionWith === "tv") {
 				kaBoom.onKeyPress("o", () => {
-					console.log(state.current().itemToPickup);
 					if (entities.tv!.status === "open") {
 						entities.tv!.play("closed");
 						entities.tv!.status = "closed";
@@ -266,8 +271,16 @@ export default function apartmentScene(
 				});
 			}
 		});
-		entities.player.onCollideEnd("tv", () => {
-			state.set("collisionWith", "null");
+
+		kaBoom.onUpdate(() => {
+			const distance = entities.tv!.pos.dist(entities.player!.pos);
+			if (
+				distance > entities.tv!.range &&
+				state.current().collisionWith === "tv"
+			) {
+				state.set("collisionWith", "null");
+				console.log("left tv area");
+			}
 		});
 
 		entities.player.onCollide("hallway", () => {

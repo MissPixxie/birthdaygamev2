@@ -12,6 +12,7 @@ export default function createTv(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.scale(1),
 		{
 			status: "closed",
+			range: 25,
 		},
 		"tv",
 	];
