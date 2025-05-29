@@ -79,14 +79,14 @@ export async function loadSprites() {
 		console.log("Ghost sprite laddad!");
 
 		console.log("Laddar maps...");
-		await kaBoom.loadSprite("apartmentMap", "../map2.png");
-		await kaBoom.loadSprite("hallwayMap", "../map3.png");
-		await kaBoom.loadSprite("basementMap", "../map4.png");
-		await kaBoom.loadSprite("basementRoom1Map", "../map5.png");
-		await kaBoom.loadSprite("basementRoom2Map", "../map6.png");
-		await kaBoom.loadSprite("basementRoom3Map", "../map5.png");
-		await kaBoom.loadSprite("basementRoom4Map", "../map6.png");
-		await kaBoom.loadSprite("bossMap", "../map9.png");
+		await kaBoom.loadSprite("apartmentMap", "../apartmentMap.png");
+		await kaBoom.loadSprite("hallwayMap", "../hallwayMap.png");
+		await kaBoom.loadSprite("basementMap", "../basementMap.png");
+		await kaBoom.loadSprite("basementRoom1Map", "../room1Map.png");
+		await kaBoom.loadSprite("basementRoom2Map", "../room2Map.png");
+		await kaBoom.loadSprite("basementRoom3Map", "../room3Map.png");
+		await kaBoom.loadSprite("basementRoom4Map", "../room2Map.png");
+		await kaBoom.loadSprite("bossMap", "../bossMap.png");
 		console.log("map sprites laddade!");
 
 		console.log("Laddar bullet sprite...");
@@ -172,6 +172,14 @@ export async function loadSprites() {
 		});
 
 		await kaBoom.loadSprite("woodWall", "../woodWall.png");
+
+		await kaBoom.loadSprite("light", "../lightAnim.png", {
+			sliceX: 1,
+			sliceY: 3,
+			anims: {
+				on: { from: 0, to: 2, loop: true, pingpong: true, speed: 2.5 },
+			},
+		});
 
 		await kaBoom.loadSprite("boss", "../torstenAnim.png", {
 			sliceX: 1,

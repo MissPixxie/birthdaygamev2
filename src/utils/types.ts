@@ -37,6 +37,7 @@ export type Entities = {
 	neighborDoor: GameObj | null;
 	eyes: GameObj | null;
 	woodWall: GameObj | null;
+	light: GameObj | null;
 	particle: GameObj | null;
 	particle2: GameObj | null;
 };
@@ -57,6 +58,7 @@ export const entities: Entities = {
 	neighborDoor: null,
 	eyes: null,
 	woodWall: null,
+	light: null,
 	particle: null,
 	particle2: null,
 };

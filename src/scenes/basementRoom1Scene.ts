@@ -6,6 +6,7 @@ import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { colorizeBackground } from "../utils";
 import createWoodWall from "../entities/woodWall";
+import createLight from "../entities/light";
 
 export default function basementRoom1Scene(
 	kaBoom: Kaboom,
@@ -46,6 +47,13 @@ export default function basementRoom1Scene(
 					entities.woodWall = map.add(
 						createWoodWall(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
+					continue;
+				}
+				if (entity.name === "light") {
+					entities.light = map.add(
+						createLight(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.light.play("on");
 					continue;
 				}
 			}
