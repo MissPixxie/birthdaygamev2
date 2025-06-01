@@ -171,16 +171,6 @@ export async function loadSprites() {
 			},
 		});
 
-		await kaBoom.loadSprite("woodWall", "../woodWall.png");
-
-		await kaBoom.loadSprite("light", "../lightAnim.png", {
-			sliceX: 1,
-			sliceY: 3,
-			anims: {
-				on: { from: 0, to: 2, loop: true, pingpong: true, speed: 2.5 },
-			},
-		});
-
 		await kaBoom.loadSprite("boss", "../torstenAnim.png", {
 			sliceX: 1,
 			sliceY: 3,
