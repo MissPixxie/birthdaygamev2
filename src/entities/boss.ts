@@ -2,6 +2,8 @@ import { GameObj, Vec2 } from "kaboom";
 import { kaBoom, Kaboom } from "../kaboomCtx";
 import { playAnimIfNotPlaying, keysPressed } from "../utils.ts";
 import { state } from "../stateManager/globalStateManager.ts";
+import { displayDialogue } from "../utils/dialogueLogic.ts";
+import { dialogueData } from "../utils/dialogueData.ts";
 
 export default function createBoss(kaBoom: Kaboom, pos: Vec2) {
 	return [
@@ -10,23 +12,20 @@ export default function createBoss(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.body(),
 		kaBoom.pos(pos),
 		kaBoom.anchor("center"),
-		kaBoom.opacity(),
+		kaBoom.opacity(1),
 		kaBoom.health(5),
 		kaBoom.z(1),
 		kaBoom.state("idle", [
 			"idle",
-			"initial",
 			"alert",
-			"chase",
-			"patrol-left",
-			"patrol-right",
 			"attack",
 			"retreat",
+			"walk",
+			"OutOfVision",
 		]),
 		{
-			speed: 70,
+			speed: 50,
 			direction: "down",
-			isInDialogue: false,
 			isAttacking: false,
 			range: 70,
 		},
@@ -48,23 +47,65 @@ export function setBossMovement(boss: GameObj | null) {
 
 	boss.onStateUpdate("idle", () => {
 		if (boss.pos.dist(player.pos) < boss.range) {
-			boss.enterState("initial");
+			boss.enterState("alert");
+			displayDialogue(dialogueData["boss"], () => {
+				state.set("freezePlayer", false);
+				boss.enterState("walk");
+			});
 			return;
 		}
 	});
 
-	boss.onStateEnter("initial", () => {
-		boss.play("initial");
+	boss.onStateEnter("walk", () => {
+		boss.flipX = true;
+		boss.play("walk");
 	});
 
-	boss.onStateUpdate("initial", () => {
+	boss.onStateUpdate("walk", () => {
+		boss.move(boss.speed, 0);
+	});
+
+	boss.onStateEnter("alert", () => {
+		boss.play("alert");
+	});
+
+	boss.onStateUpdate("alert", () => {
 		if (boss.pos.dist(player.pos) > boss.range) {
 			boss.enterState("idle");
 			return;
 		}
 	});
 
-	boss.onCollide("player", () => {
-		boss.hurt(1);
-	});
+	// Removes collision with wall object
+	// boss.onBeforePhysicsResolve(
+	// 	(collision: {
+	// 		target: { is: (arg0: string) => any };
+	// 		preventResolution: () => void;
+	// 	}) => {
+	// 		if (collision.target.is("wall")) {
+	// 			collision.preventResolution();
+	// 			//fadeOut();
+	// 		}
+	// 	}
+	// );
+
+	// boss.onStateUpdate("OutOfVision", () => {
+	// 	const startTime = time();
+	// 	const startOpacity = boss!.opacity;
+
+	// 	const elapsedTime = time() - startTime;
+	// 	const progress = Math.min(elapsedTime / 2, 1);
+	// 	boss.opacity = startOpacity * (1 - progress);
+	// });
+
+	// function fadeOut() {
+	// 	const startTime = time();
+	// 	const startOpacity = boss!.opacity;
+
+	// 	boss!.onUpdate(() => {
+	// 		const elapsedTime = time() - startTime;
+	// 		const progress = Math.min(elapsedTime / 0.2, 1);
+	// 		boss!.opacity = startOpacity * (1 - progress);
+	// 	});
+	// }
 }

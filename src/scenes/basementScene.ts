@@ -85,12 +85,22 @@ export default function basementScene(
 					continue;
 				}
 				if (entity.name === "ghost") {
-					if (state.current().isGhostDead) {
-						continue;
-					}
 					entities.ghost = map.add(
 						createGhost(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
+					if (state.current().isGhostDead) {
+						entities.ghost.enterState("dead");
+						entities.ghost.play("dead");
+						entities.ghost = map.add(
+							createGhost(
+								kaBoom,
+								kaBoom.vec2(
+									entities.ghost.deathPosX,
+									entities.ghost.deathPosY
+								)
+							)
+						);
+					}
 					continue;
 				}
 			}

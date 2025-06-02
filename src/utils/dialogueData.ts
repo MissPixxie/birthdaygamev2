@@ -36,6 +36,10 @@ export const dialogueData = {
 		"Men glöm ej spelet, din resa är lång -" +
 		"<br>" +
 		"när du har funnit, fortsätt där du en gång kom ifrån",
+	boss:
+		"Nu jävlar ska ni få betala för alla hundskitar och fimpar jag tvingat Abed att städa upp efter er" +
+		"<br>" +
+		"MUHAHAHAHA",
 };
 
 export const neighborDialogue = {

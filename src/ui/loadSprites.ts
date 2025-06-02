@@ -171,18 +171,19 @@ export async function loadSprites() {
 			},
 		});
 
-		await kaBoom.loadSprite("boss", "../torstenAnim.png", {
-			sliceX: 1,
-			sliceY: 3,
+		await kaBoom.loadSprite("boss", "../torstenAnim2.png", {
+			sliceX: 5,
+			sliceY: 1,
 			anims: {
-				idle: 0,
-				initial: {
-					from: 1,
-					to: 2,
+				idle: 2,
+				alert: {
+					from: 3,
+					to: 4,
 					loop: true,
 					pingpong: true,
 					speed: 2.5,
 				},
+				walk: { from: 0, to: 1, loop: true, pingpong: true, speed: 6 },
 			},
 		});
 

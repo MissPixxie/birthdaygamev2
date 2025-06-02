@@ -11,6 +11,7 @@ import { colorizeBackground } from "../utils";
 import createBoss, { setBossMovement } from "../entities/boss";
 import { addToBackpack, getItem } from "../utils/backpack";
 import { shoot } from "../utils/weapon";
+import createHiddenDoor from "../entities/hiddenDoor";
 
 export default function bossScene(
 	kaBoom: Kaboom,
@@ -49,6 +50,15 @@ export default function bossScene(
 						createBoss(kaBoom, kaBoom.vec2(entity.x, entity.y))
 					);
 					entities.boss.play("idle");
+					continue;
+				}
+				if (entity.name === "hiddenDoor") {
+					entities.hiddenDoor = map.add(
+						createHiddenDoor(
+							kaBoom,
+							kaBoom.vec2(entity.x, entity.y)
+						)
+					);
 					continue;
 				}
 			}
