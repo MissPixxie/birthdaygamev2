@@ -51,7 +51,7 @@ export function setBossMovement(boss: GameObj | null) {
 			boss.enterState("alert");
 			displayDialogue(dialogueData["boss"], () => {
 				state.set("freezePlayer", false);
-				boss.enterState("fightMode");
+				boss.enterState("walk");
 			});
 			return;
 		}
@@ -64,6 +64,11 @@ export function setBossMovement(boss: GameObj | null) {
 
 	boss.onStateUpdate("walk", () => {
 		boss.move(boss.speed, 0);
+		const hiddenDoor = kaBoom.get("hiddenDoor", { recursive: true })[0];
+
+		if (Math.floor(boss.pos.x) === Math.floor(hiddenDoor.pos.x)) {
+			boss.destroy();
+		}
 	});
 
 	boss.onStateEnter("alert", () => {
