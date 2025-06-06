@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"map9.json"
+        }
+    },
  "height":56,
  "infinite":false,
  "layers":[
@@ -83,8 +91,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":485,
-                 "y":374
+                 "x":463.666666666667,
+                 "y":385.333333333333
                 }, 
                 {
                  "height":0,
@@ -97,6 +105,30 @@
                  "width":0,
                  "x":310.5,
                  "y":369.5
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"hiddenDoor",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":530.333333333333,
+                 "y":388.333333333333
+                }, 
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"bossFightMode",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":531,
+                 "y":306.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -154,14 +186,14 @@
                  "y":320
                 }, 
                 {
-                 "height":96,
+                 "height":15.6666666666667,
                  "id":7,
                  "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":16,
-                 "x":528,
+                 "width":18.6666666666666,
+                 "x":525.333333333333,
                  "y":352
                 }, 
                 {
@@ -187,15 +219,15 @@
                  "y":272
                 }, 
                 {
-                 "height":48,
-                 "id":10,
-                 "name":"hiddenDoor",
+                 "height":32,
+                 "id":13,
+                 "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":512,
-                 "y":368
+                 "x":528,
+                 "y":416
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -204,7 +236,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":11,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -296,6 +328,19 @@
          "imagewidth":48,
          "margin":0,
          "name":"whiteWallDarkArch",
+         "spacing":0,
+         "tilecount":6,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":2,
+         "firstgid":1221,
+         "image":"hiddenDoor.png",
+         "imageheight":48,
+         "imagewidth":36,
+         "margin":0,
+         "name":"hiddenDoor",
          "spacing":0,
          "tilecount":6,
          "tileheight":16,

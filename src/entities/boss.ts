@@ -21,6 +21,7 @@ export default function createBoss(kaBoom: Kaboom, pos: Vec2) {
 			"attack",
 			"retreat",
 			"walk",
+			"fightMode",
 			"OutOfVision",
 		]),
 		{
@@ -50,7 +51,7 @@ export function setBossMovement(boss: GameObj | null) {
 			boss.enterState("alert");
 			displayDialogue(dialogueData["boss"], () => {
 				state.set("freezePlayer", false);
-				boss.enterState("walk");
+				boss.enterState("fightMode");
 			});
 			return;
 		}
@@ -76,18 +77,26 @@ export function setBossMovement(boss: GameObj | null) {
 		}
 	});
 
+	boss.onStateEnter("fightMode", () => {
+		boss.play("fightMode");
+	});
+
+	boss.onStateUpdate("fightMode", () => {
+		boss.move(boss.speed, 0);
+	});
+
 	// Removes collision with wall object
-	// boss.onBeforePhysicsResolve(
-	// 	(collision: {
-	// 		target: { is: (arg0: string) => any };
-	// 		preventResolution: () => void;
-	// 	}) => {
-	// 		if (collision.target.is("wall")) {
-	// 			collision.preventResolution();
-	// 			//fadeOut();
-	// 		}
-	// 	}
-	// );
+	boss.onBeforePhysicsResolve(
+		(collision: {
+			target: { is: (arg0: string) => any };
+			preventResolution: () => void;
+		}) => {
+			if (collision.target.is("hiddenDoor")) {
+				collision.preventResolution();
+				//fadeOut();
+			}
+		}
+	);
 
 	// boss.onStateUpdate("OutOfVision", () => {
 	// 	const startTime = time();

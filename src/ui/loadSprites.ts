@@ -173,7 +173,7 @@ export async function loadSprites() {
 
 		await kaBoom.loadSprite("boss", "../torstenAnim2.png", {
 			sliceX: 5,
-			sliceY: 1,
+			sliceY: 2,
 			anims: {
 				idle: 2,
 				alert: {
@@ -184,7 +184,13 @@ export async function loadSprites() {
 					speed: 2.5,
 				},
 				walk: { from: 0, to: 1, loop: true, pingpong: true, speed: 6 },
+				fightMode: { from: 5, to: 7, loop: true, pingpong: true, speed: 8 }
 			},
+		});
+
+		await kaBoom.loadSprite("hiddenDoor", "../hiddenDoor.png", {
+			sliceX: 1,
+			sliceY: 1,
 		});
 
 		console.log("Alla resurser är laddade!");
