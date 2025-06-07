@@ -1,5 +1,6 @@
 import { GameObj, Key } from "kaboom";
 import { Kaboom } from "./kaboomCtx";
+import { state } from "./stateManager/globalStateManager";
 
 export function playAnimIfNotPlaying(gameObj: GameObj, animName: string) {
 	if (gameObj.curAnim() !== animName) gameObj.play(animName);
@@ -27,6 +28,9 @@ export function setCamScale(k: Kaboom) {
 		k.camScale(k.vec2(1));
 		return;
 	}
-
-	k.camScale(k.vec2(1.5));
+	if (state.current().finalFightActive) {
+		k.camScale(k.vec2(1.2));
+	} else {
+		k.camScale(k.vec2(1.5));
+	}
 }

@@ -23,7 +23,16 @@ export const dialogueData = {
 	keyMissing: "Dörren är låst....",
 	passPhrase: "Vad är det hemliga ordet?",
 	enterPassPhrase: "slå in lösenord",
-	riddle: "......",
+	riddle:
+		"Kära hyresgäster" +
+		"<br>" +
+		"Jag, trots att världen runt omkring oss präglas av oro, krig och klimatförändringar, fortsätter vi här i huset att kämpa på med vardagen" +
+		"Vi visar medmänsklighet genom att hålla trapphuset rent och dela på ansvaret" +
+		"Det är i det lilla vi kan göra skillnad - som att engagera oss i korrekt sopsortering för en bättre framtid." +
+		"Vår trogne fastighetsskötare Abed gör sitt bästa varje dag (även om vissa tycks tro att han är odödlig och arbetar dygnet runt)." +
+		"Vi tackar honom genom att inte lämna grus, cykelhjul eller brödsmulor över hela entrén." +
+		"Så ja, fortsätt gärna visa respekt fr gemensamma utrymmen - det är trots allt vårt gemensamma hem." +
+		"Tillsammans kan vi skapa trygghet, trivsel och... kanske till och med en liten gnutta tacksamhet.",
 	IRL:
 		"Här tar spelet paus ett tag," +
 		"<br>" +

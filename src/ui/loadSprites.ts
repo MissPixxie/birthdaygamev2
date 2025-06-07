@@ -72,7 +72,7 @@ export async function loadSprites() {
 					speed: 2,
 					pingpong: true,
 				},
-				hurt: { from: 9, to: 10 },
+				hurt: { from: 9, to: 10, speed: 2 },
 				dead: { from: 7, to: 8, loop: true, speed: 2.5 },
 			},
 		});
@@ -184,11 +184,22 @@ export async function loadSprites() {
 					speed: 2.5,
 				},
 				walk: { from: 0, to: 1, loop: true, pingpong: true, speed: 6 },
-				fightMode: { from: 5, to: 7, loop: true, pingpong: true, speed: 8 }
+				fightMode: {
+					from: 5,
+					to: 7,
+					loop: true,
+					pingpong: true,
+					speed: 8,
+				},
 			},
 		});
 
 		await kaBoom.loadSprite("hiddenDoor", "../hiddenDoor.png", {
+			sliceX: 1,
+			sliceY: 1,
+		});
+
+		await kaBoom.loadSprite("hiddenDoor2", "../hiddenDoor2.png", {
 			sliceX: 1,
 			sliceY: 1,
 		});

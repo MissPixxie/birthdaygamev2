@@ -18,6 +18,8 @@ export default function createBoss(kaBoom: Kaboom, pos: Vec2) {
 		kaBoom.state("idle", [
 			"idle",
 			"alert",
+			"fightMode-left",
+			"fightMode-right",
 			"attack",
 			"retreat",
 			"walk",
@@ -67,7 +69,9 @@ export function setBossMovement(boss: GameObj | null) {
 		const hiddenDoor = kaBoom.get("hiddenDoor", { recursive: true })[0];
 
 		if (Math.floor(boss.pos.x) === Math.floor(hiddenDoor.pos.x)) {
-			boss.destroy();
+			state.set("finalFightActive", true);
+			fightModeMovement(boss);
+			boss.enterState("fightMode");
 		}
 	});
 
@@ -82,14 +86,89 @@ export function setBossMovement(boss: GameObj | null) {
 		}
 	});
 
-	boss.onStateEnter("fightMode", () => {
-		boss.play("fightMode");
-	});
+	// boss.onStateEnter("fightMode", async () => {
+	// 	await kaBoom.wait(0.1);
+	// 	state.set("finalFightActive", true);
+	// 	boss.flipX = false;
+	// 	const hiddenDoor2 = kaBoom.get("hiddenDoor", { recursive: true })[0];
+	// 	boss.pos = hiddenDoor2.pos;
+	// 	boss.play("fightMode");
+	// });
 
-	boss.onStateUpdate("fightMode", () => {
-		boss.move(boss.speed, 0);
-	});
+	// boss.onStateUpdate("fightMode", () => {
+	// 	boss.move(-boss.speed, 0);
+	// 	if (boss.hp() < 0) {
+	// 		boss.destroy();
+	// 		state.set("finalFightActive", false);
+	// 		state.set("isBossDead", true);
+	// 	}
+	// });
 
+	// boss.onStateEnter("fightMode-left", async () => {
+	// 	await kaBoom.wait(7);
+	// 	if (boss.state === "fightMode-left") boss.enterState("fightMode-right");
+	// });
+	// boss.onStateUpdate("fightMode-left", () => {
+	// 	if (boss.isHurting) return;
+	// 	boss.flipX = true;
+	// 	boss.move(-boss.speed, 0);
+	// });
+	// boss.onStateEnter("fightMode-right", async () => {
+	// 	await kaBoom.wait(3);
+	// 	if (boss.state === "fightMode-right") boss.enterState("fightMode-left");
+	// });
+	// boss.onStateUpdate("fightMode-right", () => {
+	// 	if (boss.isHurting) return;
+	// 	boss.flipX = false;
+	// 	boss.move(boss.speed, 0);
+	// });
+
+	function fightModeMovement(boss: GameObj) {
+		if (!state.current().finalFightActive) {
+			return;
+		}
+		boss.enterState("fightMode");
+		boss.onStateEnter("fightMode", async () => {
+			await kaBoom.wait(0.1);
+			state.set("finalFightActive", true);
+			boss.flipX = false;
+			const hiddenDoor2 = kaBoom.get("hiddenDoor", {
+				recursive: true,
+			})[0];
+			boss.pos = hiddenDoor2.pos;
+			boss.play("fightMode");
+		});
+
+		boss.onStateUpdate("fightMode", () => {
+			boss.move(-boss.speed, 0);
+			if (boss.hp() < 0) {
+				boss.destroy();
+				state.set("finalFightActive", false);
+				state.set("isBossDead", true);
+			}
+		});
+
+		boss.onStateEnter("fightMode-left", async () => {
+			await kaBoom.wait(7);
+			if (boss.state === "fightMode-left")
+				boss.enterState("fightMode-right");
+		});
+		boss.onStateUpdate("fightMode-left", () => {
+			if (boss.isHurting) return;
+			boss.flipX = true;
+			boss.move(-boss.speed, 0);
+		});
+		boss.onStateEnter("fightMode-right", async () => {
+			await kaBoom.wait(3);
+			if (boss.state === "fightMode-right")
+				boss.enterState("fightMode-left");
+		});
+		boss.onStateUpdate("fightMode-right", () => {
+			if (boss.isHurting) return;
+			boss.flipX = false;
+			boss.move(boss.speed, 0);
+		});
+	}
 	// Removes collision with wall object
 	boss.onBeforePhysicsResolve(
 		(collision: {
@@ -98,28 +177,7 @@ export function setBossMovement(boss: GameObj | null) {
 		}) => {
 			if (collision.target.is("hiddenDoor")) {
 				collision.preventResolution();
-				//fadeOut();
 			}
 		}
 	);
-
-	// boss.onStateUpdate("OutOfVision", () => {
-	// 	const startTime = time();
-	// 	const startOpacity = boss!.opacity;
-
-	// 	const elapsedTime = time() - startTime;
-	// 	const progress = Math.min(elapsedTime / 2, 1);
-	// 	boss.opacity = startOpacity * (1 - progress);
-	// });
-
-	// function fadeOut() {
-	// 	const startTime = time();
-	// 	const startOpacity = boss!.opacity;
-
-	// 	boss!.onUpdate(() => {
-	// 		const elapsedTime = time() - startTime;
-	// 		const progress = Math.min(elapsedTime / 0.2, 1);
-	// 		boss!.opacity = startOpacity * (1 - progress);
-	// 	});
-	// }
 }

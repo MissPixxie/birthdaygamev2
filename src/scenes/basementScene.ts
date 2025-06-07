@@ -68,7 +68,7 @@ export default function basementScene(
 				}
 				if (
 					entity.name === "playerRoom3" &&
-					state.current().previousScene === "basementRoom3Scene"
+					state.current().previousScene === "bossScene"
 				) {
 					entities.player = map.add(
 						createPlayer(kaBoom, kaBoom.vec2(entity.x, entity.y))

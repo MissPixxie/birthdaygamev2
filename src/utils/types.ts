@@ -10,6 +10,7 @@ export type GameState = {
 	collisionWith: "tv" | "bedTable" | "null";
 	isGhostDead: boolean;
 	isBossDead: boolean;
+	finalFightActive: boolean;
 	hasEnteredPassPhrase: boolean;
 	itemToPickup: Items;
 	hasSeenRiddle: boolean;
@@ -29,6 +30,7 @@ export type Entities = {
 	ghost: GameObj | null;
 	boss: GameObj | null;
 	hiddenDoor: GameObj | null;
+	hiddenDoor2: GameObj | null;
 	livingRoom: GameObj | null;
 	tv: GameObj | null;
 	bedTable: GameObj | null;
@@ -49,6 +51,7 @@ export const entities: Entities = {
 	ghost: null,
 	boss: null,
 	hiddenDoor: null,
+	hiddenDoor2: null,
 	livingRoom: null,
 	tv: null,
 	bedTable: null,

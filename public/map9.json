@@ -115,8 +115,20 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":530.333333333333,
+                 "x":536.333333333333,
                  "y":388.333333333333
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"hiddenDoor2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":536.333333333333,
+                 "y":307.333333333333
                 }, 
                 {
                  "height":0,
@@ -236,7 +248,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":15,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -334,15 +346,15 @@
          "tilewidth":16
         }, 
         {
-         "columns":2,
+         "columns":3,
          "firstgid":1221,
          "image":"hiddenDoor.png",
          "imageheight":48,
-         "imagewidth":36,
+         "imagewidth":48,
          "margin":0,
          "name":"hiddenDoor",
          "spacing":0,
-         "tilecount":6,
+         "tilecount":9,
          "tileheight":16,
          "tilewidth":16
         }],
