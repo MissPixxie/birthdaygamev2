@@ -5,6 +5,9 @@ import { Kaboom } from "../kaboomCtx";
 import { GameState, MapData, entities } from "../utils/types";
 import { state } from "../stateManager/globalStateManager";
 import { colorizeBackground } from "../utils";
+import { createParticle } from "../ui/particles";
+import { displayDialogue } from "../utils/dialogueLogic";
+import { dialogueData } from "../utils/dialogueData";
 
 export default function basementRoom2Scene(
 	kaBoom: Kaboom,
@@ -40,6 +43,52 @@ export default function basementRoom2Scene(
 					);
 					continue;
 				}
+				if (entity.name === "particle") {
+					entities.particle = map.add(
+						createParticle(kaBoom, kaBoom.vec2(entity.x, entity.y))
+					);
+					entities.particle.play("glow");
+					continue;
+				}
+				if (entity.name === "particle2") {
+					setTimeout(() => {
+						entities.particle = map.add(
+							createParticle(
+								kaBoom,
+								kaBoom.vec2(entity.x, entity.y)
+							)
+						);
+						entities.particle.play("glow");
+					}, 1500);
+
+					continue;
+				}
+				if (entity.name === "particle3") {
+					setTimeout(() => {
+						entities.particle = map.add(
+							createParticle(
+								kaBoom,
+								kaBoom.vec2(entity.x, entity.y)
+							)
+						);
+						entities.particle.play("glow");
+					}, 2600);
+
+					continue;
+				}
+				if (entity.name === "particle4") {
+					setTimeout(() => {
+						entities.particle = map.add(
+							createParticle(
+								kaBoom,
+								kaBoom.vec2(entity.x, entity.y)
+							)
+						);
+						entities.particle.play("glow");
+					}, 1100);
+
+					continue;
+				}
 			}
 		}
 	}
@@ -73,6 +122,13 @@ export default function basementRoom2Scene(
 				state.changeScene("basementScene");
 				kaBoom.go("basementScene", previousSceneData);
 			}
+		});
+
+		entities.player.onCollide("IRL", async () => {
+			state.set("freezePlayer", true);
+			await displayDialogue(dialogueData["IRL"], () => {
+				state.set("freezePlayer", false);
+			});
 		});
 	}
 

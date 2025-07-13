@@ -14,6 +14,7 @@ import createNeighborDoor, { closeDoor } from "../entities/neighborDoor";
 import createEyes from "../entities/eyes";
 import { colorizeBackground } from "../utils";
 import { getItem, removeItemFromBackpack } from "../utils/backpack";
+import displayLetter from "../utils/letterLogic";
 
 export default function hallwayScene(
 	kaBoom: Kaboom,
@@ -161,7 +162,7 @@ export default function hallwayScene(
 		});
 
 		entities.player.onCollide("wallHanging", () => {
-			displayDialogue(dialogueData["riddle"], () => {
+			displayLetter(() => {
 				state.set("freezePlayer", false);
 			});
 			state.set("hasSeenRiddle", true);

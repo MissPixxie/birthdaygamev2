@@ -144,7 +144,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -165,7 +165,7 @@
                  "y":319
                 }, 
                 {
-                 "height":79.5,
+                 "height":11.5,
                  "id":4,
                  "name":"wall",
                  "rotation":0,
@@ -173,21 +173,21 @@
                  "visible":true,
                  "width":31.5,
                  "x":255.5,
-                 "y":272
+                 "y":340
                 }, 
                 {
-                 "height":48,
+                 "height":4.33333333333331,
                  "id":5,
                  "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":240,
-                 "x":288,
+                 "width":272,
+                 "x":256,
                  "y":272
                 }, 
                 {
-                 "height":32,
+                 "height":3.66666666666663,
                  "id":6,
                  "name":"wall",
                  "rotation":0,
@@ -195,18 +195,18 @@
                  "visible":true,
                  "width":192,
                  "x":336,
-                 "y":320
+                 "y":348.333333333333
                 }, 
                 {
-                 "height":15.6666666666667,
+                 "height":95.6666666666667,
                  "id":7,
-                 "name":"wall",
+                 "name":"rightWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":18.6666666666666,
                  "x":525.333333333333,
-                 "y":352
+                 "y":272
                 }, 
                 {
                  "height":16,
@@ -222,7 +222,7 @@
                 {
                  "height":160,
                  "id":9,
-                 "name":"wall",
+                 "name":"leftWall",
                  "rotation":0,
                  "type":"",
                  "visible":true,

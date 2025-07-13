@@ -52,6 +52,13 @@ export default function bossScene(
 					entities.boss.play("idle");
 					continue;
 				}
+				// if (entity.name === "bossFightMode") {
+				// 	entities.boss = map.add(
+				// 		createBoss(kaBoom, kaBoom.vec2(entity.x, entity.y))
+				// 	);
+				// 	entities.boss.play("idle");
+				// 	continue;
+				// }
 				if (entity.name === "hiddenDoor") {
 					entities.hiddenDoor = map.add(
 						createHiddenDoor(
@@ -124,5 +131,5 @@ export default function bossScene(
 	}
 
 	setPlayerMovement(kaBoom, entities.player!);
-	setBossMovement(entities.boss!);
+	setBossMovement(entities.boss!, map);
 }

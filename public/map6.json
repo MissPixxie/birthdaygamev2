@@ -26,12 +26,12 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2147483670, 21, 21, 21, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870922, 1, 1, 1, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870922, 1, 1, 1, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870922, 1, 1, 1, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870922, 1, 1, 1, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1073741836, 11, 11, 11, 17, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2147483666, 17, 17, 17, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870918, 1, 1, 1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870918, 1, 1, 1, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870918, 1, 1, 1, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536870918, 1, 1, 1, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1073741832, 7, 7, 7, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -86,13 +86,13 @@
                  "y":352
                 }, 
                 {
-                 "height":112,
+                 "height":46.5454545454546,
                  "id":5,
                  "name":"wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":48,
+                 "width":15.8181818181818,
                  "x":480,
                  "y":352
                 }, 
@@ -139,6 +139,28 @@
                  "width":16,
                  "x":416,
                  "y":464
+                }, 
+                {
+                 "height":20.2954545454545,
+                 "id":19,
+                 "name":"IRL",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":7.1875,
+                 "x":478.875,
+                 "y":397.715909090909
+                }, 
+                {
+                 "height":47.8181818181818,
+                 "id":20,
+                 "name":"wall",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16.1818181818182,
+                 "x":480,
+                 "y":416.545454545455
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -153,18 +175,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":1,
-                 "name":"woodWall",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":496,
-                 "y":393
-                }, 
-                {
-                 "height":0,
                  "id":2,
                  "name":"playerRoom2",
                  "point":true,
@@ -177,36 +187,60 @@
                 }, 
                 {
                  "height":0,
-                 "id":12,
-                 "name":"woodWall",
+                 "id":15,
+                 "name":"particle",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":496,
-                 "y":439.666666666667
+                 "x":480.125,
+                 "y":403.5
                 }, 
                 {
                  "height":0,
-                 "id":13,
-                 "name":"light",
+                 "id":16,
+                 "name":"particle2",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":496.666666666667,
-                 "y":416.333333333333
+                 "x":482.25,
+                 "y":406
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"particle3",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":480.375,
+                 "y":408.125
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"particle4",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":483.375,
+                 "y":405.5
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":15,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -239,21 +273,8 @@
          "tilewidth":16
         }, 
         {
-         "columns":2,
-         "firstgid":3,
-         "image":"woodWall2.png",
-         "imageheight":40,
-         "imagewidth":32,
-         "margin":0,
-         "name":"woodWall2",
-         "spacing":0,
-         "tilecount":4,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
          "columns":1,
-         "firstgid":7,
+         "firstgid":3,
          "image":"wall-white-top.png",
          "imageheight":16,
          "imagewidth":16,
@@ -266,7 +287,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":8,
+         "firstgid":4,
          "image":"wall-white-corner.png",
          "imageheight":16,
          "imagewidth":16,
@@ -279,7 +300,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":9,
+         "firstgid":5,
          "image":"wall-white-side.png",
          "imageheight":16,
          "imagewidth":16,
@@ -292,7 +313,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":10,
+         "firstgid":6,
          "image":"greyFloorSideDarker.png",
          "imageheight":16,
          "imagewidth":16,
@@ -305,7 +326,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":11,
+         "firstgid":7,
          "image":"greyFloorDarkGradient.png",
          "imageheight":16,
          "imagewidth":16,
@@ -318,7 +339,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":12,
+         "firstgid":8,
          "image":"greyFloorGradientSideLeft.png",
          "imageheight":16,
          "imagewidth":16,
@@ -331,7 +352,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":13,
+         "firstgid":9,
          "image":"greyFloorGradientSideRight.png",
          "imageheight":16,
          "imagewidth":16,
@@ -344,7 +365,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":14,
+         "firstgid":10,
          "image":"cementWall.png",
          "imageheight":16,
          "imagewidth":16,
@@ -357,7 +378,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":15,
+         "firstgid":11,
          "image":"lightCementWall.png",
          "imageheight":16,
          "imagewidth":16,
@@ -370,7 +391,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":16,
+         "firstgid":12,
          "image":"lightCementWall.png",
          "imageheight":16,
          "imagewidth":16,
@@ -383,7 +404,7 @@
         }, 
         {
          "columns":2,
-         "firstgid":17,
+         "firstgid":13,
          "image":"..\/..\/..\/Downloads\/pixil-frame-0(43).png",
          "imageheight":32,
          "imagewidth":32,
@@ -396,7 +417,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":21,
+         "firstgid":17,
          "image":"greyFloorDarkerTopline.png",
          "imageheight":16,
          "imagewidth":16,
@@ -409,7 +430,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":22,
+         "firstgid":18,
          "image":"greyFloorCornerDarker2.png",
          "imageheight":16,
          "imagewidth":16,
@@ -417,6 +438,19 @@
          "name":"greyFloorCornerDarker2",
          "spacing":0,
          "tilecount":1,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":1,
+         "firstgid":19,
+         "image":"woodWall.png",
+         "imageheight":32,
+         "imagewidth":30,
+         "margin":0,
+         "name":"woodWall",
+         "spacing":0,
+         "tilecount":2,
          "tileheight":16,
          "tilewidth":16
         }],

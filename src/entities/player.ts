@@ -1,7 +1,6 @@
 import { GameObj, Vec2 } from "kaboom";
 import { Kaboom } from "../kaboomCtx";
 import { playAnimIfNotPlaying, keysPressed } from "../utils.ts";
-import { state } from "../stateManager/globalStateManager.ts";
 
 export default function createPlayer(kaBoom: Kaboom, pos: Vec2) {
 	return [

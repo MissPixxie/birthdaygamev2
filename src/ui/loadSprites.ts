@@ -91,7 +91,7 @@ export async function loadSprites() {
 
 		console.log("Laddar bullet sprite...");
 		await kaBoom.loadSprite("bullet", "../bullet.png");
-
+		await kaBoom.loadSprite("cigarette", "../cigg.png");
 		await kaBoom.loadSprite("tv", "../tvAnim.png", {
 			sliceX: 1,
 			sliceY: 2,
@@ -166,12 +166,12 @@ export async function loadSprites() {
 					to: 4,
 					loop: true,
 					pingpong: true,
-					speed: 3.7,
+					speed: 3.9,
 				},
 			},
 		});
 
-		await kaBoom.loadSprite("boss", "../torstenAnim2.png", {
+		await kaBoom.loadSprite("boss", "../torstenAnim.png", {
 			sliceX: 5,
 			sliceY: 2,
 			anims: {
@@ -186,10 +186,10 @@ export async function loadSprites() {
 				walk: { from: 0, to: 1, loop: true, pingpong: true, speed: 6 },
 				fightMode: {
 					from: 5,
-					to: 7,
+					to: 8,
 					loop: true,
 					pingpong: true,
-					speed: 8,
+					speed: 7,
 				},
 			},
 		});

@@ -4,6 +4,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" src="style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Sono:wght@200..800&display=swap"
+			rel="stylesheet"
+		/>
 		<title>Vite App</title>
 		<style>
 			body {
@@ -249,6 +255,17 @@
 				scale: 4;
 				image-rendering: pixelated;
 			}
+			.hint-letter {
+				font-weight: 500;
+			}
+
+			.sono-font {
+				font-family: "Sono", monospace;
+				font-optical-sizing: auto;
+				font-weight: 500;
+				font-style: normal;
+				font-variation-settings: "MONO" 1;
+			}
 		</style>
 	</head>
 	<body>
@@ -444,6 +461,65 @@
 							"
 						>
 							<button id="close-backpack" class="uiCommonBtn">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-------LETTER------>
+				<div id="letter-textbox-container" style="display: none">
+					<div
+						style="
+							background-image: url('/public/letter.png');
+							background-repeat: no-repeat;
+							background-size: cover;
+							image-rendering: pixelated;
+							width: 80%;
+							height: 100%;
+							position: absolute;
+							padding-top: 1%;
+							left: 10%;
+							right: 10%;
+							display: flex;
+							flex-direction: column;
+						"
+					>
+						<h4 style="align-self: center; font-family: monospace">
+							Kära hyresgäster
+						</h4>
+						<div style="width: 80%; align-self: center">
+							<p
+								class=".sono-font"
+								style="letter-spacing: 1px; line-height: 1.5"
+							>
+								Ja, trots att världen runt omkring oss präglas
+								av oro, krig och klimatförändringar, fortsätter
+								vi här i huset att kämpa på med vardagen. Vi
+								visar medmänsklighet genom att hålla trapphuset
+								rent och
+								<span class="hint-letter">d</span>ela på
+								ansvaret. Det är i det lilla vi kan göra
+								skillnad - som att
+								<span class="hint-letter">e</span>ngagera oss i
+								korrekt sopsortering för en bättre framtid. Vår
+								trogne fastighetsskötare Abed gör sitt bästa
+								varje dag (även om vissa tycks tro att han är
+								odödlig och arbetar dygnet runt). Vi tackar
+								honom genom att inte lämna grus, cykelhjul eller
+								brödsmulor över hela entrén. Så
+								<span class="hint-letter">j</span>a, fortsätt
+								gärna visa respekt för gemensamma utrymmen - det
+								är trots allt vårt gemensamma hem. Tillsammans
+								kan vi skapa trygghet, trivsel och... kanske
+								till och med en liten gnutta
+								<span class="hint-letter">t</span>acksamhet.
+							</p>
+						</div>
+						<div style="align-self: center">
+							<button
+								id="close-letter"
+								class="uiCommonBtn ui-close-btn"
+							>
 								Close
 							</button>
 						</div>
